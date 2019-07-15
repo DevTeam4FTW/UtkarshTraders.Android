@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1026872704182",
+    "firebase_url": "https://utkarshtradersweb.firebaseio.com",
+    "project_id": "utkarshtradersweb",
+    "storage_bucket": "utkarshtradersweb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026872704182:android:6fadc07d004fe014",
+        "android_client_info": {
+          "package_name": "com.example.utkarshtraders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026872704182-nm3jqlg1odg3jtk7suiaccsm639jasf0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.utkarshtraders",
+            "certificate_hash": "68e48dcdb988a12c106abf6011520575beab4c00"
+          }
+        },
+        {
+          "client_id": "1026872704182-u2br0lci96gr8f1ece1a1o5hdg0rnurd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvNuMiPmt8I2fUClNDD3LvuiljpvAZFpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026872704182-u2br0lci96gr8f1ece1a1o5hdg0rnurd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
