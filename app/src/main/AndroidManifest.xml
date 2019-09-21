@@ -16,7 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddCustomerActivity"></activity>
+        <activity android:name=".PlaceOrderActivity"></activity>
+        <activity android:name=".ViewItemsActivity" />
+        <activity android:name=".Edit_CustomerActivity" />
+        <activity android:name=".ViewOrdersActivity" />
+        <activity
+            android:name=".ViewCustomerInfoActivity"
+            android:theme="@style/AppTheme.CustomeTheme" />
+        <activity android:name=".AddCustomerActivity" />
         <activity android:name=".CustomersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

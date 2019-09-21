@@ -7,9 +7,9 @@
     android:layout_margin="4dp">
 
     <RelativeLayout
-        android:id="@+id/viewcustomers"
+        android:id="@+id/viewitems"
         android:layout_width="266dp"
-        android:layout_height="70dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="70dp"
@@ -21,33 +21,37 @@
 
 
             android:id="@+id/item_name"
-            android:layout_width="210dp"
+            android:layout_width="249dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/montserrat"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/quantity"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="14dp"
-            android:fontFamily="@font/montserrat"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/edit_customer"
+            android:id="@+id/additemtoorder"
             android:layout_width="37dp"
             android:layout_height="47dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="9dp"
             android:layout_marginBottom="11dp"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ordericon" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="47dp"
+            android:layout_marginBottom="29dp"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
     </RelativeLayout>
 
 

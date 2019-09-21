@@ -18,7 +18,7 @@ import java.util.Map;
 public class AddCustomerActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
-    private EditText c_name, c__phno, c_address, c_area, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
+    private EditText c_name, c__phno, c_address, c_area, c_city, c_pin, c_state, c_type, c_fssai, c_gst,c_bal;
     private ImageView addcust;
 
     @Override
@@ -37,6 +37,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         c_type = findViewById(R.id.ctype);
         c_fssai = findViewById(R.id.cfssai);
         c_gst = findViewById(R.id.cgst);
+        c_bal = findViewById(R.id.c_bal);
 
         addcust = findViewById(R.id.addcustbtn);
 
@@ -55,22 +56,24 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String ctype = c_type.getText().toString();
                 String cfssai = c_fssai.getText().toString();
                 String cgst = c_gst.getText().toString();
+                String cbal = c_bal.getText().toString();
 
 
 
+                if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(carea) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst) && !TextUtils.isEmpty(cbal)) {
 
-                if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(carea) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst)) {
-
+                    Long phno = Long.parseLong(cphno);
                     Map<String, String> userMap = new HashMap<>();
 
                     userMap.put("city", ccity);
                     userMap.put("clientAddress", caddress);
                     userMap.put("clientArea", carea);
                     userMap.put("clientName", cname);
-                    userMap.put("clientPhoneNo", cphno);
+                    userMap.put("clientPhoneNo",phno);
                     userMap.put("custType", ctype);
                     userMap.put("fssaino",cfssai);
                     userMap.put("gstno",cgst);
+                    userMap.put("remainingBal",cbal);
                     userMap.put("pincode",cpin);
                     userMap.put("state", cstate);
 

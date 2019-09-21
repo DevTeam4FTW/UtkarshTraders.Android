@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">UtkarshTraders</string>
+
+    <string name="seller_prompt">Choose a seller</string>
+
+    <string-array name="seller_prompts">
+        <item>Utkarsh</item>
+        <item>Shanti</item>
+    </string-array>
 </resources>

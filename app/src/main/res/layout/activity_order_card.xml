@@ -7,7 +7,7 @@
     android:layout_margin="4dp">
 
     <RelativeLayout
-        android:id="@+id/viewcustomers"
+        android:id="@+id/vieworders"
         android:layout_width="266dp"
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
@@ -40,14 +40,14 @@
             android:textAlignment="center" />
 
         <ImageView
-            android:id="@+id/edit_customer"
+            android:id="@+id/editorder"
             android:layout_width="37dp"
             android:layout_height="47dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="9dp"
             android:layout_marginBottom="11dp"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ordericon" />
     </RelativeLayout>
 
 

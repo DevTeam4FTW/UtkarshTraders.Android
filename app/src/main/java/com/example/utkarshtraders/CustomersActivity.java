@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -78,6 +76,7 @@ public class CustomersActivity extends AppCompatActivity {
         });
 
 
+
         customerRef.
                 get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -89,24 +88,46 @@ public class CustomersActivity extends AppCompatActivity {
 
 
 
-                    Customers customers = documentSnapshot.toObject(Customers.class);
-                    String customer_id = documentSnapshot.getId();
-
+                    final Customers customers = documentSnapshot.toObject(Customers.class);
+                    final String customer_id = documentSnapshot.getId();
 
                     String name = customers.getClientName();
-                    String phoneno = customers.getClientPhoneNo();
-
-
+                    String phoneno = customers.getClientPhoneNo().toString();
 
 
                     final View Card = inflater.inflate(R.layout.activity_customer_card, null);
-                    final TextView c_name = Card.findViewById(R.id.customername);
-                    final TextView c_phno = Card.findViewById(R.id.customerphone);
+
+                    final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
+
+                    final TextView c_name = Card.findViewById(R.id.item_name);
+                    final TextView c_phno = Card.findViewById(R.id.quantity);
+                    final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
 
                     c_name.setText(name);
                     c_phno.setText(phoneno);
 
                     c_list.addView(Card);
+
+                    edit_customer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent edit = new Intent(getBaseContext(),ViewCustomerInfoActivity.class);
+                            edit.putExtra("customer_object",customers);
+                            edit.putExtra("customer_id",customer_id);
+                            startActivity(edit);
+                        }
+                    });
+
+                    viewCustomerorders.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
+                            order.putExtra("customer_id",customer_id);
+                            startActivity(order);
+                        }
+                    });
 
 
                 }
@@ -127,6 +148,9 @@ public class CustomersActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
 

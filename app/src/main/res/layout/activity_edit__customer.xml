@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:background="#1E90FF"
-    tools:context=".AddCustomerActivity">
+    tools:context=".Edit_CustomerActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -160,8 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="-1dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginBottom="-2dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Remaining balance"
@@ -271,12 +271,12 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/addheading"
+        android:id="@+id/editheading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat"
-        android:text="Add Customer"
+        android:text="Edit Customer"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -286,7 +286,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/addcustbtn"
+        android:id="@+id/savecustbtn"
         android:layout_width="72dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
