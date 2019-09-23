@@ -92,15 +92,15 @@ public class CustomersActivity extends AppCompatActivity {
                     final String customer_id = documentSnapshot.getId();
 
                     String name = customers.getClientName();
-                    String phoneno = customers.getClientPhoneNo().toString();
+                    String phoneno = customers.getClientPhoneNo();
 
 
                     final View Card = inflater.inflate(R.layout.activity_customer_card, null);
 
                     final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
 
-                    final TextView c_name = Card.findViewById(R.id.item_name);
-                    final TextView c_phno = Card.findViewById(R.id.quantity);
+                    final TextView c_name = Card.findViewById(R.id.c_name);
+                    final TextView c_phno = Card.findViewById(R.id.c_phno);
                     final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
 
                     c_name.setText(name);

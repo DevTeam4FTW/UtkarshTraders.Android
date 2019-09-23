@@ -53,7 +53,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         final String c_id = intent.getStringExtra("customer_id");
 
         c_name.setText(customers.getClientName());
-        c_phno.setText(customers.getClientPhoneNo().toString());
+        c_phno.setText(customers.getClientPhoneNo());
         c_address.setText(customers.getClientAddress());
         c_area.setText(customers.getClientArea());
         c_city.setText(customers.getCity());
@@ -75,7 +75,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
                                 "clientAddress",c_address.getText().toString() ,
                                 "clientArea",c_area.getText().toString(),
                                 "clientName",c_name.getText().toString() ,
-                                "clientPhoneNo",Long.parseLong(c_phno.getText().toString()),
+                                "clientPhoneNo",c_phno.getText().toString(),
                                 "custType",c_type.getText().toString() ,
                                 "fssaino",c_fssai.getText().toString() ,
                                 "gstno",c_gstin.getText().toString() ,

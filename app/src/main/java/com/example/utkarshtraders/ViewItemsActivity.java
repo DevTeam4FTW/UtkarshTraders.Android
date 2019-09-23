@@ -58,8 +58,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
 
                     String item_name = items.getItemName();
-                    String default_price = "Rs: "+items.getItemPrice().toString();
-
+                    String default_price = "Rs: "+items.getItemPrice();
 
                     final View Card = inflater.inflate(R.layout.activity_item_card, null);
 

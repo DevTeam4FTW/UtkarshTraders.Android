@@ -8,14 +8,14 @@ public class Items implements  Parcelable {
     private String ItemCategory;
     private String hsnNo;
     private String itemName;
-    private Long itemPrice;
-    private Long taxRate;
+    private String itemPrice;
+    private String taxRate;
 
     public Items() {
 
     }
 
-    public Items(String itemcategory, String hsnno, String itemname, Long itemprice, Long taxrate) {
+    public Items(String itemcategory, String hsnno, String itemname, String itemprice, String taxrate) {
         ItemCategory = itemcategory;
         hsnNo = hsnno;
         itemName = itemname;
@@ -27,8 +27,8 @@ public class Items implements  Parcelable {
         ItemCategory = in.readString();
         hsnNo = in.readString();
         itemName = in.readString();
-        itemPrice = in.readLong();
-        taxRate = in.readLong();
+        itemPrice = in.readString();
+        taxRate = in.readString();
     }
 
     public static final Parcelable.Creator<Items> CREATOR = new Parcelable.Creator<Items>() {
@@ -67,19 +67,19 @@ public class Items implements  Parcelable {
         this.itemName = itemName;
     }
 
-    public Long getItemPrice() {
+    public String getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(Long itemPrice) {
+    public void setItemPrice(String itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public Long getTaxRate() {
+    public String getTaxRate() {
         return taxRate;
     }
 
-    public void setTaxRate(Long taxRate) {
+    public void setTaxRate(String taxRate) {
         this.taxRate = taxRate;
     }
 
@@ -93,7 +93,7 @@ public class Items implements  Parcelable {
         parcel.writeString(ItemCategory);
         parcel.writeString(hsnNo);
         parcel.writeString(itemName);
-        parcel.writeLong(itemPrice);
-        parcel.writeLong(taxRate);
+        parcel.writeString(itemPrice);
+        parcel.writeString(taxRate);
     }
 }

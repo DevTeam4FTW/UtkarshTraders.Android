@@ -7,4 +7,12 @@
         <item>Utkarsh</item>
         <item>Shanti</item>
     </string-array>
+
+    <string name="unit_prompt">Choose a unit</string>
+
+    <string-array name="unit_prompts">
+        <item>Per/Kg</item>
+        <item>Per/Piece</item>
+        <item>Per/Dozen</item>
+    </string-array>
 </resources>

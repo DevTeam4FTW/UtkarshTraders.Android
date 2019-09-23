@@ -20,7 +20,7 @@
         <TextView
 
 
-            android:id="@+id/item_name"
+            android:id="@+id/c_name"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -30,7 +30,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/quantity"
+            android:id="@+id/c_phno"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

@@ -57,7 +57,7 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         final String c_id = intent.getStringExtra("customer_id");
 
         c_name.setText(customers.getClientName());
-        c_ph.setText(customers.getClientPhoneNo().toString());
+        c_ph.setText(customers.getClientPhoneNo());
         c_address.setText(customers.getClientAddress());
         c_area.setText(customers.getClientArea());
         c_city.setText(customers.getCity());

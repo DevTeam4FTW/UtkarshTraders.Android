@@ -9,7 +9,7 @@ public class Customers implements Parcelable {
     private String clientAddress;
     private String clientArea;
     private String clientName;
-    private Long clientPhoneNo;
+    private String clientPhoneNo;
     private String custType;
     private String fssaino;
     private String gstno;
@@ -22,7 +22,7 @@ public class Customers implements Parcelable {
 
     }
 
-    public Customers(String City, String ClientAddress, String ClientArea, String ClientName, Long ClientPhoneNo, String CustType, String Fssaino, String Gstno,String RemainingBal, String Pincode, String State) {
+    public Customers(String City, String ClientAddress, String ClientArea, String ClientName, String ClientPhoneNo, String CustType, String Fssaino, String Gstno,String RemainingBal, String Pincode, String State) {
         city = City;
         clientAddress = ClientAddress;
         clientArea = ClientArea;
@@ -41,7 +41,7 @@ public class Customers implements Parcelable {
         clientAddress = in.readString();
         clientArea = in.readString();
         clientName = in.readString();
-        clientPhoneNo = in.readLong();
+        clientPhoneNo = in.readString();
         custType = in.readString();
         fssaino = in.readString();
         gstno = in.readString();
@@ -94,11 +94,11 @@ public class Customers implements Parcelable {
         this.clientName = clientName;
     }
 
-    public Long getClientPhoneNo() {
+    public String getClientPhoneNo() {
         return clientPhoneNo;
     }
 
-    public void setClientPhoneNo(Long clientPhoneNo) {
+    public void setClientPhoneNo(String clientPhoneNo) {
         this.clientPhoneNo = clientPhoneNo;
     }
 
@@ -161,7 +161,7 @@ public class Customers implements Parcelable {
         parcel.writeString(clientAddress);
         parcel.writeString(clientArea);
         parcel.writeString(clientName);
-        parcel.writeLong(clientPhoneNo);
+        parcel.writeString(clientPhoneNo);
         parcel.writeString(custType);
         parcel.writeString(fssaino);
         parcel.writeString(gstno);

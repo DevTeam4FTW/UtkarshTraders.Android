@@ -62,14 +62,14 @@ public class AddCustomerActivity extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(carea) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst) && !TextUtils.isEmpty(cbal)) {
 
-                    Long phno = Long.parseLong(cphno);
+
                     Map<String, String> userMap = new HashMap<>();
 
                     userMap.put("city", ccity);
                     userMap.put("clientAddress", caddress);
                     userMap.put("clientArea", carea);
                     userMap.put("clientName", cname);
-                    userMap.put("clientPhoneNo",phno);
+                    userMap.put("clientPhoneNo",cphno);
                     userMap.put("custType", ctype);
                     userMap.put("fssaino",cfssai);
                     userMap.put("gstno",cgst);
