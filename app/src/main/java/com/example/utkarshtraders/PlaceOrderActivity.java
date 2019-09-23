@@ -111,7 +111,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
             public void run() {
                 if(!TextUtils.isEmpty(item_qty.getText().toString()))
                 {
-                    final Long grandTotal = (Long.parseLong(item_qty.getText().toString()) * Long.parseLong(item_price.getText().toString())) + (Long.parseLong(item_qty.getText().toString()) * Long.parseLong(item_price.getText().toString()) * Long.parseLong(taxrate.getText().toString()));
+                    final Float taxableTotal = (Float .parseFloat(item_qty.getText().toString()) * Float .parseFloat(item_price.getText().toString()));
+                    final Float tax = (Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString()) * (Float.parseFloat(taxrate.getText().toString())/100));
+                    final Float grandTotal = taxableTotal + tax;
                     grand_total.setText(grandTotal.toString());
                 }
 
