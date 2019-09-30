@@ -54,9 +54,6 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                     final Items items = documentSnapshot.toObject(Items.class);
 
-                    documentSnapshot.get("city");
-
-
                     String item_name = items.getItemName();
                     String default_price = "Rs: "+items.getItemPrice();
 

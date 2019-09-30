@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ import java.util.TimerTask;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
-    private TextView date,item_name,taxrate,grand_total;
+    private TextView date,item_name,taxrate,customer_total;
     private EditText item_qty, item_price, area;
     private ImageView placeorder;
     private ToggleButton togglespecial;
@@ -53,7 +54,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
         taxrate = findViewById(R.id.taxrate);
-        grand_total = findViewById(R.id.grand_total);
+        customer_total = findViewById(R.id.customer_total);
         item_qty = findViewById(R.id.item_qty);
         item_price = findViewById(R.id.item_price);
         area = findViewById(R.id.area);
@@ -90,6 +91,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
         item_price.setText(items.getItemPrice());
         taxrate.setText(items.getTaxRate());
 
+
+
         customerRef.document(c_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -109,12 +112,11 @@ public class PlaceOrderActivity extends AppCompatActivity {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(!TextUtils.isEmpty(item_qty.getText().toString()))
+                if(!TextUtils.isEmpty(item_qty.getText().toString()) && !TextUtils.isEmpty(item_price.getText().toString()) )
                 {
-                    final Float taxableTotal = (Float .parseFloat(item_qty.getText().toString()) * Float .parseFloat(item_price.getText().toString()));
-                    final Float tax = (Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString()) * (Float.parseFloat(taxrate.getText().toString())/100));
-                    final Float grandTotal = taxableTotal + tax;
-                    grand_total.setText(grandTotal.toString());
+                    final Float c_total = (Float .parseFloat(item_qty.getText().toString()) * Float .parseFloat(item_price.getText().toString()));
+                    customer_total.setText(c_total.toString());
+
                 }
 
             }
@@ -126,9 +128,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(grand_total.getText().toString()) && !TextUtils.isEmpty(area.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString())) {
+                if (!TextUtils.isEmpty(customer_total.getText().toString()) && !TextUtils.isEmpty(area.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString())) {
 
-                    if (String.valueOf(bill_spinner.getSelectedItem()) == "Utkarsh") {
+                    if (bill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
                         bill_generator = "1";
                     } else {
                         bill_generator = "2";
@@ -143,15 +145,17 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     String orderId = c_id + date.getText().toString();
                     String orderStatus = "true";
                     String salesmanId = mCurrentUser.getUid();
-                    Long taxTotalLong = Long.parseLong(item_qty.getText().toString()) * Long.parseLong(item_price.getText().toString());
-                    String taxTotal = taxTotalLong.toString();
-                    String taxableRate = "";
+                    Float taxTotalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
+                    String taxTotal = taxTotalFloat.toString();
+                    Float taxableRateFloat = Float.parseFloat(item_price.getText().toString()) - (Float.parseFloat(item_price.getText().toString()) * (Float.parseFloat(taxrate.getText().toString())/100));
+                    String taxableRate = taxableRateFloat.toString();
                     String tax_rate = taxrate.getText().toString();
-                    String total = grand_total.getText().toString();
+                    String total = taxTotal;
 
-                    if (String.valueOf(unit_spinner.getSelectedItem()) == "Per/Kg") {
+
+                    if (unit_spinner.getSelectedItem().toString().equals("Per/Kg")) {
                          unit_type = "per/kg";
-                    } else if (String.valueOf(unit_spinner.getSelectedItem()) == "Per/Piece") {
+                    } else if (unit_spinner.getSelectedItem().toString().equals("Per/Piece")) {
                          unit_type = "per/pc";
                     } else {
                          unit_type = "per/dozen";
