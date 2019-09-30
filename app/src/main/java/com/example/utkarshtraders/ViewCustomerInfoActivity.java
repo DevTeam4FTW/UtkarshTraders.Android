@@ -29,14 +29,6 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer_info);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int)(width*0.87),(int)(height*0.87));
-
 
         c_name = findViewById(R.id.customer_name);
         c_ph = findViewById(R.id.customer_ph);
@@ -76,9 +68,20 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
                 edit.putExtra("customer_object",customers);
                 edit.putExtra("customer_id",c_id);
                 startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

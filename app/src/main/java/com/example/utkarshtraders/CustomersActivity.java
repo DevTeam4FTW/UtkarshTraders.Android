@@ -118,6 +118,9 @@ public class CustomersActivity extends AppCompatActivity {
                             edit.putExtra("customer_object",customers);
                             edit.putExtra("customer_id",customer_id);
                             startActivity(edit);
+                            finish();
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            view.setOnClickListener(null);
                         }
                     });
 
@@ -128,6 +131,10 @@ public class CustomersActivity extends AppCompatActivity {
                             Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
                             order.putExtra("customer_id",customer_id);
                             startActivity(order);
+                            finish();
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            view.setOnClickListener(null);
+
                         }
                     });
 
@@ -146,6 +153,7 @@ public class CustomersActivity extends AppCompatActivity {
                 addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(addcustomerintent);
                 finish();
+                view.setOnClickListener(null);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
             }

@@ -100,4 +100,14 @@ public class Edit_CustomerActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+
 }

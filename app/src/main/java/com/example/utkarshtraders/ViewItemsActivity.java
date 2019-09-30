@@ -30,6 +30,8 @@ public class ViewItemsActivity extends AppCompatActivity {
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference itemsRef=mFireStore.collection("items");
 
+    public String customer_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class ViewItemsActivity extends AppCompatActivity {
         final LinearLayout i_list = findViewById(R.id.itemlist);
 
         Intent intent = getIntent();
-        final String customer_id = intent.getStringExtra("customer_id");
+        customer_id = intent.getStringExtra("customer_id");
 
         itemsRef.
                 get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -77,6 +79,10 @@ public class ViewItemsActivity extends AppCompatActivity {
                             additemtoorder.putExtra("item_object",items);
                             additemtoorder.putExtra("customer_id",customer_id);
                             startActivity(additemtoorder);
+                            finish();
+                            view.setOnClickListener(null);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
                         }
                     });
                 }
@@ -84,5 +90,14 @@ public class ViewItemsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), ViewOrdersActivity.class);
+        edit.putExtra("customer_id",customer_id);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

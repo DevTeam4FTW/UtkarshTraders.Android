@@ -81,6 +81,9 @@ public class ViewOrdersActivity extends AppCompatActivity {
                                     Intent editorder = new Intent(getBaseContext(),ViewOrderInfoActivity.class);
                                     editorder.putExtra("order_object",orders);
                                     startActivity(editorder);
+                                    finish();
+                                    view.setOnClickListener(null);
+                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                 }
                             });
                         }
@@ -99,7 +102,19 @@ public class ViewOrdersActivity extends AppCompatActivity {
                 intent.putExtra("customer_id",customer_id);
                 startActivity(intent);
                 finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+
 }

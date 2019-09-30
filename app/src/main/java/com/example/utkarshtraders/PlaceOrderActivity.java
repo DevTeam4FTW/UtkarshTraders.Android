@@ -45,6 +45,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String bill_generator;
     private String unit_type;
 
+    public String cust_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
                     String customerArea = area.getText().toString();
                     String customerId = c_id;
+                    cust_id = c_id;
                     String datefield = date.getText().toString();
                     String itemName = item_name.getText().toString();
                     String itemPrice = item_price.getText().toString();
@@ -184,8 +187,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(PlaceOrderActivity.this, ViewOrdersActivity.class);
+                    intent.putExtra("customer_id",cust_id);
                     startActivity(intent);
                     finish();
+                    view.setOnClickListener(null);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
                 }
@@ -207,15 +212,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
 
+    }
 
-
-
-
-
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), ViewItemsActivity.class);
+        edit.putExtra("customer_id",cust_id);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

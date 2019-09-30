@@ -21,19 +21,12 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView unit;
     TextView order_total;
     ImageView edit_customer;
+    public String c_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order_info);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int)(width*0.87),(int)(height*0.87));
 
 
         date = findViewById(R.id.date);
@@ -56,6 +49,8 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         unit.setText(orders.getUnit());
         order_total.setText(orders.getTotal());
 
+        c_id = orders.getCustomerId();
+
         edit_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +58,19 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
                 Intent edit = new Intent(getBaseContext(), Edit_OrderActivity.class);
                 edit.putExtra("order_object",orders);
                 startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent edit = new Intent(getBaseContext(), ViewOrdersActivity.class);
+        edit.putExtra("customer_id",c_id);
+        startActivity(edit);
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
