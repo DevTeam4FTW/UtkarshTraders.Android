@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,12 +22,15 @@ public class AddCustomerActivity extends AppCompatActivity {
     private FirebaseFirestore mFirestore;
     private EditText c_name, c__phno, c_address, c_area, c_city, c_pin, c_state, c_type, c_fssai, c_gst,c_bal;
     private ImageView addcust;
+    private CollectionReference customerRef=mFirestore.collection("customer");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-
+        setup();
         mFirestore = FirebaseFirestore.getInstance();
         c_name = findViewById(R.id.cname);
         c__phno = findViewById(R.id.cphno);
@@ -78,7 +83,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     userMap.put("state", cstate);
 
 
-                    mFirestore.collection("customer").add(userMap);
+                    customerRef.add(userMap);
 
                     Toast.makeText(AddCustomerActivity.this, "Customer added successfully",
                             Toast.LENGTH_LONG).show();
@@ -104,6 +109,14 @@ public class AddCustomerActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public void setup() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
     }
 }
 

@@ -40,6 +40,8 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Orders orders = intent.getParcelableExtra("order_object");
+        final String order_id = intent.getStringExtra("order_id");
+
 
         date.setText(orders.getDate());
         item_name.setText(orders.getItemName());
@@ -57,6 +59,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
 
                 Intent edit = new Intent(getBaseContext(), Edit_OrderActivity.class);
                 edit.putExtra("order_object",orders);
+                edit.putExtra("order_id",order_id);
                 startActivity(edit);
                 finish();
                 view.setOnClickListener(null);

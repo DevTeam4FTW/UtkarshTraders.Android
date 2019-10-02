@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -52,7 +53,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
-
+        setup();
         date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
         taxrate = findViewById(R.id.taxrate);
@@ -67,7 +68,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Items items = intent.getParcelableExtra("item_object");
-        final String c_id = intent.getStringExtra("customer_id");
+        cust_id = intent.getStringExtra("customer_id");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         item_price.setEnabled(false);
 
@@ -95,7 +96,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
 
-        customerRef.document(c_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        customerRef.document(cust_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
@@ -139,13 +140,12 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     }
 
                     String customerArea = area.getText().toString();
-                    String customerId = c_id;
-                    cust_id = c_id;
+                    String customerId = cust_id;
                     String datefield = date.getText().toString();
                     String itemName = item_name.getText().toString();
                     String itemPrice = item_price.getText().toString();
                     String itemQuantity = item_qty.getText().toString();
-                    String orderId = c_id + date.getText().toString();
+                    String orderId = cust_id + date.getText().toString();
                     String orderStatus = "true";
                     String salesmanId = mCurrentUser.getUid();
                     Float taxTotalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
@@ -168,7 +168,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
                     orderMap.put("billGenerator", bill_generator);
                     orderMap.put("customerArea", customerArea);
-                    orderMap.put("customerId", customerId);
+                    orderMap.put("customerId", cust_id);
                     orderMap.put("date", datefield);
                     orderMap.put("itemName",itemName);
                     orderMap.put("itemPrice", itemPrice);
@@ -221,5 +221,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public void setup() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
     }
 }

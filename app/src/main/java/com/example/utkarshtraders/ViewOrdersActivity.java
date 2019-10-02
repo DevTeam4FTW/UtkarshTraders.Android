@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -33,7 +34,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_orders);
-
+        setup();
         addorder = findViewById(R.id.addorder);
 
         Intent intent = getIntent();
@@ -60,6 +61,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                             String order_date = orders.getDate();
                             String order_item_name = orders.getItemName();
                             String order_price = "Rs: " + orders.getTotal();
+                            final String order_id = documentSnapshot.getId();
 
                             final View Card = inflater.inflate(R.layout.activity_order_card, null);
 
@@ -80,6 +82,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                                 public void onClick(View view) {
                                     Intent editorder = new Intent(getBaseContext(),ViewOrderInfoActivity.class);
                                     editorder.putExtra("order_object",orders);
+                                    editorder.putExtra("order_id",order_id);
                                     startActivity(editorder);
                                     finish();
                                     view.setOnClickListener(null);
@@ -114,6 +117,14 @@ public class ViewOrdersActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public void setup() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
     }
 
 

@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+
 public class ViewCustomerInfoActivity extends AppCompatActivity {
 
     TextView c_name;
@@ -28,7 +31,7 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer_info);
-
+        setup();
 
         c_name = findViewById(R.id.customer_name);
         c_ph = findViewById(R.id.customer_ph);
@@ -83,5 +86,13 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public void setup() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
     }
 }
