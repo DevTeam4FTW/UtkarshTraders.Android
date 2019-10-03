@@ -63,18 +63,14 @@
             android:hint="Enter Address"
             android:maxLines="1"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/carea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="221dp"
+            android:layout_height="34dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="141dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:hint="Enter Area"
-            android:maxLines="1"/>
+            android:layout_marginTop="147dp" />
 
         <EditText
             android:id="@+id/ccity"
@@ -268,6 +264,18 @@
             android:layout_marginTop="432dp"
             app:srcCompat="@drawable/gst" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignStart="@+id/imageView8"
+            android:layout_alignTop="@+id/imageView8"
+            android:layout_marginStart="-1dp"
+            android:layout_marginTop="459dp"
+            app:srcCompat="@drawable/remainingbal"
+            tools:layout_editor_absoluteX="82dp"
+            tools:layout_editor_absoluteY="574dp" />
+
     </RelativeLayout>
 
     <TextView
@@ -299,5 +307,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

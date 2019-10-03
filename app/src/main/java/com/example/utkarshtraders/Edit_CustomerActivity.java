@@ -1,26 +1,37 @@
 package com.example.utkarshtraders;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Edit_CustomerActivity extends AppCompatActivity {
 
-    private FirebaseFirestore mFirestore;
+    private FirebaseFirestore mFirestore=FirebaseFirestore.getInstance();
     EditText c_name;
     EditText c_phno;
     EditText c_address;
-    EditText c_area;
+    Spinner c_area;
     EditText c_city;
     EditText c_pin;
     EditText c_state;
@@ -30,12 +41,14 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     EditText c_bal;
     CircleImageView saveCust;
 
+    private CollectionReference areasRef = mFirestore.collection("areas");
+    private CollectionReference customerRef = mFirestore.collection("customer");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__customer);
         setup();
-        mFirestore = FirebaseFirestore.getInstance();
         c_name = findViewById(R.id.cname);
         c_phno = findViewById(R.id.cphno);
         c_address = findViewById(R.id.caddress);
@@ -56,7 +69,32 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         c_name.setText(customers.getClientName());
         c_phno.setText(customers.getClientPhoneNo());
         c_address.setText(customers.getClientAddress());
-        c_area.setText(customers.getClientArea());
+
+
+        final List<String> areas = new ArrayList<>();
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        final String area = customers.getClientArea();
+        c_area.setAdapter(areaAdapter);
+        areasRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String areaName = document.getString("areaName");
+                        areas.add(areaName);
+                    }
+                    areaAdapter.notifyDataSetChanged();
+                    c_area.setSelection(areaAdapter.getPosition(area));
+                }
+            }
+        });
+
+
+
+
+
         c_city.setText(customers.getCity());
         c_pin.setText(customers.getPincode());
         c_state.setText(customers.getState());
@@ -70,11 +108,11 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                mFirestore.collection("customer").document(c_id)
+                customerRef.document(c_id)
                         .update(
                                 "city", c_city.getText().toString(),
                                 "clientAddress",c_address.getText().toString() ,
-                                "clientArea",c_area.getText().toString(),
+                                "clientArea",c_area.getSelectedItem().toString(),
                                 "clientName",c_name.getText().toString() ,
                                 "clientPhoneNo",c_phno.getText().toString(),
                                 "custType",c_type.getText().toString() ,

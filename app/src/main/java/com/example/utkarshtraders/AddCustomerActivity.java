@@ -1,28 +1,39 @@
 package com.example.utkarshtraders;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddCustomerActivity extends AppCompatActivity {
 
-    private FirebaseFirestore mFirestore;
-    private EditText c_name, c__phno, c_address, c_area, c_city, c_pin, c_state, c_type, c_fssai, c_gst,c_bal;
+    private FirebaseFirestore mFirestore=FirebaseFirestore.getInstance();
+    private EditText c_name, c__phno, c_address, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
     private ImageView addcust;
     private CollectionReference customerRef=mFirestore.collection("customer");
+    private CollectionReference areasRef = mFirestore.collection("areas");
+    private Spinner c_area;
 
 
 
@@ -42,9 +53,26 @@ public class AddCustomerActivity extends AppCompatActivity {
         c_type = findViewById(R.id.ctype);
         c_fssai = findViewById(R.id.cfssai);
         c_gst = findViewById(R.id.cgst);
-        c_bal = findViewById(R.id.c_bal);
 
         addcust = findViewById(R.id.addcustbtn);
+
+        final List<String> areas = new ArrayList<>();
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        c_area.setAdapter(areaAdapter);
+        areasRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String areaName = document.getString("areaName");
+                        areas.add(areaName);
+                    }
+                    areaAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
 
         addcust.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,18 +82,17 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String cname = c_name.getText().toString();
                 String cphno = c__phno.getText().toString();
                 String caddress = c_address.getText().toString();
-                String carea = c_area.getText().toString();
+                String carea = c_area.getSelectedItem().toString();
                 String ccity = c_city.getText().toString();
                 String cpin = c_pin.getText().toString();
                 String cstate = c_state.getText().toString();
                 String ctype = c_type.getText().toString();
                 String cfssai = c_fssai.getText().toString();
                 String cgst = c_gst.getText().toString();
-                String cbal = c_bal.getText().toString();
 
 
 
-                if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(carea) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst) && !TextUtils.isEmpty(cbal)) {
+                if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst)) {
 
 
                     Map<String, String> userMap = new HashMap<>();
@@ -78,7 +105,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     userMap.put("custType", ctype);
                     userMap.put("fssaino",cfssai);
                     userMap.put("gstno",cgst);
-                    userMap.put("remainingBal",cbal);
+                    userMap.put("remainingBal","0");
                     userMap.put("pincode",cpin);
                     userMap.put("state", cstate);
 

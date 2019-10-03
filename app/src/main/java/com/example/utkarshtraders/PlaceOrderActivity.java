@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -94,6 +95,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         item_price.setText(items.getItemPrice());
         taxrate.setText(items.getTaxRate());
 
+        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, android.R.layout.simple_spinner_item);
+        billadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bill_spinner.setAdapter(billadapter);
+
+        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, android.R.layout.simple_spinner_item);
+        unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unit_spinner.setAdapter(unitadapter);
 
 
         customerRef.document(cust_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

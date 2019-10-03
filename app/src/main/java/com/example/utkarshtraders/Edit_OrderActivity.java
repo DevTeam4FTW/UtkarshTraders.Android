@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,9 +24,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,6 +49,8 @@ public class Edit_OrderActivity extends AppCompatActivity {
     private String editunit_type;
 
     public String cust_id;
+    String default_bill;
+    String default_unit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,40 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
         edititem_qty.setText(orders.getItemQuantity());
         edititem_price.setText(orders.getItemPrice());
+
+        String bill_gen = orders.getBillGenerator();
+        switch (bill_gen)
+        {
+            case "1": default_bill = "Utkarsh";
+                break;
+            case "2" :default_bill = "Shanti";
+                break;
+                default: default_bill = "Utkarsh";
+        }
+        final String unit = orders.getUnit();
+
+        switch (unit)
+        {
+            case "per/pc": default_unit = "Per/Piece";
+                break;
+            case "per/dozen" :default_unit = "Per/Dozen";
+                break;
+            case "per/kg" :default_unit = "Per/Kg";
+                break;
+            default: default_unit = "Per/Piece";
+        }
+
+        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, android.R.layout.simple_spinner_item);
+        billadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editbill_spinner.setAdapter(billadapter);
+
+        editbill_spinner.setSelection(billadapter.getPosition(default_bill));
+
+        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, android.R.layout.simple_spinner_item);
+        unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editunit_spinner.setAdapter(unitadapter);
+
+        editunit_spinner.setSelection(unitadapter.getPosition(default_unit));
 
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
