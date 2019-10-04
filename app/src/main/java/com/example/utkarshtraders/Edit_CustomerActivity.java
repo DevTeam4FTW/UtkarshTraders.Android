@@ -43,7 +43,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     EditText c_gstin;
     EditText c_bal;
     CircleImageView saveCust;
-    Boolean val;
+    boolean val;
 
     private CollectionReference areasRef = mFirestore.collection("areas");
     private CollectionReference customerRef = mFirestore.collection("customer");
@@ -193,7 +193,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         db.setFirestoreSettings(settings);
     }
 
-    Boolean validations()
+    boolean validations()
     {
         Boolean val = true;
         String cname = c_name.getText().toString();

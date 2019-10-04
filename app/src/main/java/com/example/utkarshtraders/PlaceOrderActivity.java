@@ -54,7 +54,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String unit_type;
 
     public String cust_id;
-    Boolean val;
+    boolean val;
     String default_area;
 
 
@@ -282,7 +282,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         db.setFirestoreSettings(settings);
     }
 
-    Boolean validations()
+    boolean validations()
     {
         Boolean val = true;
         String qty = item_qty.getText().toString();

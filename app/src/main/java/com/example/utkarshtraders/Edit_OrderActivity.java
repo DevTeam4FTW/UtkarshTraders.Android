@@ -53,6 +53,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
     String default_bill;
     String default_unit;
     String default_area;
+    boolean val;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,11 +154,26 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
         editunit_spinner.setSelection(unitadapter.getPosition(default_unit));
 
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        val = validations();
+                    }
+                });
+
+            }
+        }, 0, 500);
+
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(!TextUtils.isEmpty(edititem_qty.getText().toString()) && !TextUtils.isEmpty(edititem_price.getText().toString()) )
+                if(!TextUtils.isEmpty(edititem_qty.getText().toString()) && !TextUtils.isEmpty(edititem_price.getText().toString()) && edititem_qty.getText().toString().matches("^[0-9]*$") && edititem_price.getText().toString().matches("^[0-9]*$") )
                 {
                     final Float c_total = (Float .parseFloat(edititem_qty.getText().toString()) * Float .parseFloat(edititem_price.getText().toString()));
                     editcustomer_total.setText(c_total.toString());
@@ -173,7 +189,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())&& !TextUtils.isEmpty(edititem_price.getText().toString())) {
+                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())&& !TextUtils.isEmpty(edititem_price.getText().toString()) && val) {
 
                     if (editbill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
                         editbill_generator = "1";
@@ -210,7 +226,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
                                     "total",edittotal,
                                     "unit",editunit_type
                             );
-                    Toast.makeText(Edit_OrderActivity.this, "Order added successfully",
+                    Toast.makeText(Edit_OrderActivity.this, "Order edited successfully",
                             Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(Edit_OrderActivity.this, ViewOrdersActivity.class);
@@ -252,5 +268,35 @@ public class Edit_OrderActivity extends AppCompatActivity {
                 .setPersistenceEnabled(true)
                 .build();
         db.setFirestoreSettings(settings);
+    }
+
+    boolean validations()
+    {
+        Boolean val = true;
+        String qty = edititem_qty.getText().toString();
+        String price = edititem_price.getText().toString();
+
+        if(!qty.isEmpty())
+        {
+            if(!qty.matches("^[0-9]*$"))
+            {
+                edititem_qty.setError("Enter numbers only");
+                val = false;
+            }
+        }
+
+        if(!price.isEmpty())
+        {
+            if(!price.matches("^[0-9]*$"))
+            {
+                edititem_price.setError("Enter numbers only");
+                val = false;
+            }
+        }
+
+
+
+
+        return val;
     }
 }

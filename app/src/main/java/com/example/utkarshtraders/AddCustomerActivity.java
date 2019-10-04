@@ -36,7 +36,7 @@ public class AddCustomerActivity extends AppCompatActivity {
     private CollectionReference customerRef = mFirestore.collection("customer");
     private CollectionReference areasRef = mFirestore.collection("areas");
     private Spinner c_area;
-    Boolean val;
+    boolean val;
 
 
     @Override
@@ -169,7 +169,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         db.setFirestoreSettings(settings);
     }
 
-    Boolean validations()
+    boolean validations()
     {
         Boolean val = true;
         String cname = c_name.getText().toString();
