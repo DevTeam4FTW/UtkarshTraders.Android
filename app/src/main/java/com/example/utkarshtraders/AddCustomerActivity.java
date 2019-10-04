@@ -25,16 +25,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AddCustomerActivity extends AppCompatActivity {
 
-    private FirebaseFirestore mFirestore=FirebaseFirestore.getInstance();
-    private EditText c_name, c__phno, c_address, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
+    private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    private EditText c_name, c_phno, c_address, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
     private ImageView addcust;
-    private CollectionReference customerRef=mFirestore.collection("customer");
+    private CollectionReference customerRef = mFirestore.collection("customer");
     private CollectionReference areasRef = mFirestore.collection("areas");
     private Spinner c_area;
-
+    Boolean val;
 
 
     @Override
@@ -44,7 +46,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         setup();
         mFirestore = FirebaseFirestore.getInstance();
         c_name = findViewById(R.id.cname);
-        c__phno = findViewById(R.id.cphno);
+        c_phno = findViewById(R.id.cphno);
         c_address = findViewById(R.id.caddress);
         c_area = findViewById(R.id.carea);
         c_city = findViewById(R.id.ccity);
@@ -73,6 +75,22 @@ public class AddCustomerActivity extends AppCompatActivity {
             }
         });
 
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        val = validations();
+                    }
+                });
+
+
+            }
+        }, 0, 1000);
+
 
         addcust.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +98,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
 
                 String cname = c_name.getText().toString();
-                String cphno = c__phno.getText().toString();
+                String cphno = c_phno.getText().toString();
                 String caddress = c_address.getText().toString();
                 String carea = c_area.getSelectedItem().toString();
                 String ccity = c_city.getText().toString();
@@ -91,22 +109,27 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String cgst = c_gst.getText().toString();
 
 
-
-                if (!TextUtils.isEmpty(cname) && !TextUtils.isEmpty(cphno) && !TextUtils.isEmpty(caddress) && !TextUtils.isEmpty(ccity) && !TextUtils.isEmpty(cpin) && !TextUtils.isEmpty(cstate) && !TextUtils.isEmpty(ctype) && !TextUtils.isEmpty(cfssai) && !TextUtils.isEmpty(cgst)) {
-
-
+                if (!TextUtils.isEmpty(cname) &&
+                        !TextUtils.isEmpty(cphno) &&
+                        !TextUtils.isEmpty(caddress) &&
+                        !TextUtils.isEmpty(ccity) &&
+                        !TextUtils.isEmpty(cpin) &&
+                        !TextUtils.isEmpty(cstate) &&
+                        !TextUtils.isEmpty(ctype) &&
+                        !TextUtils.isEmpty(cfssai) &&
+                        !TextUtils.isEmpty(cgst)&& val) {
                     Map<String, String> userMap = new HashMap<>();
 
                     userMap.put("city", ccity);
                     userMap.put("clientAddress", caddress);
                     userMap.put("clientArea", carea);
                     userMap.put("clientName", cname);
-                    userMap.put("clientPhoneNo",cphno);
+                    userMap.put("clientPhoneNo", cphno);
                     userMap.put("custType", ctype);
-                    userMap.put("fssaino",cfssai);
-                    userMap.put("gstno",cgst);
-                    userMap.put("remainingBal","0");
-                    userMap.put("pincode",cpin);
+                    userMap.put("fssaino", cfssai);
+                    userMap.put("gstno", cgst);
+                    userMap.put("remainingBal", "0");
+                    userMap.put("pincode", cpin);
                     userMap.put("state", cstate);
 
 
@@ -120,7 +143,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
-                    Toast.makeText(AddCustomerActivity.this, "Please dont leave any fields Empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddCustomerActivity.this, "Please dont leave any fields Empty or enter right values", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -144,6 +167,75 @@ public class AddCustomerActivity extends AppCompatActivity {
                 .setPersistenceEnabled(true)
                 .build();
         db.setFirestoreSettings(settings);
+    }
+
+    Boolean validations()
+    {
+        Boolean val = true;
+        String cname = c_name.getText().toString();
+        String cphno = c_phno.getText().toString();
+        String ccity = c_city.getText().toString();
+        String cpin = c_pin.getText().toString();
+        String cstate = c_state.getText().toString();
+        String ctype = c_type.getText().toString();
+
+        if(!cname.isEmpty())
+        {
+            if(!cname.matches("[a-zA-Z ]+"))
+            {
+                c_name.setError("Enter characters only");
+                val = false;
+            }
+        }
+        if(!cphno.isEmpty())
+        {
+            if(!cphno.matches("[0-9{10}]"))
+            {
+                c_phno.setError("Enter 10 digit number");
+                val = false;
+            }
+        }
+
+        if(!ccity.isEmpty())
+        {
+            if(!cname.matches("[a-zA-Z ]+"))
+            {
+                c_city.setError("Enter characters only");
+                val = false;
+            }
+        }
+
+        if(!cpin.isEmpty())
+        {
+            if(!cpin.matches("[0-9{4,6}]"))
+            {
+                c_pin.setError("Enter 6 digit number starting with 4");
+                val = false;
+            }
+        }
+        if(!cstate.isEmpty())
+        {
+            if(!cstate.matches("[a-zA-Z ]+"))
+            {
+                c_state.setError("Enter characters only");
+                val = false;
+            }
+        }
+        if(!ctype.isEmpty())
+        {
+            if(!ctype.matches("[a-zA-Z ]+"))
+            {
+                c_type.setError("Enter characters only");
+                val = false;
+            }
+        }
+
+
+
+
+
+
+        return val;
     }
 }
 
