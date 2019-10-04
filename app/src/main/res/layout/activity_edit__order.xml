@@ -206,20 +206,6 @@
         app:layout_constraintTop_toBottomOf="@+id/edititem_name"
         app:layout_constraintVertical_bias="0.612" />
 
-    <EditText
-        android:id="@+id/editarea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editbill_spinner"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/edittaxrate"
-        app:layout_constraintVertical_bias="0.508" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="106dp"
@@ -233,5 +219,14 @@
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <Spinner
+        android:id="@+id/editarea_spinner"
+        android:layout_width="194dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/edittaxrate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

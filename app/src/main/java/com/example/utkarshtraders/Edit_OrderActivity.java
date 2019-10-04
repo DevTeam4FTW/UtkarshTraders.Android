@@ -38,12 +38,13 @@ import java.util.TimerTask;
 public class Edit_OrderActivity extends AppCompatActivity {
 
     private TextView editdate,edititem_name,edittaxrate,editcustomer_total;
-    private EditText edititem_qty, edititem_price, editarea;
+    private EditText edititem_qty, edititem_price;
     private ImageView editplaceorder;
     private ToggleButton edittogglespecial;
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference ordersRef=mFireStore.collection("orders");
-    private Spinner editbill_spinner,editunit_spinner;
+    private CollectionReference areasRef=mFireStore.collection("areas");
+    private Spinner editbill_spinner,editunit_spinner,editarea_spinner;
 
     private String editbill_generator;
     private String editunit_type;
@@ -51,6 +52,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
     public String cust_id;
     String default_bill;
     String default_unit;
+    String default_area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
         editcustomer_total = findViewById(R.id.editcustomer_total);
         edititem_qty = findViewById(R.id.edititem_qty);
         edititem_price = findViewById(R.id.edititem_price);
-        editarea = findViewById(R.id.editarea);
+        editarea_spinner = findViewById(R.id.editarea_spinner);
         editplaceorder = findViewById(R.id.editplaceorder);
         edittogglespecial = findViewById(R.id.edittogglespecial);
         editbill_spinner = findViewById(R.id.editbill_spinner);
@@ -89,7 +91,30 @@ public class Edit_OrderActivity extends AppCompatActivity {
         editdate.setText(orders.getDate());
         edititem_name.setText(orders.getItemName());
         edittaxrate.setText(orders.getTaxrate());
-        editarea.setText(orders.getCustomerArea());
+
+        default_area = orders.getCustomerArea();
+
+        final List<String> areas = new ArrayList<>();
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        editarea_spinner.setAdapter(areaAdapter);
+        areasRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String areaName = document.getString("areaName");
+                        areas.add(areaName);
+                    }
+                    areaAdapter.notifyDataSetChanged();
+                    editarea_spinner.setSelection(areaAdapter.getPosition(default_area));
+                }
+            }
+        });
+
+
+
 
         edititem_qty.setText(orders.getItemQuantity());
         edititem_price.setText(orders.getItemPrice());
@@ -148,7 +173,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(editarea.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())&& !TextUtils.isEmpty(edititem_price.getText().toString())) {
+                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())&& !TextUtils.isEmpty(edititem_price.getText().toString())) {
 
                     if (editbill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
                         editbill_generator = "1";
@@ -156,7 +181,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
                         editbill_generator = "2";
                     }
 
-                    String editcustomerArea = editarea.getText().toString();
+                    String editcustomerArea = editarea_spinner.getSelectedItem().toString();
                     String edititemPrice = edititem_price.getText().toString();
                     String edititemQuantity = edititem_qty.getText().toString();
                     Float taxTotalFloat = Float.parseFloat(edititem_qty.getText().toString()) * Float.parseFloat(edititem_price.getText().toString());

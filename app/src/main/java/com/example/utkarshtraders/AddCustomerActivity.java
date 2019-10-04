@@ -189,7 +189,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         }
         if(!cphno.isEmpty())
         {
-            if(!cphno.matches("[0-9{10}]"))
+            if(!cphno.matches("\\A[0-9]{10}\\z"))
             {
                 c_phno.setError("Enter 10 digit number");
                 val = false;
@@ -198,7 +198,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
         if(!ccity.isEmpty())
         {
-            if(!cname.matches("[a-zA-Z ]+"))
+            if(!ccity.matches("[a-zA-Z ]+"))
             {
                 c_city.setError("Enter characters only");
                 val = false;
@@ -207,7 +207,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
         if(!cpin.isEmpty())
         {
-            if(!cpin.matches("[0-9{4,6}]"))
+            if(!cpin.matches("\\A[0-9]{6}\\z"))
             {
                 c_pin.setError("Enter 6 digit number starting with 4");
                 val = false;
