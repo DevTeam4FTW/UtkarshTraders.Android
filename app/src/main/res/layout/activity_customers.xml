@@ -16,7 +16,7 @@
     <ScrollView
         android:id="@+id/scrollbaba"
         android:layout_width="wrap_content"
-        android:layout_height="547dp"
+        android:layout_height="527dp"
         android:layout_below="@+id/search_customer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -61,6 +61,7 @@
         android:layout_height="65dp"
         android:layout_below="@+id/scrollbaba"
         android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"

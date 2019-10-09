@@ -10,19 +10,14 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="274dp"
-        android:layout_height="506dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="45dp"
+        android:layout_width="381dp"
+        android:layout_height="547dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/cardview_light_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/savecustbtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23">
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/cname"
@@ -30,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="3dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Name"
@@ -43,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="52dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Ph.No"
@@ -56,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="94dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="100dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Address"
@@ -69,8 +64,8 @@
             android:layout_height="34dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="147dp" />
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="149dp" />
 
         <EditText
             android:id="@+id/ccity"
@@ -78,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="273dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="314dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter City"
@@ -91,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="227dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="264dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Pincode"
@@ -104,8 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="181dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="215dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter State"
@@ -117,8 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="133dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="165dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Type"
@@ -130,8 +125,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="87dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="116dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter fssai.no"
@@ -143,8 +138,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="68dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter gstin.no"
@@ -156,8 +151,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="46dp"
-            android:layout_marginBottom="-2dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginBottom="19dp"
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Remaining balance"
@@ -169,8 +164,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="14dp"
             app:srcCompat="@drawable/nameicon" />
 
         <ImageView
@@ -179,8 +174,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="105dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="111dp"
             app:srcCompat="@drawable/addressicon" />
 
         <ImageView
@@ -189,8 +184,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="152dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="154dp"
             app:srcCompat="@drawable/addressicon" />
 
         <ImageView
@@ -199,8 +194,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="290dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="298dp"
             app:srcCompat="@drawable/addressicon" />
 
         <ImageView
@@ -209,8 +204,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="59dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="64dp"
             app:srcCompat="@drawable/phoneicon" />
 
         <ImageView
@@ -219,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="198dp"
             android:layout_marginBottom="284dp"
             app:srcCompat="@drawable/cityicon" />
@@ -230,8 +225,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="244dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="248dp"
             app:srcCompat="@drawable/pinicon" />
 
         <ImageView
@@ -240,8 +235,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="338dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="346dp"
             app:srcCompat="@drawable/typeicon" />
 
         <ImageView
@@ -250,8 +245,8 @@
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="383dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="395dp"
             app:srcCompat="@drawable/fssai" />
 
         <ImageView
@@ -260,8 +255,8 @@
             android:layout_height="23dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="432dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="445dp"
             app:srcCompat="@drawable/gst" />
 
         <ImageView
@@ -270,8 +265,8 @@
             android:layout_height="23dp"
             android:layout_alignStart="@+id/imageView8"
             android:layout_alignTop="@+id/imageView8"
-            android:layout_marginStart="-1dp"
-            android:layout_marginTop="459dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="479dp"
             app:srcCompat="@drawable/remainingbal"
             tools:layout_editor_absoluteX="82dp"
             tools:layout_editor_absoluteY="574dp" />
@@ -294,17 +289,15 @@
 
     <Button
         android:id="@+id/savecustbtn"
-        android:layout_width="108dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="85dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_dark"
         android:text="Edit"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
