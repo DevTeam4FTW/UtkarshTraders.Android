@@ -2,6 +2,7 @@ package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -41,7 +44,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private TextView date,item_name,taxrate,customer_total;
     private EditText item_qty, item_price;
     private Spinner area_spinner;
-    private ImageView placeorder;
+    private Button placeorder;
     private ToggleButton togglespecial;
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference customerRef=mFireStore.collection("customer");
@@ -63,6 +66,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
         setup();
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(navView, navController);
         date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
         taxrate = findViewById(R.id.taxrate);

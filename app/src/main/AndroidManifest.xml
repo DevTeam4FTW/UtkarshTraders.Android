@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Edit_OrderActivity"></activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"></activity>
+        <activity android:name=".Edit_OrderActivity" />
         <activity android:name=".ViewOrderInfoActivity" />
         <activity android:name=".PlaceOrderActivity" />
         <activity android:name=".ViewItemsActivity" />

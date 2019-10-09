@@ -4,229 +4,262 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E90FF"
-    tools:context=".PlaceOrderActivity">
+    android:layout_weight="1"
+    android:background="#808080"
+    tools:context=".Edit_OrderActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="338dp"
+        android:layout_height="558dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="35dp"
+        android:background="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138">
+
+
+        <TextView
+            android:id="@+id/edititem_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/edititem_qty"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="58dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/edititem_price"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="118dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1" />
+
+        <ToggleButton
+            android:id="@+id/edittogglespecial"
+            android:layout_width="51dp"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="213dp"
+            android:layout_marginTop="123dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat" />
+
+        <TextView
+            android:id="@+id/edittaxrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginBottom="351dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1" />
+
+        <Spinner
+            android:id="@+id/editarea_spinner"
+            android:layout_width="191dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="69dp"
+            android:layout_marginTop="234dp" />
+
+
+        <Spinner
+            android:id="@+id/editbill_spinner"
+            android:layout_width="191dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="351dp" />
+
+        <Spinner
+            android:id="@+id/editunit_spinner"
+            android:layout_width="191dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="290dp" />
+
+        <TextView
+            android:id="@+id/editcustomer_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginBottom="123dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1" />
+
+        <ImageView
+            android:id="@+id/editimageView8"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="19dp"
+            app:srcCompat="@drawable/item_namelogo" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="127dp"
+            app:srcCompat="@drawable/item_pricelogo" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="185dp"
+            app:srcCompat="@drawable/taxratelogo" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="358dp"
+            app:srcCompat="@drawable/billlogo" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="69dp"
+            app:srcCompat="@drawable/item_qtylogo" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="242dp"
+            android:layout_marginBottom="284dp"
+            app:srcCompat="@drawable/addressicon" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="295dp"
+            app:srcCompat="@drawable/item_qtylogo" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="22dp"
+            android:layout_height="19dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="187dp"
+            app:srcCompat="@drawable/rupee" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="22dp"
+            android:layout_height="19dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="49dp"
+            android:layout_marginTop="132dp"
+            app:srcCompat="@drawable/rupee" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="22dp"
+            android:layout_height="19dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="415dp"
+            app:srcCompat="@drawable/rupee" />
+
+        <Button
+            android:id="@+id/editplaceorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="115dp"
+            android:layout_marginTop="465dp"
+            android:background="@android:color/holo_blue_dark"
+            android:fontFamily="@font/montserrat"
+            android:text="Submit"
+            android:textColor="@android:color/background_light" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/editdate"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="332dp"
-        android:text="TextView"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/edittaxrate"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="116dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edititem_price" />
-
-    <Spinner
-        android:id="@+id/editbill_spinner"
-        android:layout_width="195dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="28dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_below="@+id/savecustbtn"
+        android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625" />
-
-    <Spinner
-        android:id="@+id/editunit_spinner"
-        android:layout_width="195dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editcustomer_total"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.828"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editbill_spinner"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/editcustomer_total"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="84dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.609"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editbill_spinner" />
-
-    <ImageView
-        android:id="@+id/editplaceorder"
-        android:layout_width="81dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editcustomer_total"
-        app:srcCompat="@drawable/ordericon" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Item Name :"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toStartOf="@+id/edititem_name"
-        app:layout_constraintHorizontal_bias="0.017"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editdate" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Item Quantity :"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Item Price : Rs"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toStartOf="@+id/edititem_price"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="64dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Tax (%) :"
-        android:textAlignment="textStart"
-        app:layout_constraintEnd_toStartOf="@+id/edittaxrate"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Area"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Bill :"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="124dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Total : Rs"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <TextView
-        android:id="@+id/edititem_name"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="116dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ToggleButton
-        android:id="@+id/edittogglespecial"
-        android:layout_width="67dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="48dp"
-        android:text="ToggleButton"
-        app:layout_constraintBottom_toTopOf="@+id/edittaxrate"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/edititem_price"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/edittogglespecial"
-        app:layout_constraintTop_toBottomOf="@+id/edititem_qty" />
-
-    <EditText
-        android:id="@+id/edititem_qty"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edititem_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/edititem_name"
-        app:layout_constraintVertical_bias="0.612" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Unit Type :"
-        app:layout_constraintEnd_toStartOf="@+id/editunit_spinner"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <Spinner
-        android:id="@+id/editarea_spinner"
-        android:layout_width="194dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/edittaxrate" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

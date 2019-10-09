@@ -2,12 +2,14 @@ package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,7 +42,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
     private TextView editdate,edititem_name,edittaxrate,editcustomer_total;
     private EditText edititem_qty, edititem_price;
-    private ImageView editplaceorder;
+    private Button editplaceorder;
     private ToggleButton edittogglespecial;
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference ordersRef=mFireStore.collection("orders");
@@ -60,6 +63,16 @@ public class Edit_OrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__order);
         setup();
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(navView, navController);
         editdate = findViewById(R.id.editdate);
         edititem_name = findViewById(R.id.edititem_name);
         edittaxrate = findViewById(R.id.edittaxrate);

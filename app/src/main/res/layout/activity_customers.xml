@@ -5,59 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="#1E90FF"
+    android:background="#808080"
     tools:context=".CustomersActivity">
 
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="71dp">
-
-        <TextView
-            android:id="@+id/hellomessage"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/editsalesman"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="26dp"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
-
-        <TextView
-            android:id="@+id/addcustomer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="138dp"
-            android:layout_marginBottom="13dp"
-            android:fontFamily="@font/montserrat"
-            android:text="+ Add Customer"
-            android:textColor="@android:color/background_light"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        android:layout_height="64dp"/>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="617dp"
-        android:layout_below="@+id/main"
+        android:id="@+id/scrollbaba"
+        android:layout_width="wrap_content"
+        android:layout_height="547dp"
+        android:layout_below="@+id/search_customer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="1dp">
 
         <LinearLayout
             android:id="@+id/customerlist"
@@ -77,11 +42,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="68dp"
-        android:background="@drawable/customborder"
+        android:background="@color/cardview_light_background"
         android:gravity="center_vertical" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/searchadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -89,4 +54,17 @@
         android:layout_marginTop="71dp"
         android:layout_marginEnd="29dp"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_below="@+id/scrollbaba"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>

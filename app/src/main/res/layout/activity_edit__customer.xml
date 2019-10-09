@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="#1E90FF"
+    android:background="#808080"
     tools:context=".Edit_CustomerActivity">
 
     <RelativeLayout
@@ -16,13 +16,13 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="45dp"
-        android:background="@drawable/customborder"
+        android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476">
+        app:layout_constraintVertical_bias="0.23">
 
         <EditText
             android:id="@+id/cname"
@@ -48,7 +48,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Ph.No"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/caddress"
@@ -61,7 +61,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Address"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <Spinner
             android:id="@+id/carea"
@@ -83,7 +83,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter City"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/cpin"
@@ -96,7 +96,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Pincode"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/cstate"
@@ -109,7 +109,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter State"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/ctype"
@@ -122,7 +122,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter Type"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/cfssai"
@@ -135,7 +135,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter fssai.no"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/cgst"
@@ -148,7 +148,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:hint="Enter gstin.no"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/c_bal"
@@ -278,36 +278,33 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/editheading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Edit Customer"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_below="@+id/savecustbtn"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <Button
+        android:id="@+id/savecustbtn"
+        android:layout_width="108dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Edit"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/savecustbtn"
-        android:layout_width="72dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="6dp"
-        android:src="@drawable/submiticon"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

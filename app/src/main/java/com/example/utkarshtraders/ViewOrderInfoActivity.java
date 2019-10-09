@@ -1,14 +1,17 @@
 package com.example.utkarshtraders;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firestore.v1beta1.StructuredQuery;
 
 public class ViewOrderInfoActivity extends AppCompatActivity {
@@ -19,8 +22,9 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView item_quantity;
     TextView area;
     TextView unit;
+    TextView bill;
     TextView order_total;
-    ImageView edit_customer;
+    Button edit_customer;
     public String c_id;
 
     @Override
@@ -28,6 +32,15 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order_info);
 
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(navView, navController);
 
         date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
@@ -35,6 +48,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         item_quantity = findViewById(R.id.item_quantity);
         area = findViewById(R.id.area);
         unit = findViewById(R.id.unit);
+        bill = findViewById(R.id.bill);
         order_total = findViewById(R.id.order_total);
         edit_customer = findViewById(R.id.edit_customer);
 
@@ -49,7 +63,16 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         item_quantity.setText(orders.getItemQuantity());
         area.setText(orders.getCustomerArea());
         unit.setText(orders.getUnit());
+
+        if(orders.getBillGenerator().equals("1")) {
+            bill.setText("Utkarsh");
+        }
+        else
+        {
+            bill.setText("Shanti");
+        }
         order_total.setText(orders.getTotal());
+
 
         c_id = orders.getCustomerId();
 

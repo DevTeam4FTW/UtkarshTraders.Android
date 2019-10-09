@@ -2,12 +2,14 @@ package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -32,7 +35,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
     private EditText c_name, c_phno, c_address, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
-    private ImageView addcust;
+    private Button addcust;
     private CollectionReference customerRef = mFirestore.collection("customer");
     private CollectionReference areasRef = mFirestore.collection("areas");
     private Spinner c_area;
@@ -43,6 +46,16 @@ public class AddCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(navView, navController);
         setup();
         mFirestore = FirebaseFirestore.getInstance();
         c_name = findViewById(R.id.cname);
