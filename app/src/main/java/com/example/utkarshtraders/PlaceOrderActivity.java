@@ -7,6 +7,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,9 +57,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String bill_generator;
     private String unit_type;
 
-    public String cust_id;
+    private String cust_id;
     boolean val;
-    String default_area;
+    private String default_area;
 
 
     @Override
@@ -126,20 +127,26 @@ public class PlaceOrderActivity extends AppCompatActivity {
         unit_spinner.setAdapter(unitadapter);
 
 
+
+
         customerRef.document(cust_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
                 if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-
-                    if (documentSnapshot.exists() && documentSnapshot != null) {
-
-                        default_area = documentSnapshot.getString("clientArea");
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        default_area = document.getString("clientArea");
+                    } else {
+                        Toast.makeText(PlaceOrderActivity.this, "foo", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(PlaceOrderActivity.this, "foo", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+
 
         final List<String> areas = new ArrayList<>();
         final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);

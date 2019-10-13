@@ -48,8 +48,7 @@ public class ViewItemsActivity extends AppCompatActivity {
     private ImageView search_item;
     private ImageView clearsearch;
     boolean hasbeen = false;
-    LinearLayout i_list;
-    Items items;
+    private LinearLayout i_list;
 
     private String customer_id;
 //
@@ -92,7 +91,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
 
-                        items = documentSnapshot.toObject(Items.class);
+                        final Items items = documentSnapshot.toObject(Items.class);
 
                         String item_name = items.getItemName();
                         String default_price = "Rs: " + items.getItemPrice();
@@ -176,7 +175,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                                items = document.toObject(Items.class);
+                                                final Items items = document.toObject(Items.class);
 
                                                 String item_name = items.getItemName();
                                                 String default_price = "Rs: " + items.getItemPrice();
@@ -238,7 +237,6 @@ public class ViewItemsActivity extends AppCompatActivity {
                 {
                     search.getText().clear();
                     Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
-                    refreshViewall.putExtra("item_object",items);
                     refreshViewall.putExtra("customer_id",customer_id);
                     startActivity(refreshViewall);
                     finish();
