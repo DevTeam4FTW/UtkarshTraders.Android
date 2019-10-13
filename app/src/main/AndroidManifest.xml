@@ -22,14 +22,16 @@
         <activity android:name=".Edit_OrderActivity" />
         <activity android:name=".ViewOrderInfoActivity" />
         <activity android:name=".PlaceOrderActivity" />
-        <activity android:name=".ViewItemsActivity" />
+        <activity android:name=".ViewItemsActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".Edit_CustomerActivity" />
-        <activity android:name=".ViewOrdersActivity" />
+        <activity android:name=".ViewOrdersActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".ViewCustomerInfoActivity"
             android:theme="@style/AppTheme.CustomeTheme" />
         <activity android:name=".AddCustomerActivity" />
-        <activity android:name=".CustomersActivity">
+        <activity android:name=".CustomersActivity" android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

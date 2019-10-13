@@ -1,5 +1,6 @@
 package com.example.utkarshtraders;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -8,22 +9,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ViewItemsActivity extends AppCompatActivity {
 
@@ -33,13 +44,25 @@ public class ViewItemsActivity extends AppCompatActivity {
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference itemsRef=mFireStore.collection("items");
 
-    public String customer_id;
+    private EditText search;
+    private ImageView search_item;
+    private ImageView clearsearch;
+    boolean hasbeen = false;
+    LinearLayout i_list;
+    Items items;
 
+    private String customer_id;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
         setup();
+
+        search_item = findViewById(R.id.searchitem);
+        clearsearch = findViewById(R.id.clearall);
+        search = findViewById(R.id.search_item);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -53,56 +76,195 @@ public class ViewItemsActivity extends AppCompatActivity {
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final LinearLayout i_list = findViewById(R.id.itemlist);
+        i_list = findViewById(R.id.itemlist);
 
         Intent intent = getIntent();
         customer_id = intent.getStringExtra("customer_id");
 
-        itemsRef.
-                get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
 
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+            itemsRef.
+                    get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
 
-                    final Items items = documentSnapshot.toObject(Items.class);
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-                    String item_name = items.getItemName();
-                    String default_price = "Rs: "+items.getItemPrice();
 
-                    final View Card = inflater.inflate(R.layout.activity_item_card, null);
+                        items = documentSnapshot.toObject(Items.class);
 
-                    final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
+                        String item_name = items.getItemName();
+                        String default_price = "Rs: " + items.getItemPrice();
 
-                    final TextView i_name = Card.findViewById(R.id.item_name);
-                    final TextView i_price = Card.findViewById(R.id.item_price);
-                    final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
+                        final View Card = inflater.inflate(R.layout.activity_item_card, null);
 
-                    i_name.setText(item_name);
-                    i_price.setText(default_price);
+                        final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
 
-                    i_list.addView(Card);
+                        final TextView i_name = Card.findViewById(R.id.item_name);
+                        final TextView i_price = Card.findViewById(R.id.item_price);
+                        final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
 
-                    additemtoorder.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent additemtoorder = new Intent(getBaseContext(),PlaceOrderActivity.class);
-                            additemtoorder.putExtra("item_object",items);
-                            additemtoorder.putExtra("customer_id",customer_id);
-                            startActivity(additemtoorder);
-                            finish();
-                            view.setOnClickListener(null);
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        i_name.setText(item_name);
+                        i_price.setText(default_price);
 
-                        }
-                    });
+                        i_list.addView(Card);
+
+                        additemtoorder.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
+                                additemtoorder.putExtra("item_object", items);
+                                additemtoorder.putExtra("customer_id", customer_id);
+                                startActivity(additemtoorder);
+                                finish();
+                                view.setOnClickListener(null);
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                            }
+                        });
+                    }
+
+
                 }
+            });
+
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        if(TextUtils.isEmpty(search.getText().toString()))
+                        {
+                            search_item.setClickable(false);
+                        }
+                        else
+                        {
+                            search_item.setClickable(true);
+                        }
+
+                    }
+                });
 
 
             }
+        }, 0, 500);
+
+
+            search_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    i_list.removeAllViews();
+                    hasbeen = true;
+
+                    if(!TextUtils.isEmpty(search.getText().toString())) {
+
+                        String value = search.getText().toString();
+
+                        itemsRef
+                                .whereEqualTo("itemName", value)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                items = document.toObject(Items.class);
+
+                                                String item_name = items.getItemName();
+                                                String default_price = "Rs: " + items.getItemPrice();
+
+                                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
+
+                                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
+
+                                                final TextView i_name = Card.findViewById(R.id.item_name);
+                                                final TextView i_price = Card.findViewById(R.id.item_price);
+                                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
+
+                                                i_name.setText(item_name);
+                                                i_price.setText(default_price);
+
+                                                i_list.addView(Card);
+
+                                                additemtoorder.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
+                                                        additemtoorder.putExtra("item_object", items);
+                                                        additemtoorder.putExtra("customer_id", customer_id);
+                                                        startActivity(additemtoorder);
+                                                        finish();
+                                                        view.setOnClickListener(null);
+                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                                                    }
+                                                });
+                                            }
+                                        } else {
+
+                                            Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                    }
+                    else
+                    {
+                        Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+
+
+
+
+
+
+        clearsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(hasbeen)
+                {
+                    search.getText().clear();
+                    Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
+                    refreshViewall.putExtra("item_object",items);
+                    refreshViewall.putExtra("customer_id",customer_id);
+                    startActivity(refreshViewall);
+                    finish();
+                    view.setOnClickListener(null);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                }
+                else
+                {
+                    Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         });
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
