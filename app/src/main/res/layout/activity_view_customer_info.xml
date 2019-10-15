@@ -8,302 +8,675 @@
     android:background="#808080"
     tools:context=".ViewCustomerInfoActivity">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="334dp"
-        android:layout_height="570dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/relativeLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@color/cardview_light_background"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/nav_view"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.45">-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginStart="135dp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_ph"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="135dp"-->
+<!--            android:layout_marginBottom="581dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_state"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="110dp"-->
+<!--            android:layout_marginBottom="279dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_pin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="111dp"-->
+<!--            android:layout_marginBottom="319dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_city"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="111dp"-->
+<!--            android:layout_marginBottom="365dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_area"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="111dp"-->
+<!--            android:layout_marginBottom="408dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_address"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="135dp"-->
+<!--            android:layout_marginBottom="544dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/remainingBal"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="129dp"-->
+<!--            android:layout_marginBottom="104dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_gstin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="110dp"-->
+<!--            android:layout_marginBottom="148dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_fssai"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="110dp"-->
+<!--            android:layout_marginBottom="194dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/customer_type"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="110dp"-->
+<!--            android:layout_marginBottom="235dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:maxLines="1" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/edit_customer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginStart="156dp"-->
+<!--            android:layout_marginTop="609dp"-->
+<!--            android:background="@android:color/holo_blue_dark"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Edit"-->
+<!--            android:textColor="@android:color/background_light" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="36dp"-->
+<!--            android:layout_marginBottom="618dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Name:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="36dp"-->
+<!--            android:layout_marginBottom="581dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Phone No:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="36dp"-->
+<!--            android:layout_marginBottom="545dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Address:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="37dp"-->
+<!--            android:layout_marginBottom="513dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Area:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading5"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="365dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="City:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="320dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Pin:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading7"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="278dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="State:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading8"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="235dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Type:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading9"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="194dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Fssai:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading10"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="149dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Gstin:" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/heading11"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginBottom="104dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Remaining Bal:" />-->
+
+
+<!--    </RelativeLayout>-->
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/linear"
+        android:orientation="vertical"
         android:background="@color/cardview_light_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354">
+        app:layout_constraintVertical_bias="0.45">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_nameheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Name:"/>
 
         <TextView
             android:id="@+id/customer_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginTop="25dp"
-            android:ems="10"
             android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:textSize="18sp"
+            android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/customer_ph"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="489dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/customer_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="279dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
-        <TextView
-            android:id="@+id/customer_pin"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="319dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/customer_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="365dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            <TextView
+                android:id="@+id/customer_phheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Phone No:"/>
 
-        <TextView
-            android:id="@+id/customer_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="408dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            <TextView
+                android:id="@+id/customer_ph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/customer_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="446dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/remainingBal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="129dp"
-            android:layout_marginBottom="104dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
-        <TextView
-            android:id="@+id/customer_gstin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="148dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/customer_fssai"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="194dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/customer_type"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/customer_addressheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Address:"/>
+
+            <TextView
+                android:id="@+id/customer_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="235dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_areaheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Area:"/>
+
+            <TextView
+                android:id="@+id/customer_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_cityheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="City:"/>
+
+            <TextView
+                android:id="@+id/customer_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_pinheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Pincode:"/>
+
+            <TextView
+                android:id="@+id/customer_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_stateheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="State:"/>
+
+            <TextView
+                android:id="@+id/customer_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_typeheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Type:"/>
+
+            <TextView
+                android:id="@+id/customer_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_fssaiheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Fssai No:"/>
+
+            <TextView
+                android:id="@+id/customer_fssai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/customer_gstinheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Gstin No:"/>
+
+            <TextView
+                android:id="@+id/customer_gstin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/remainingBalheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="Remaining Balance:"/>
+
+            <TextView
+                android:id="@+id/remainingBal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
         <Button
             android:id="@+id/edit_customer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="119dp"
-            android:layout_marginTop="490dp"
+            android:layout_weight="1"
             android:background="@android:color/holo_blue_dark"
-            android:fontFamily="@font/montserrat"
-            android:text="Edit"
-            android:textColor="@android:color/background_light" />
+            android:text="EDIT" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/heading1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="526dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Name:" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintVertical_bias="1.0"
+            app:menu="@menu/bottom_nav_menu" />
 
-        <TextView
-            android:id="@+id/heading2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="489dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Phone No:" />
-
-        <TextView
-            android:id="@+id/heading3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="446dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Address:" />
-
-        <TextView
-            android:id="@+id/heading4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="407dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Area:" />
-
-        <TextView
-            android:id="@+id/heading5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="365dp"
-            android:fontFamily="@font/montserrat"
-            android:text="City:" />
-
-        <TextView
-            android:id="@+id/heading6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="320dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Pin:" />
-
-        <TextView
-            android:id="@+id/heading7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="278dp"
-            android:fontFamily="@font/montserrat"
-            android:text="State:" />
-
-        <TextView
-            android:id="@+id/heading8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="235dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Type:" />
-
-        <TextView
-            android:id="@+id/heading9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="194dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Fssai:" />
-
-        <TextView
-            android:id="@+id/heading10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="149dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Gstin:" />
-
-        <TextView
-            android:id="@+id/heading11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="104dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Remaining Bal:" />
-
-
-
-    </RelativeLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_nav_menu" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

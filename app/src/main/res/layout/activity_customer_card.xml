@@ -8,14 +8,14 @@
 
     <RelativeLayout
         android:id="@+id/viewcustomers"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="89dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="0dp"
         android:background="@color/cardview_light_background">
 
         <TextView

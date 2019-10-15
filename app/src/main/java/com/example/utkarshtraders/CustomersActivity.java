@@ -12,8 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,9 +45,9 @@ public class CustomersActivity extends AppCompatActivity {
 
 
     private FirebaseUser mCurrentUser;
-    private ImageView searchbtn;
-    private ImageView clearsearch;
-    private ImageView addcust;
+    private Button searchbtn;
+    private Button clearsearch;
+//    private ImageView addcust;
     private EditText searchtext;
 
     boolean hasbeen = false;
@@ -62,10 +64,18 @@ public class CustomersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-        addcust = findViewById(R.id.addcust);
-        searchtext = findViewById(R.id.search_customer);
-        searchbtn = findViewById(R.id.searchbtn);
-        clearsearch = findViewById(R.id.clearsearch);
+////        addcust = findViewById(R.id.addcust);
+//        searchtext = findViewById(R.id.searchtext);
+//        searchbtn = findViewById(R.id.searchbtn);
+//        clearsearch = findViewById(R.id.clearsearch);
+
+//        @Override
+//        public boolean onCreateOptionsMenu(Menu menu) {
+//            MenuInflater inflater = getMenuInflater();
+//
+//            inflater.inflate(R.menu.main_activity_bar, menu);
+//            return super.onCreateOptionsMenu(menu);
+//        }
 
 
 
@@ -96,30 +106,30 @@ public class CustomersActivity extends AppCompatActivity {
         }
 
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        if(TextUtils.isEmpty(searchtext.getText().toString()))
-                        {
-                            searchbtn.setClickable(false);
-                        }
-                        else
-                        {
-                            searchbtn.setClickable(true);
-                        }
-
-                    }
-                });
-
-
-            }
-        }, 0, 500);
+//        new Timer().scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//                runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//
+//                        if(TextUtils.isEmpty(searchtext.getText().toString()))
+//                        {
+//                            searchbtn.setClickable(false);
+//                        }
+//                        else
+//                        {
+//                            searchbtn.setClickable(true);
+//                        }
+//
+//                    }
+//                });
+//
+//
+//            }
+//        }, 0, 500);
 
 
 
@@ -192,197 +202,197 @@ public class CustomersActivity extends AppCompatActivity {
             }
         });
 
-        addcust.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        addcust.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
+//                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(addcustomerintent);
+//                finish();
+//                view.setOnClickListener(null);
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//
+//            }
+//        });
 
-                Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
-                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(addcustomerintent);
-                finish();
-                view.setOnClickListener(null);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-            }
-        });
-
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                c_list.removeAllViews();
-                hasbeen = true;
-
-                if(!TextUtils.isEmpty(searchtext.getText().toString())) {
-
-                    value = searchtext.getText().toString();
-
-                    if (Character.isDigit(value.charAt(0))) {
-
-                        customerRef
-                                .whereEqualTo("clientPhoneNo", value)
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                                final Customers customers = document.toObject(Customers.class);
-
-                                                final String customer_id = document.getId();
-
-                                                String name = customers.getClientName();
-                                                String phoneno = customers.getClientPhoneNo();
-
-
-                                                final View Card = inflater.inflate(R.layout.activity_customer_card, null);
-
-                                                final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
-
-                                                final TextView c_name = Card.findViewById(R.id.c_name);
-                                                final TextView c_phno = Card.findViewById(R.id.c_phno);
-                                                final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
-
-                                                c_name.setText(name);
-                                                c_phno.setText(phoneno);
-
-                                                c_list.addView(Card);
-
-                                                edit_customer.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-
-                                                        Intent edit = new Intent(getBaseContext(),ViewCustomerInfoActivity.class);
-                                                        edit.putExtra("customer_object",customers);
-                                                        edit.putExtra("customer_id",customer_id);
-                                                        startActivity(edit);
-                                                        finish();
-                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                                        view.setOnClickListener(null);
-                                                    }
-                                                });
-
-                                                viewCustomerorders.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-
-                                                        Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
-                                                        order.putExtra("customer_id",customer_id);
-                                                        startActivity(order);
-                                                        finish();
-                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                                        view.setOnClickListener(null);
-
-                                                    }
-                                                });
-
-                                            }
-                                        } else {
-
-                                            Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }
-                                });
-                    } else if(Character.isLetter(value.charAt(0))) {
-                        customerRef
-                                .whereEqualTo("clientName", value)
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                                final Customers customers = document.toObject(Customers.class);
-                                                final String customer_id = document.getId();
-
-                                                String name = customers.getClientName();
-                                                String phoneno = customers.getClientPhoneNo();
-
-
-                                                final View Card = inflater.inflate(R.layout.activity_customer_card, null);
-
-                                                final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
-
-                                                final TextView c_name = Card.findViewById(R.id.c_name);
-                                                final TextView c_phno = Card.findViewById(R.id.c_phno);
-                                                final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
-
-                                                c_name.setText(name);
-                                                c_phno.setText(phoneno);
-
-                                                c_list.addView(Card);
-
-                                                edit_customer.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-
-                                                        Intent edit = new Intent(getBaseContext(), ViewCustomerInfoActivity.class);
-                                                        edit.putExtra("customer_object", customers);
-                                                        edit.putExtra("customer_id", customer_id);
-                                                        startActivity(edit);
-                                                        finish();
-                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                                        view.setOnClickListener(null);
-                                                    }
-                                                });
-
-                                                viewCustomerorders.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-
-                                                        Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
-                                                        order.putExtra("customer_id", customer_id);
-                                                        startActivity(order);
-                                                        finish();
-                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                                        view.setOnClickListener(null);
-
-                                                    }
-                                                });
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else
-                    {
-                        Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-                    }
-                }
+//        searchbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                c_list.removeAllViews();
+//                hasbeen = true;
+//
+//                if(!TextUtils.isEmpty(searchtext.getText().toString())) {
+//
+//                    value = searchtext.getText().toString();
+//
+//                    if (Character.isDigit(value.charAt(0))) {
+//
+//                        customerRef
+//                                .whereEqualTo("clientPhoneNo", value)
+//                                .get()
+//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                        if (task.isSuccessful()) {
+//                                            for (QueryDocumentSnapshot document : task.getResult()) {
+//
+//                                                final Customers customers = document.toObject(Customers.class);
+//
+//                                                final String customer_id = document.getId();
+//
+//                                                String name = customers.getClientName();
+//                                                String phoneno = customers.getClientPhoneNo();
+//
+//
+//                                                final View Card = inflater.inflate(R.layout.activity_customer_card, null);
+//
+//                                                final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
+//
+//                                                final TextView c_name = Card.findViewById(R.id.c_name);
+//                                                final TextView c_phno = Card.findViewById(R.id.c_phno);
+//                                                final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
+//
+//                                                c_name.setText(name);
+//                                                c_phno.setText(phoneno);
+//
+//                                                c_list.addView(Card);
+//
+//                                                edit_customer.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View view) {
+//
+//                                                        Intent edit = new Intent(getBaseContext(),ViewCustomerInfoActivity.class);
+//                                                        edit.putExtra("customer_object",customers);
+//                                                        edit.putExtra("customer_id",customer_id);
+//                                                        startActivity(edit);
+//                                                        finish();
+//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                                                        view.setOnClickListener(null);
+//                                                    }
+//                                                });
+//
+//                                                viewCustomerorders.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View view) {
+//
+//                                                        Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
+//                                                        order.putExtra("customer_id",customer_id);
+//                                                        startActivity(order);
+//                                                        finish();
+//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                                                        view.setOnClickListener(null);
+//
+//                                                    }
+//                                                });
+//
+//                                            }
+//                                        } else {
+//
+//                                            Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                    }
+//                                });
+//                    } else if(Character.isLetter(value.charAt(0))) {
+//                        customerRef
+//                                .whereEqualTo("clientName", value)
+//                                .get()
+//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                        if (task.isSuccessful()) {
+//                                            for (QueryDocumentSnapshot document : task.getResult()) {
+//
+//                                                final Customers customers = document.toObject(Customers.class);
+//                                                final String customer_id = document.getId();
+//
+//                                                String name = customers.getClientName();
+//                                                String phoneno = customers.getClientPhoneNo();
+//
+//
+//                                                final View Card = inflater.inflate(R.layout.activity_customer_card, null);
+//
+//                                                final RelativeLayout viewCustomerorders = Card.findViewById(R.id.viewcustomers);
+//
+//                                                final TextView c_name = Card.findViewById(R.id.c_name);
+//                                                final TextView c_phno = Card.findViewById(R.id.c_phno);
+//                                                final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
+//
+//                                                c_name.setText(name);
+//                                                c_phno.setText(phoneno);
+//
+//                                                c_list.addView(Card);
+//
+//                                                edit_customer.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View view) {
+//
+//                                                        Intent edit = new Intent(getBaseContext(), ViewCustomerInfoActivity.class);
+//                                                        edit.putExtra("customer_object", customers);
+//                                                        edit.putExtra("customer_id", customer_id);
+//                                                        startActivity(edit);
+//                                                        finish();
+//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                                                        view.setOnClickListener(null);
+//                                                    }
+//                                                });
+//
+//                                                viewCustomerorders.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View view) {
+//
+//                                                        Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
+//                                                        order.putExtra("customer_id", customer_id);
+//                                                        startActivity(order);
+//                                                        finish();
+//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                                                        view.setOnClickListener(null);
+//
+//                                                    }
+//                                                });
+//                                            }
+//                                        }
+//                                        else
+//                                        {
+//                                            Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//                                });
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(CustomersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//
+//            }
+//        });
 
 
-            }
-        });
-
-
-        clearsearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(hasbeen)
-                {
-                    searchtext.getText().clear();
-                    Intent refreshViewall = new Intent(getBaseContext(),CustomersActivity.class);
-                    startActivity(refreshViewall);
-                    finish();
-                    view.setOnClickListener(null);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                }
-                else
-                {
-                    Toast.makeText(CustomersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
+//        clearsearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(hasbeen)
+//                {
+//                    searchtext.getText().clear();
+//                    Intent refreshViewall = new Intent(getBaseContext(),CustomersActivity.class);
+//                    startActivity(refreshViewall);
+//                    finish();
+//                    view.setOnClickListener(null);
+//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//
+//                }
+//                else
+//                {
+//                    Toast.makeText(CustomersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
 
 
 
