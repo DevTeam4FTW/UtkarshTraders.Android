@@ -14,16 +14,6 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="71dp">
-
-        <ImageView
-            android:id="@+id/addorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="193dp"
-            android:layout_marginTop="28dp"
-            app:srcCompat="@android:drawable/ic_input_add" />
     </RelativeLayout>
 
     <ScrollView

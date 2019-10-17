@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -300,6 +302,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
                 .setPersistenceEnabled(true)
                 .build();
         db.setFirestoreSettings(settings);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
+        setTitle("Place Order");
+        return true;
+
     }
 
     boolean validations()

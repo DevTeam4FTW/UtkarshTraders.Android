@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,11 +39,11 @@ public class ViewOrdersActivity extends AppCompatActivity {
     private ImageView searchorder;
     private ImageView clearsearch;
     private EditText searchtext;
-    private ImageView addcustomer;
 
     private FirebaseUser mCurrentUser;
     private boolean hasbeen;
     private String value;
+    private String customer_id;
 
     private FirebaseFirestore mFireStore = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = mFireStore.collection("orders");
@@ -55,7 +57,6 @@ public class ViewOrdersActivity extends AppCompatActivity {
         searchorder = findViewById(R.id.searchorder);
         clearsearch = findViewById(R.id.clearsearch);
         searchtext = findViewById(R.id.search_orders);
-        addcustomer = findViewById(R.id.addorder);
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -70,7 +71,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final String customer_id = intent.getStringExtra("customer_id");
+        customer_id = intent.getStringExtra("customer_id");
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -301,20 +302,6 @@ public class ViewOrdersActivity extends AppCompatActivity {
             }
         });
 
-
-        addcustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ViewOrdersActivity.this, ViewItemsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("customer_id", customer_id);
-                startActivity(intent);
-                finish();
-                view.setOnClickListener(null);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
-        });
     }
 
     @Override
@@ -331,5 +318,32 @@ public class ViewOrdersActivity extends AppCompatActivity {
                 .setPersistenceEnabled(true)
                 .build();
         db.setFirestoreSettings(settings);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar, menu);
+        setTitle("View Orders");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
+        case R.id.action_search:
+
+
+
+            return(true);
+        case R.id.action_add:
+
+            Intent intent = new Intent(ViewOrdersActivity.this, ViewItemsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("customer_id", customer_id);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            return(true);
+    }
+        return(super.onOptionsItemSelected(item));
     }
 }

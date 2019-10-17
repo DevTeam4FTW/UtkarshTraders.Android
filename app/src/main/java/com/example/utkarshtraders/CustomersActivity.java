@@ -12,7 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -201,20 +203,6 @@ public class CustomersActivity extends AppCompatActivity {
 
             }
         });
-
-//        addcust.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
-//                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(addcustomerintent);
-//                finish();
-//                view.setOnClickListener(null);
-//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//
-//            }
-//        });
 
 //        searchbtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -427,6 +415,32 @@ public class CustomersActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar, menu);
+        setTitle("View Customers");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
+        case R.id.action_search:
+
+
+            return(true);
+        case R.id.action_add:
+
+            Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
+            addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(addcustomerintent);
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+            return(true);
+    }
+        return(super.onOptionsItemSelected(item));
     }
 
 

@@ -12,6 +12,8 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -79,7 +81,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         customer_id = intent.getStringExtra("customer_id");
-
+        String foo;
 
 
             itemsRef.
@@ -253,16 +255,6 @@ public class ViewItemsActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -281,6 +273,26 @@ public class ViewItemsActivity extends AppCompatActivity {
                 .build();
         db.setFirestoreSettings(settings);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar_items, menu);
+        setTitle("View Items");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
+        case R.id.action_search:
+
+            return(true);
+    }
+        return(super.onOptionsItemSelected(item));
+    }
+
+
+
+
 
 
 }

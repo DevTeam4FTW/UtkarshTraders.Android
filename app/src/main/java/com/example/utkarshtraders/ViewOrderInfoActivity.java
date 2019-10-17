@@ -6,6 +6,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -98,5 +100,12 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
+        setTitle("View Order Info");
+        return true;
     }
 }

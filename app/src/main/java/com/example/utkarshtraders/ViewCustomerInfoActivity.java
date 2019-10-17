@@ -6,6 +6,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -107,4 +109,13 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
                 .build();
         db.setFirestoreSettings(settings);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
+        setTitle("View Customer Info");
+        return true;
+    }
+
+
 }
