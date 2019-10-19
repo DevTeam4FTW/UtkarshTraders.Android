@@ -43,21 +43,15 @@ public class AddCustomerActivity extends AppCompatActivity {
     private Spinner c_area;
     boolean val;
 
+    private Button home,settings;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
         setup();
         mFirestore = FirebaseFirestore.getInstance();
         c_name = findViewById(R.id.cname);
@@ -72,6 +66,8 @@ public class AddCustomerActivity extends AppCompatActivity {
         c_gst = findViewById(R.id.cgst);
 
         addcust = findViewById(R.id.addcustbtn);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
 
         final List<String> areas = new ArrayList<>();
         final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
@@ -164,6 +160,27 @@ public class AddCustomerActivity extends AppCompatActivity {
             }
 
 
+        });
+
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
         });
 
     }

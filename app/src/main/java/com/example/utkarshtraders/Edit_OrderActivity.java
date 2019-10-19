@@ -52,7 +52,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
     private Spinner editbill_spinner,editunit_spinner,editarea_spinner;
 
     private String editbill_generator;
-    private String editunit_type;
+    private String editunit_type,customer_name;
 
     public String cust_id;
     String default_bill;
@@ -60,21 +60,18 @@ public class Edit_OrderActivity extends AppCompatActivity {
     String default_area;
     boolean val;
 
+    private Button add_customer,home,settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__order);
         setup();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
+        add_customer = findViewById(R.id.add_customer);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
+
         editdate = findViewById(R.id.editdate);
         edititem_name = findViewById(R.id.edititem_name);
         edittaxrate = findViewById(R.id.edittaxrate);
@@ -90,6 +87,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final Orders orders = intent.getParcelableExtra("order_object");
         final String order_id = intent.getStringExtra("order_id");
+        customer_name = intent.getStringExtra("customer_name");
         cust_id = orders.getCustomerId();
         edititem_price.setEnabled(false);
 
@@ -246,6 +244,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(Edit_OrderActivity.this, ViewOrdersActivity.class);
                     intent.putExtra("customer_id",cust_id);
+                    intent.putExtra("customer_name",customer_name);
                     startActivity(intent);
                     finish();
                     view.setOnClickListener(null);
@@ -258,20 +257,49 @@ public class Edit_OrderActivity extends AppCompatActivity {
                     Toast.makeText(Edit_OrderActivity.this,"Enter all fields before placing order ",Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
-
-
-
             }
         });
+
+        add_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addcustomerintent = new Intent(Edit_OrderActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
         Intent edit = new Intent(getBaseContext(), ViewOrdersActivity.class);
         edit.putExtra("customer_id",cust_id);
+        edit.putExtra("customer_name",customer_name);
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

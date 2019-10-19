@@ -32,21 +32,18 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
     TextView remainingBal;
     Button edit_customer;
 
+    private Button add_customer,home,settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer_info);
         setup();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
+        add_customer = findViewById(R.id.add_customer);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
+
         c_name = findViewById(R.id.customer_name);
         c_ph = findViewById(R.id.customer_ph);
         c_address = findViewById(R.id.customer_address);
@@ -87,6 +84,39 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
                 startActivity(edit);
                 finish();
                 view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        add_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addcustomerintent = new Intent(ViewCustomerInfoActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });

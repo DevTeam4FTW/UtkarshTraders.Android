@@ -3,6 +3,7 @@ package com.example.utkarshtraders;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView password;
     private Button login;
     private FirebaseAuth uAuth;
+    private ProgressDialog mLoginProgress;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (TextView) findViewById(R.id.email);
         password = (TextView) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
+        mLoginProgress = new ProgressDialog(this);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                 String s_password = password.getText().toString();
 
                 if (!TextUtils.isEmpty(s_email) && !TextUtils.isEmpty(s_password)) {
+                    v.setOnClickListener(null);
+                    mLoginProgress.setTitle("Logging In");
+                    mLoginProgress.setMessage("Please wait while we redirect you !");
+                    mLoginProgress.setCanceledOnTouchOutside(false);
+                    mLoginProgress.show();
                     login_user(s_email, s_password);
                 } else {
                     Toast.makeText(LoginActivity.this, "Required fields are empty", Toast.LENGTH_LONG).show();
@@ -60,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+
 
                     Intent mainintent = new Intent(LoginActivity.this, CustomersActivity.class);
                     mainintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

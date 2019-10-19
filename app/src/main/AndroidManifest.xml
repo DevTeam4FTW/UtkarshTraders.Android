@@ -16,29 +16,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SettingsActivity"></activity>
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"></activity>
-        <activity android:name=".Edit_OrderActivity" />
+            android:label="@string/title_activity_main2" />
+        <activity android:name=".Edit_OrderActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ViewOrderInfoActivity" />
-        <activity android:name=".PlaceOrderActivity" />
-        <activity android:name=".ViewItemsActivity"
+        <activity android:name=".PlaceOrderActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Edit_CustomerActivity" />
-        <activity android:name=".ViewOrdersActivity"
+        <activity
+            android:name=".ViewItemsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Edit_CustomerActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ViewOrdersActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ViewCustomerInfoActivity"
             android:theme="@style/AppTheme.CustomeTheme" />
         <activity android:name=".AddCustomerActivity" />
-        <activity android:name=".CustomersActivity" android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".CustomersActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
         <meta-data
             android:name="preloaded_fonts"

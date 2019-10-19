@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,27 +55,25 @@ public class ViewItemsActivity extends AppCompatActivity {
     private LinearLayout i_list;
 
     private String customer_id;
-//
+    private String customer_name;
+    private Button add_customer,home,settings;
+    private ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
         setup();
 
-        search_item = findViewById(R.id.searchitem);
-        clearsearch = findViewById(R.id.clearall);
-        search = findViewById(R.id.search_item);
+//        search_item = findViewById(R.id.searchitem);
+//        clearsearch = findViewById(R.id.clearall);
+//        search = findViewById(R.id.search_item);
 
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
+        add_customer = findViewById(R.id.add_customer);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
+        mProgressDialog = new ProgressDialog(this);
+
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,8 +81,13 @@ public class ViewItemsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         customer_id = intent.getStringExtra("customer_id");
-        String foo;
+        customer_name = intent.getStringExtra("customer_name");
 
+
+        mProgressDialog.setTitle("Loading Items");
+        mProgressDialog.setMessage("Please wait while we load the Items we have");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
 
             itemsRef.
                     get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -117,6 +122,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                 Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
                                 additemtoorder.putExtra("item_object", items);
                                 additemtoorder.putExtra("customer_id", customer_id);
+                                additemtoorder.putExtra("customer_name",customer_name);
                                 startActivity(additemtoorder);
                                 finish();
                                 view.setOnClickListener(null);
@@ -126,133 +132,170 @@ public class ViewItemsActivity extends AppCompatActivity {
                         });
                     }
 
+                    mProgressDialog.dismiss();
+
+
+
 
                 }
             });
 
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        if(TextUtils.isEmpty(search.getText().toString()))
-                        {
-                            search_item.setClickable(false);
-                        }
-                        else
-                        {
-                            search_item.setClickable(true);
-                        }
-
-                    }
-                });
-
-
-            }
-        }, 0, 500);
-
-
-            search_item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    i_list.removeAllViews();
-                    hasbeen = true;
-
-                    if(!TextUtils.isEmpty(search.getText().toString())) {
-
-                        String value = search.getText().toString();
-
-                        itemsRef
-                                .whereEqualTo("itemName", value)
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                                final Items items = document.toObject(Items.class);
-
-                                                String item_name = items.getItemName();
-                                                String default_price = "Rs: " + items.getItemPrice();
-
-                                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
-
-                                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
-
-                                                final TextView i_name = Card.findViewById(R.id.item_name);
-                                                final TextView i_price = Card.findViewById(R.id.item_price);
-                                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
-
-                                                i_name.setText(item_name);
-                                                i_price.setText(default_price);
-
-                                                i_list.addView(Card);
-
-                                                additemtoorder.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
-                                                        additemtoorder.putExtra("item_object", items);
-                                                        additemtoorder.putExtra("customer_id", customer_id);
-                                                        startActivity(additemtoorder);
-                                                        finish();
-                                                        view.setOnClickListener(null);
-                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                                                    }
-                                                });
-                                            }
-                                        } else {
-
-                                            Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }
-                                });
-                    }
-                    else
-                    {
-                        Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            });
-
-
-
-
-
-
-
-        clearsearch.setOnClickListener(new View.OnClickListener() {
+        add_customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(hasbeen)
-                {
-                    search.getText().clear();
-                    Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
-                    refreshViewall.putExtra("customer_id",customer_id);
-                    startActivity(refreshViewall);
-                    finish();
-                    view.setOnClickListener(null);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                }
-                else
-                {
-                    Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
-                }
-
+                Intent addcustomerintent = new Intent(ViewItemsActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+
+//        new Timer().scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//                runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//
+//                        if(TextUtils.isEmpty(search.getText().toString()))
+//                        {
+//                            search_item.setClickable(false);
+//                        }
+//                        else
+//                        {
+//                            search_item.setClickable(true);
+//                        }
+//
+//                    }
+//                });
+//
+//
+//            }
+//        }, 0, 500);
+
+
+//            search_item.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                    i_list.removeAllViews();
+//                    hasbeen = true;
+//
+//                    if(!TextUtils.isEmpty(search.getText().toString())) {
+//
+//                        String value = search.getText().toString();
+//
+//                        itemsRef
+//                                .whereEqualTo("itemName", value)
+//                                .get()
+//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                        if (task.isSuccessful()) {
+//                                            for (QueryDocumentSnapshot document : task.getResult()) {
+//
+//                                                final Items items = document.toObject(Items.class);
+//
+//                                                String item_name = items.getItemName();
+//                                                String default_price = "Rs: " + items.getItemPrice();
+//
+//                                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
+//
+//                                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
+//
+//                                                final TextView i_name = Card.findViewById(R.id.item_name);
+//                                                final TextView i_price = Card.findViewById(R.id.item_price);
+//                                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
+//
+//                                                i_name.setText(item_name);
+//                                                i_price.setText(default_price);
+//
+//                                                i_list.addView(Card);
+//
+//                                                additemtoorder.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View view) {
+//                                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
+//                                                        additemtoorder.putExtra("item_object", items);
+//                                                        additemtoorder.putExtra("customer_id", customer_id);
+//                                                        startActivity(additemtoorder);
+//                                                        finish();
+//                                                        view.setOnClickListener(null);
+//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//
+//                                                    }
+//                                                });
+//                                            }
+//                                        } else {
+//
+//                                            Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                    }
+//                                });
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//            });
+
+
+
+
+
+
+
+//        clearsearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(hasbeen)
+//                {
+//                    search.getText().clear();
+//                    Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
+//                    refreshViewall.putExtra("customer_id",customer_id);
+//                    startActivity(refreshViewall);
+//                    finish();
+//                    view.setOnClickListener(null);
+//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//
+//                }
+//                else
+//                {
+//                    Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
 
 
     }
@@ -261,6 +304,7 @@ public class ViewItemsActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent edit = new Intent(getBaseContext(), ViewOrdersActivity.class);
         edit.putExtra("customer_id",customer_id);
+        edit.putExtra("customer_name",customer_name);
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

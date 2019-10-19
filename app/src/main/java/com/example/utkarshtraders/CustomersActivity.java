@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,16 +51,19 @@ public class CustomersActivity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private Button searchbtn;
     private Button clearsearch;
-//    private ImageView addcust;
     private EditText searchtext;
 
     boolean hasbeen = false;
     LinearLayout c_list;
     String value;
+    private ProgressDialog mProgressDialog;
 
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference salesmanRef=mFireStore.collection("salesman");
     private CollectionReference customerRef=mFireStore.collection("customer");
+
+
+    private Button add_customer,settings;
 
 
     @Override
@@ -66,7 +71,9 @@ public class CustomersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-////        addcust = findViewById(R.id.addcust);
+          add_customer = findViewById(R.id.add_customer);
+          settings = findViewById(R.id.settings);
+          mProgressDialog = new ProgressDialog(this);
 //        searchtext = findViewById(R.id.searchtext);
 //        searchbtn = findViewById(R.id.searchbtn);
 //        clearsearch = findViewById(R.id.clearsearch);
@@ -80,16 +87,6 @@ public class CustomersActivity extends AppCompatActivity {
 //        }
 
 
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
 
 
         setup();
@@ -137,6 +134,11 @@ public class CustomersActivity extends AppCompatActivity {
 
 
 
+        mProgressDialog.setTitle("Loading Customers");
+        mProgressDialog.setMessage("Please wait while we load the Customers");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
 
         customerRef.
                 get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -145,8 +147,6 @@ public class CustomersActivity extends AppCompatActivity {
 
 
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-
-
 
 
                     final Customers customers = documentSnapshot.toObject(Customers.class);
@@ -162,7 +162,7 @@ public class CustomersActivity extends AppCompatActivity {
 
                     final TextView c_name = Card.findViewById(R.id.c_name);
                     final TextView c_phno = Card.findViewById(R.id.c_phno);
-                    final ImageView edit_customer = Card.findViewById(R.id.edit_customer);
+                    final Button edit_customer = Card.findViewById(R.id.edit_customer);
 
                     c_name.setText(name);
                     c_phno.setText(phoneno);
@@ -189,6 +189,7 @@ public class CustomersActivity extends AppCompatActivity {
 
                             Intent order = new Intent(getBaseContext(), ViewOrdersActivity.class);
                             order.putExtra("customer_id",customer_id);
+                            order.putExtra("customer_name",c_name.getText().toString());
                             startActivity(order);
                             finish();
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -199,6 +200,8 @@ public class CustomersActivity extends AppCompatActivity {
 
 
                 }
+
+                mProgressDialog.dismiss();
 
 
             }
@@ -382,6 +385,28 @@ public class CustomersActivity extends AppCompatActivity {
 //            }
 //        });
 
+        add_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
 
 
 
@@ -419,7 +444,7 @@ public class CustomersActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_bar, menu);
+        getMenuInflater().inflate(R.menu.main_activity_bar_items, menu);
         setTitle("View Customers");
         return true;
     }
@@ -430,18 +455,10 @@ public class CustomersActivity extends AppCompatActivity {
 
 
             return(true);
-        case R.id.action_add:
-
-            Intent addcustomerintent = new Intent(CustomersActivity.this, AddCustomerActivity.class);
-            addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(addcustomerintent);
-            finish();
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-            return(true);
     }
         return(super.onOptionsItemSelected(item));
     }
+
 
 
 

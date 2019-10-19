@@ -316,18 +316,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Name:"
                 android:textAlignment="center"
-                android:text="Name:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/customer_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -348,18 +348,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Phone No:"
                 android:textAlignment="center"
-                android:text="Phone No:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_ph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -381,18 +381,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Address:"
                 android:textAlignment="center"
-                android:text="Address:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -413,18 +413,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Area:"
                 android:textAlignment="center"
-                android:text="Area:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -445,18 +445,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="City:"
                 android:textAlignment="center"
-                android:text="City:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -477,18 +477,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Pincode:"
                 android:textAlignment="center"
-                android:text="Pincode:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -509,18 +509,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="State:"
                 android:textAlignment="center"
-                android:text="State:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -541,18 +541,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Type:"
                 android:textAlignment="center"
-                android:text="Type:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -573,18 +573,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Fssai No:"
                 android:textAlignment="center"
-                android:text="Fssai No:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_fssai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -605,18 +605,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Gstin No:"
                 android:textAlignment="center"
-                android:text="Gstin No:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/customer_gstin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -637,18 +637,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:text="Remaining Balance:"
                 android:textAlignment="center"
-                android:text="Remaining Balance:"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/remainingBal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -662,21 +662,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_dark"
-            android:text="EDIT" />
+            android:background="#4a9ee0"
+            android:text="Edit"
+            android:textColor="#fff" />
     </LinearLayout>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
+    <LinearLayout
+        android:id="@+id/nav_view"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" >
+
+
+        <Button
+            android:id="@+id/home"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/bottom_nav_menu" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:text="Home" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+
+        <Button
+            android:id="@+id/add_customer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add Customer"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Settings"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,272 +10,7 @@
     android:background="#808080"
     tools:context=".Edit_CustomerActivity">
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/relativeLayout"-->
-<!--        android:layout_width="381dp"-->
-<!--        android:layout_height="547dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:background="@color/cardview_light_background"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/savecustbtn"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.533"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/cname"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginTop="3dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter Name"-->
-<!--            android:maxLines="1" />-->
-<!--
-    <EditText
-        android:id="@+id/cphno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:fontFamily="@font/montserrat"
-        android:hint="Enter Ph.No"
-        android:maxLines="1" />-->
-
-
-
-<!--        <EditText-->
-<!--            android:id="@+id/caddress"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginTop="100dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter Address"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <Spinner-->
-<!--            android:id="@+id/carea"-->
-<!--            android:layout_width="221dp"-->
-<!--            android:layout_height="34dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginTop="149dp" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/ccity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="314dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter City"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/cpin"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="264dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter Pincode"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/cstate"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="215dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter State"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/ctype"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="165dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter Type"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/cfssai"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="116dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter fssai.no"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/cgst"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="68dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Enter gstin.no"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/c_bal"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginStart="77dp"-->
-<!--            android:layout_marginBottom="19dp"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/montserrat"-->
-<!--            android:hint="Remaining balance"-->
-<!--            android:maxLines="1" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView8"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="14dp"-->
-<!--            app:srcCompat="@drawable/nameicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView9"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="111dp"-->
-<!--            app:srcCompat="@drawable/addressicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView11"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="154dp"-->
-<!--            app:srcCompat="@drawable/addressicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView15"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="298dp"-->
-<!--            app:srcCompat="@drawable/addressicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView10"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="64dp"-->
-<!--            app:srcCompat="@drawable/phoneicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView12"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="198dp"-->
-<!--            android:layout_marginBottom="284dp"-->
-<!--            app:srcCompat="@drawable/cityicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView13"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="248dp"-->
-<!--            app:srcCompat="@drawable/pinicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView16"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="346dp"-->
-<!--            app:srcCompat="@drawable/typeicon" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView17"-->
-<!--            android:layout_width="23dp"-->
-<!--            android:layout_height="24dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="395dp"-->
-<!--            app:srcCompat="@drawable/fssai" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView18"-->
-<!--            android:layout_width="23dp"-->
-<!--            android:layout_height="23dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginStart="19dp"-->
-<!--            android:layout_marginTop="445dp"-->
-<!--            app:srcCompat="@drawable/gst" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView4"-->
-<!--            android:layout_width="23dp"-->
-<!--            android:layout_height="23dp"-->
-<!--            android:layout_alignStart="@+id/imageView8"-->
-<!--            android:layout_alignTop="@+id/imageView8"-->
-<!--            android:layout_marginStart="0dp"-->
-<!--            android:layout_marginTop="479dp"-->
-<!--            app:srcCompat="@drawable/remainingbal"-->
-<!--            tools:layout_editor_absoluteX="82dp"-->
-<!--            tools:layout_editor_absoluteY="574dp" />-->
-
-<!--    </RelativeLayout>-->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -301,9 +36,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -318,13 +53,12 @@
             <EditText
                 android:id="@+id/cname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Name"
                 android:maxLines="1"
-                android:layout_weight="1"/>
-
+                android:textSize="18sp" />
 
 
         </LinearLayout>
@@ -336,9 +70,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -353,12 +87,12 @@
             <EditText
                 android:id="@+id/cphno"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Phone No."
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -370,9 +104,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -387,12 +121,12 @@
             <EditText
                 android:id="@+id/caddress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Address"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -403,9 +137,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -434,9 +168,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -451,12 +185,12 @@
             <EditText
                 android:id="@+id/ccity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter City"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -467,9 +201,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -484,12 +218,12 @@
             <EditText
                 android:id="@+id/cpin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Pincode"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -500,9 +234,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -517,12 +251,12 @@
             <EditText
                 android:id="@+id/cstate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter State"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -533,9 +267,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -550,12 +284,12 @@
             <EditText
                 android:id="@+id/ctype"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Type"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -566,9 +300,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView9"
@@ -583,12 +317,12 @@
             <EditText
                 android:id="@+id/cfssai"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Fssai No."
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -599,9 +333,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView10"
@@ -616,12 +350,12 @@
             <EditText
                 android:id="@+id/cgst"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Gstin No."
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -632,9 +366,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_height="70dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -649,12 +383,12 @@
             <EditText
                 android:id="@+id/c_bal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/montserrat"
-                android:textSize="18sp"
                 android:hint="Enter Remaining balance"
                 android:maxLines="1"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -668,27 +402,63 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="@android:color/holo_blue_dark"
-            android:text="EDIT" />
+            android:background="#4a9ee0"
+            android:text="Edit"
+            android:textColor="#fff" />
     </LinearLayout>
 
     </ScrollView>
 
 
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <LinearLayout
         android:id="@+id/nav_view"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintRight_toRightOf="parent" >
+
+
+        <Button
+            android:id="@+id/home"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:text="Home" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+
+        <Button
+            android:id="@+id/add_customer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add Customer"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_weight="1"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Settings"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 <!--    <Button-->
 <!--        android:id="@+id/savecustbtn"-->

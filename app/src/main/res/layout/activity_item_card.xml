@@ -4,38 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:layout_marginBottom="4dp">
 
     <RelativeLayout
         android:id="@+id/viewitems"
-        android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="138dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="2dp"
         android:background="@color/cardview_light_background">
 
         <TextView
-
-
-            android:id="@+id/item_name"
-            android:layout_width="249dp"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Item Name:"
+            android:textColor="#000"
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/additemtoorder"
-            android:layout_width="37dp"
-            android:layout_height="47dp"
+            android:layout_width="61dp"
+            android:layout_height="119dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="9dp"
@@ -43,15 +39,46 @@
             app:srcCompat="@drawable/ordericon" />
 
         <TextView
-            android:id="@+id/item_price"
-            android:layout_width="124dp"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/additemtoorder"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="33dp"
+            android:text="Price :"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <TextView
+
+
+            android:id="@+id/item_name"
+            android:layout_width="302dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="-37dp"
+            android:fontFamily="@font/montserrat"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="302dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/textView2"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="47dp"
-            android:layout_marginBottom="29dp"
-            android:textAlignment="center"
-            android:textSize="14sp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

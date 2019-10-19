@@ -61,7 +61,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     private String cust_id;
     boolean val;
-    private String default_area;
+    private String default_area,customer_name;
+    private Button add_customer,home,settings;
 
 
     @Override
@@ -70,15 +71,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_order);
         setup();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
+        add_customer = findViewById(R.id.add_customer);
+        home = findViewById(R.id.home);
+        settings = findViewById(R.id.settings);
+
         date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
         taxrate = findViewById(R.id.taxrate);
@@ -94,6 +90,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final Items items = intent.getParcelableExtra("item_object");
         cust_id = intent.getStringExtra("customer_id");
+        customer_name = intent.getStringExtra("customer_name");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         item_price.setEnabled(false);
 
@@ -261,6 +258,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(PlaceOrderActivity.this, ViewOrdersActivity.class);
                     intent.putExtra("customer_id",cust_id);
+                    intent.putExtra("customer_name",customer_name);
                     startActivity(intent);
                     finish();
                     view.setOnClickListener(null);
@@ -275,10 +273,40 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
 
+            }
+        });
+
+        add_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addcustomerintent = new Intent(PlaceOrderActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
 
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
 
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getBaseContext(), SettingsActivity.class);
+                startActivity(edit);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
@@ -291,6 +319,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent edit = new Intent(getBaseContext(), ViewItemsActivity.class);
         edit.putExtra("customer_id",cust_id);
+        edit.putExtra("customer_name",customer_name);
         startActivity(edit);
         finish();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
