@@ -18,10 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,6 +56,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFireStore = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = mFireStore.collection("orders");
+    private Boolean count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
 
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout o_list = findViewById(R.id.orderlist);
-
+        final ScrollView scroll_o_list = findViewById(R.id.scrollorders);
 //        new Timer().scheduleAtFixedRate(new TimerTask() {
 //            @Override
 //            public void run() {
@@ -140,6 +143,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                         orderprice.setText(order_price);
 
                         o_list.addView(Card);
+                        count = true;
 
                         vieworders.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -155,8 +159,23 @@ public class ViewOrdersActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    else
+                    {
+                        if(count == null) {
+                            count = false;
+                        }
+
+                        if(count == true)
+                        {
+                            count=true;
+                        }
+                    }
                 }
                 mProgressDialog.dismiss();
+                if(!count)
+                {
+                    Toast.makeText(ViewOrdersActivity.this, "No Orders found", Toast.LENGTH_LONG).show();
+                }
 
 
             }
