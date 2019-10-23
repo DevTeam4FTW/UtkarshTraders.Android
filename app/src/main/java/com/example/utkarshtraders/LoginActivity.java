@@ -86,6 +86,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     Toast.makeText(LoginActivity.this, "Login Failed,please check email/password",
                             Toast.LENGTH_LONG).show();
+                    mLoginProgress.dismiss();
+                    Intent mainintent = new Intent(LoginActivity.this, LoginActivity.class);
+                    mainintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainintent);
+                    finish();
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
 
