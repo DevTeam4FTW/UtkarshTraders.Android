@@ -1,12 +1,14 @@
 package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -48,9 +50,10 @@ public class ViewItemsActivity extends AppCompatActivity {
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference itemsRef=mFireStore.collection("items");
 
-    private EditText search;
-    private ImageView search_item;
+    private ImageView searchbtn;
     private ImageView clearsearch;
+    private EditText searchtext;
+
     boolean hasbeen = false;
     private LinearLayout i_list;
 
@@ -58,21 +61,25 @@ public class ViewItemsActivity extends AppCompatActivity {
     private String customer_name;
     private Button add_customer,home,settings;
     private ProgressDialog mProgressDialog;
+    private ProgressDialog searchDialog;
+
+    private boolean count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_items);
         setup();
 
-//        search_item = findViewById(R.id.searchitem);
-//        clearsearch = findViewById(R.id.clearall);
-//        search = findViewById(R.id.search_item);
+        searchbtn = findViewById(R.id.searchbtn);
+        clearsearch = findViewById(R.id.clearsearch);
+        searchtext = findViewById(R.id.searchtext);
 
 
         add_customer = findViewById(R.id.add_customer);
         home = findViewById(R.id.home);
         settings = findViewById(R.id.settings);
         mProgressDialog = new ProgressDialog(this);
+        searchDialog = new ProgressDialog(this);
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -174,99 +181,130 @@ public class ViewItemsActivity extends AppCompatActivity {
         });
 
 
-//        new Timer().scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//
-//                runOnUiThread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//
-//                        if(TextUtils.isEmpty(search.getText().toString()))
-//                        {
-//                            search_item.setClickable(false);
-//                        }
-//                        else
-//                        {
-//                            search_item.setClickable(true);
-//                        }
-//
-//                    }
-//                });
-//
-//
-//            }
-//        }, 0, 500);
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        if(TextUtils.isEmpty(searchtext.getText().toString()))
+                        {
+                            searchbtn.setClickable(false);
+                        }
+                        else
+                        {
+                            searchbtn.setClickable(true);
+                        }
+
+                    }
+                });
 
 
-//            search_item.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    i_list.removeAllViews();
-//                    hasbeen = true;
-//
-//                    if(!TextUtils.isEmpty(search.getText().toString())) {
-//
-//                        String value = search.getText().toString();
-//
-//                        itemsRef
-//                                .whereEqualTo("itemName", value)
-//                                .get()
-//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                        if (task.isSuccessful()) {
-//                                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//                                                final Items items = document.toObject(Items.class);
-//
-//                                                String item_name = items.getItemName();
-//                                                String default_price = "Rs: " + items.getItemPrice();
-//
-//                                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
-//
-//                                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
-//
-//                                                final TextView i_name = Card.findViewById(R.id.item_name);
-//                                                final TextView i_price = Card.findViewById(R.id.item_price);
-//                                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
-//
-//                                                i_name.setText(item_name);
-//                                                i_price.setText(default_price);
-//
-//                                                i_list.addView(Card);
-//
-//                                                additemtoorder.setOnClickListener(new View.OnClickListener() {
-//                                                    @Override
-//                                                    public void onClick(View view) {
-//                                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
-//                                                        additemtoorder.putExtra("item_object", items);
-//                                                        additemtoorder.putExtra("customer_id", customer_id);
-//                                                        startActivity(additemtoorder);
-//                                                        finish();
-//                                                        view.setOnClickListener(null);
-//                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//
-//                                                    }
-//                                                });
-//                                            }
-//                                        } else {
-//
-//                                            Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-//
-//                                        }
-//                                    }
-//                                });
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
-//            });
+            }
+        }, 0, 500);
+
+
+            searchbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    searchDialog.setTitle("Loading Customers");
+                    searchDialog.setMessage("Please wait while we load the Customers");
+                    searchDialog.setCanceledOnTouchOutside(false);
+                    searchDialog.show();
+
+                    i_list.removeAllViews();
+                    hasbeen = true;
+
+                    if(!TextUtils.isEmpty(searchtext.getText().toString())) {
+                        count=true;
+
+                        String value = searchtext.getText().toString();
+
+                        itemsRef
+                                .whereEqualTo("itemName", value)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                final Items items = document.toObject(Items.class);
+
+                                                String item_name = items.getItemName();
+                                                String default_price = "Rs: " + items.getItemPrice();
+
+                                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
+
+                                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
+
+                                                final TextView i_name = Card.findViewById(R.id.item_name);
+                                                final TextView i_price = Card.findViewById(R.id.item_price);
+                                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
+
+                                                i_name.setText(item_name);
+                                                i_price.setText(default_price);
+
+                                                i_list.addView(Card);
+
+                                                additemtoorder.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
+                                                        additemtoorder.putExtra("item_object", items);
+                                                        additemtoorder.putExtra("customer_id", customer_id);
+                                                        startActivity(additemtoorder);
+                                                        finish();
+                                                        view.setOnClickListener(null);
+                                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                                                    }
+                                                });
+                                            }
+                                        } else {
+                                            count = false;
+                                            Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                    }
+                    else
+                    {
+                        count=false;
+                        Toast.makeText(ViewItemsActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+                    }
+
+                    final Timer t = new Timer();
+                    t.schedule(new TimerTask() {
+                        public void run() {
+                            searchDialog.dismiss();
+                            t.cancel();
+                        }
+                    }, 1000);
+
+                    if(!count)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ViewItemsActivity.this);
+                        builder.setTitle("Customers");
+                        builder.setMessage("Cannot find customer. Must be exact match");
+                        builder.setNeutralButton("Ok",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+
+                }
+            });
 
 
 
@@ -274,28 +312,28 @@ public class ViewItemsActivity extends AppCompatActivity {
 
 
 
-//        clearsearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if(hasbeen)
-//                {
-//                    search.getText().clear();
-//                    Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
-//                    refreshViewall.putExtra("customer_id",customer_id);
-//                    startActivity(refreshViewall);
-//                    finish();
-//                    view.setOnClickListener(null);
-//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
+        clearsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(hasbeen)
+                {
+                    searchtext.getText().clear();
+                    Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
+                    refreshViewall.putExtra("customer_id",customer_id);
+                    startActivity(refreshViewall);
+                    finish();
+                    view.setOnClickListener(null);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                }
+                else
+                {
+                    Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
     }
@@ -320,23 +358,10 @@ public class ViewItemsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_bar_items, menu);
+        getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
         setTitle("View Items");
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
-        case R.id.action_search:
-
-            return(true);
-    }
-        return(super.onOptionsItemSelected(item));
-    }
-
-
-
-
 
 
 }

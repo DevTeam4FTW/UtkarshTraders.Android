@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 public class SettingsActivity extends AppCompatActivity {
 
 
-    private Button logout;
+    private Button logout,add_customer,home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         logout = findViewById(R.id.logout);
+        add_customer = findViewById(R.id.add_customer);
+        home = findViewById(R.id.home);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -64,6 +66,29 @@ public class SettingsActivity extends AppCompatActivity {
                 alert.show();
 
 
+            }
+        });
+
+        add_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addcustomerintent = new Intent(SettingsActivity.this, AddCustomerActivity.class);
+                addcustomerintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(addcustomerintent);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(SettingsActivity.this, CustomersActivity.class);
+                startActivity(edit);
+                finish();
+                view.setOnClickListener(null);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 

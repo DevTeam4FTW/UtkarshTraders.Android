@@ -9,45 +9,56 @@ android:layout_height="fill_parent"
 android:focusable="true"
 android:focusableInTouchMode="true"
 android:background="#DCDCDC"
-tools:context=".CustomersActivity">
+tools:context=".ViewOrdersActivity">
 
 
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/searchtab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#ececec"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        tools:context=".ViewOrdersActivity">
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollorders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="71dp">
+        <ImageView
+            android:id="@+id/clearsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/btn_dialog" />
 
-            <TextView
-                android:id="@+id/customerName"
-                android:layout_width="393dp"
-                android:layout_height="46dp"
-                android:textSize="15dp"
-                android:fontFamily="@font/montserrat"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp" />
+        <EditText
+            android:id="@+id/searchtext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/searchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
+
 
         <ScrollView
             android:id="@+id/scrollorders"
-            android:layout_width="411dp"
-            android:layout_height="609dp"
-            android:layout_below="@+id/main"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="-1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchtab"
+            app:layout_constraintVertical_bias="0.45">
 
             <LinearLayout
                 android:id="@+id/orderlist"
@@ -59,7 +70,6 @@ tools:context=".CustomersActivity">
         </ScrollView>
 
 
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/nav_view"
@@ -78,7 +88,7 @@ tools:context=".CustomersActivity">
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@android:color/black"
             android:text="Home" />
 
         <View
@@ -93,7 +103,7 @@ tools:context=".CustomersActivity">
             android:text="Add Customer"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@android:color/black"
             android:layout_weight="1"/>
 
         <View
@@ -107,7 +117,7 @@ tools:context=".CustomersActivity">
             android:text="Settings"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/holo_blue_dark"
+            android:background="@android:color/black"
             android:layout_weight="1"/>
     </LinearLayout>
 

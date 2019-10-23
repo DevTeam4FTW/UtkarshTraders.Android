@@ -1,11 +1,13 @@
 package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,7 +42,7 @@ import java.util.TimerTask;
 
 public class ViewOrdersActivity extends AppCompatActivity {
 
-    private ImageView searchorder;
+    private ImageView searchbtn;
     private ImageView clearsearch;
     private EditText searchtext;
 
@@ -50,9 +52,9 @@ public class ViewOrdersActivity extends AppCompatActivity {
     private String customer_id;
     private String customer_name;
 
-    private TextView customer_nm;
     private Button add_customer,home,settings;
     private ProgressDialog mProgressDialog;
+    private ProgressDialog searchDialog;
 
     private FirebaseFirestore mFireStore = FirebaseFirestore.getInstance();
     private CollectionReference ordersRef = mFireStore.collection("orders");
@@ -64,18 +66,17 @@ public class ViewOrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_orders);
         setup();
 
-//        searchorder = findViewById(R.id.searchorder);
-//        clearsearch = findViewById(R.id.clearsearch);
-//        searchtext = findViewById(R.id.search_orders);
+        searchbtn = findViewById(R.id.searchbtn);
+        clearsearch = findViewById(R.id.clearsearch);
+        searchtext = findViewById(R.id.searchtext);
 
-
-        customer_nm = findViewById(R.id.customerName);
 
 
         add_customer = findViewById(R.id.add_customer);
         home = findViewById(R.id.home);
         settings = findViewById(R.id.settings);
         mProgressDialog = new ProgressDialog(this);
+        searchDialog = new ProgressDialog(this);
 
         Intent intent = getIntent();
         customer_id = intent.getStringExtra("customer_id");
@@ -84,29 +85,28 @@ public class ViewOrdersActivity extends AppCompatActivity {
         customer_name = intent.getStringExtra("customer_name");
 
 
-        customer_nm.setText("Customer Name : " + customer_name);
 
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout o_list = findViewById(R.id.orderlist);
-        final ScrollView scroll_o_list = findViewById(R.id.scrollorders);
-//        new Timer().scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//
-//                runOnUiThread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//
-//                        if (TextUtils.isEmpty(searchtext.getText().toString())) {
-//                            searchorder.setClickable(false);
-//                        } else {
-//                            searchorder.setClickable(true);
-//                        }
-//                    }
-//                });
-//            }
-//        }, 0, 500);
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        if (TextUtils.isEmpty(searchtext.getText().toString())) {
+                            searchbtn.setClickable(false);
+                        } else {
+                            searchbtn.setClickable(true);
+                        }
+                    }
+                });
+            }
+        }, 0, 500);
 
         mProgressDialog.setTitle("Loading Orders");
         mProgressDialog.setMessage("Please wait while we load the Orders for the Customer");
@@ -174,166 +174,210 @@ public class ViewOrdersActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
                 if(!count)
                 {
-                    Toast.makeText(ViewOrdersActivity.this, "No Orders found", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrdersActivity.this);
+                    builder.setTitle("Orders");
+                    builder.setMessage("No Orders Exist for this Customer");
+                    builder.setNeutralButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
-
-
             }
 
         });
 
 
-//        searchorder.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                o_list.removeAllViews();
-//                hasbeen = true;
-//
-//                if (!TextUtils.isEmpty(searchtext.getText().toString())) {
-//
-//                    value = searchtext.getText().toString();
-//
-//                    if (Character.isDigit(value.charAt(0))) {
-//
-//                        ordersRef
-//                                .whereEqualTo("date", value)
-//                                .get()
-//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                        if (task.isSuccessful()) {
-//                                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//                                                final Orders orders = document.toObject(Orders.class);
-//
-//                                                if (orders.getCustomerId().equals(customer_id)) {
-//
-//                                                    String order_date = orders.getDate();
-//                                                    String order_item_name = orders.getItemName();
-//                                                    String order_price = "Rs: " + orders.getTotal();
-//                                                    final String order_id = document.getId();
-//
-//                                                    final View Card = inflater.inflate(R.layout.activity_order_card, null);
-//
-//                                                    final RelativeLayout vieworders = Card.findViewById(R.id.vieworders);
-//
-//                                                    final TextView orderdate = Card.findViewById(R.id.order_date);
-//                                                    final TextView orderitemname = Card.findViewById(R.id.order_item_name);
-//                                                    final TextView orderprice = Card.findViewById(R.id.order_price);
-//
-//                                                    orderdate.setText(order_date);
-//                                                    orderitemname.setText(order_item_name);
-//                                                    orderprice.setText(order_price);
-//
-//                                                    o_list.addView(Card);
-//
-//                                                    vieworders.setOnClickListener(new View.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(View view) {
-//                                                            Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
-//                                                            editorder.putExtra("order_object", orders);
-//                                                            editorder.putExtra("order_id", order_id);
-//                                                            startActivity(editorder);
-//                                                            finish();
-//                                                            view.setOnClickListener(null);
-//                                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//                                                        }
-//                                                    });
-//                                                }
-//                                            }
-//
-//
-//                                        } else {
-//
-//                                            Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-//
-//                                        }
-//                                    }
-//                                });
-//                    } else if (Character.isLetter(value.charAt(0))) {
-//                        ordersRef
-//                                .whereEqualTo("itemName", value)
-//                                .get()
-//                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                        if (task.isSuccessful()) {
-//                                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//                                                final Orders orders = document.toObject(Orders.class);
-//
-//                                                if (orders.getCustomerId().equals(customer_id)) {
-//
-//                                                    String order_date = orders.getDate();
-//                                                    String order_item_name = orders.getItemName();
-//                                                    String order_price = "Rs: " + orders.getTotal();
-//                                                    final String order_id = document.getId();
-//
-//                                                    final View Card = inflater.inflate(R.layout.activity_order_card, null);
-//
-//                                                    final RelativeLayout vieworders = Card.findViewById(R.id.vieworders);
-//
-//                                                    final TextView orderdate = Card.findViewById(R.id.order_date);
-//                                                    final TextView orderitemname = Card.findViewById(R.id.order_item_name);
-//                                                    final TextView orderprice = Card.findViewById(R.id.order_price);
-//
-//                                                    orderdate.setText(order_date);
-//                                                    orderitemname.setText(order_item_name);
-//                                                    orderprice.setText(order_price);
-//
-//                                                    o_list.addView(Card);
-//
-//                                                    vieworders.setOnClickListener(new View.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(View view) {
-//                                                            Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
-//                                                            editorder.putExtra("order_object", orders);
-//                                                            editorder.putExtra("order_id", order_id);
-//                                                            startActivity(editorder);
-//                                                            finish();
-//                                                            view.setOnClickListener(null);
-//                                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//                                                        }
-//                                                    });
-//                                                }
-//                                            }
-//                                        } else {
-//                                            Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                                });
-//                    } else {
-//                        Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//
-//            }
-//        });
 
-//        clearsearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if(hasbeen)
-//                {
-//                    searchtext.getText().clear();
-//                    Intent refreshViewall = new Intent(getBaseContext(),ViewOrdersActivity.class);
-//                    refreshViewall.putExtra("customer_id",customer_id);
-//                    startActivity(refreshViewall);
-//                    finish();
-//                    view.setOnClickListener(null);
-//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//
-//                }
-//                else
-//                {
-//                    Toast.makeText(ViewOrdersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
+
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                searchDialog.setTitle("Loading Customers");
+                searchDialog.setMessage("Please wait while we load the Customers");
+                searchDialog.setCanceledOnTouchOutside(false);
+                searchDialog.show();
+
+                o_list.removeAllViews();
+                hasbeen = true;
+
+                if (!TextUtils.isEmpty(searchtext.getText().toString())) {
+
+                    value = searchtext.getText().toString();
+
+                    if (Character.isDigit(value.charAt(0))) {
+                        count= true;
+                        ordersRef
+                                .whereEqualTo("date", value)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                final Orders orders = document.toObject(Orders.class);
+
+                                                if (orders.getCustomerId().equals(customer_id)) {
+
+                                                    String order_date = orders.getDate();
+                                                    String order_item_name = orders.getItemName();
+                                                    String order_price = "Rs: " + orders.getTotal();
+                                                    final String order_id = document.getId();
+
+                                                    final View Card = inflater.inflate(R.layout.activity_order_card, null);
+
+                                                    final RelativeLayout vieworders = Card.findViewById(R.id.vieworders);
+
+                                                    final TextView orderdate = Card.findViewById(R.id.order_date);
+                                                    final TextView orderitemname = Card.findViewById(R.id.order_item_name);
+                                                    final TextView orderprice = Card.findViewById(R.id.order_price);
+
+                                                    orderdate.setText(order_date);
+                                                    orderitemname.setText(order_item_name);
+                                                    orderprice.setText(order_price);
+
+                                                    o_list.addView(Card);
+
+                                                    vieworders.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
+                                                            editorder.putExtra("order_object", orders);
+                                                            editorder.putExtra("order_id", order_id);
+                                                            startActivity(editorder);
+                                                            finish();
+                                                            view.setOnClickListener(null);
+                                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                        }
+                                                    });
+                                                }
+                                            }
+
+
+                                        } else {
+                                            count = false;
+                                            Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                    } else if (Character.isLetter(value.charAt(0))) {
+                        count= true;
+                        ordersRef
+                                .whereEqualTo("itemName", value)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                final Orders orders = document.toObject(Orders.class);
+
+                                                if (orders.getCustomerId().equals(customer_id)) {
+
+                                                    String order_date = orders.getDate();
+                                                    String order_item_name = orders.getItemName();
+                                                    String order_price = "Rs: " + orders.getTotal();
+                                                    final String order_id = document.getId();
+
+                                                    final View Card = inflater.inflate(R.layout.activity_order_card, null);
+
+                                                    final RelativeLayout vieworders = Card.findViewById(R.id.vieworders);
+
+                                                    final TextView orderdate = Card.findViewById(R.id.order_date);
+                                                    final TextView orderitemname = Card.findViewById(R.id.order_item_name);
+                                                    final TextView orderprice = Card.findViewById(R.id.order_price);
+
+                                                    orderdate.setText(order_date);
+                                                    orderitemname.setText(order_item_name);
+                                                    orderprice.setText(order_price);
+
+                                                    o_list.addView(Card);
+
+                                                    vieworders.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
+                                                            editorder.putExtra("order_object", orders);
+                                                            editorder.putExtra("order_id", order_id);
+                                                            startActivity(editorder);
+                                                            finish();
+                                                            view.setOnClickListener(null);
+                                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        } else {
+                                            count = false;
+                                            Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    } else {
+                        count = false;
+                        Toast.makeText(ViewOrdersActivity.this, "Nothing to Show here", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                final Timer t = new Timer();
+                t.schedule(new TimerTask() {
+                    public void run() {
+                        searchDialog.dismiss();
+                        t.cancel();
+                    }
+                }, 1000);
+
+                if(!count)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrdersActivity.this);
+                    builder.setTitle("Customers");
+                    builder.setMessage("Cannot find customer. Must be exact match");
+                    builder.setNeutralButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
+
+            }
+        });
+
+        clearsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(hasbeen)
+                {
+                    searchtext.getText().clear();
+                    Intent refreshViewall = new Intent(getBaseContext(),ViewOrdersActivity.class);
+                    refreshViewall.putExtra("customer_id",customer_id);
+                    refreshViewall.putExtra("customer_name",customer_name);
+                    startActivity(refreshViewall);
+                    finish();
+                    view.setOnClickListener(null);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                }
+                else
+                {
+                    Toast.makeText(ViewOrdersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         add_customer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -389,17 +433,12 @@ public class ViewOrdersActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_bar, menu);
-        setTitle("View Orders");
+        setTitle("Orders for: " + customer_name);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
-        case R.id.action_search:
-
-
-
-            return(true);
         case R.id.action_add:
 
             Intent intent = new Intent(ViewOrdersActivity.this, ViewItemsActivity.class);
