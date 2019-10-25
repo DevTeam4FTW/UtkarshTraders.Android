@@ -109,7 +109,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         long datemnow = System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         String dateString = sdf.format(datemnow);
         date.setText(dateString);
 
@@ -185,12 +185,22 @@ public class PlaceOrderActivity extends AppCompatActivity {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(!TextUtils.isEmpty(item_qty.getText().toString()) && !TextUtils.isEmpty(item_price.getText().toString()) && item_qty.getText().toString().matches("^[0-9]*$") && item_price.getText().toString().matches("^[0-9]*$"))
-                {
-                    final Float c_total = (Float .parseFloat(item_qty.getText().toString()) * Float .parseFloat(item_price.getText().toString()));
-                    customer_total.setText(c_total.toString());
 
-                }
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        if(!TextUtils.isEmpty(item_qty.getText().toString()) && !TextUtils.isEmpty(item_price.getText().toString()) && item_qty.getText().toString().matches("^[0-9]*$") && item_price.getText().toString().matches("^[0-9]*$"))
+                        {
+                            final Float c_total = (Float .parseFloat(item_qty.getText().toString()) * Float .parseFloat(item_price.getText().toString()));
+                            customer_total.setText(c_total.toString());
+
+                        }
+
+                    }
+                });
+
 
             }
         }, 0, 1000);
