@@ -417,6 +417,7 @@ public class CustomersActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    searchtext.getText().clear();
                     Toast.makeText(CustomersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
                 }
 

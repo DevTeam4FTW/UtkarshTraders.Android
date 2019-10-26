@@ -88,7 +88,7 @@ tools:context=".ViewOrdersActivity">
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:text="Home" />
 
         <View
@@ -103,7 +103,7 @@ tools:context=".ViewOrdersActivity">
             android:text="Add Customer"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
 
         <View
@@ -117,7 +117,7 @@ tools:context=".ViewOrdersActivity">
             android:text="Settings"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
     </LinearLayout>
 

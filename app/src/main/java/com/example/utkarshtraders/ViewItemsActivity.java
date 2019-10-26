@@ -257,6 +257,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                                         Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
                                                         additemtoorder.putExtra("item_object", items);
                                                         additemtoorder.putExtra("customer_id", customer_id);
+                                                        additemtoorder.putExtra("customer_name",customer_name);
                                                         startActivity(additemtoorder);
                                                         finish();
                                                         view.setOnClickListener(null);
@@ -321,6 +322,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                     searchtext.getText().clear();
                     Intent refreshViewall = new Intent(getBaseContext(),ViewItemsActivity.class);
                     refreshViewall.putExtra("customer_id",customer_id);
+                    refreshViewall.putExtra("customer_name",customer_name);
                     startActivity(refreshViewall);
                     finish();
                     view.setOnClickListener(null);
@@ -329,6 +331,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    searchtext.getText().clear();
                     Toast.makeText(ViewItemsActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
                 }
 

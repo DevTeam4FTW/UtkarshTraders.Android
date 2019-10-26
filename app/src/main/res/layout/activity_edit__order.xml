@@ -36,7 +36,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="71dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="19dp"
+                    android:layout_marginTop="14dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1" />
@@ -49,7 +49,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="72dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="65dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1" />
@@ -60,9 +60,9 @@
                     android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="112dp"
+                    android:layout_marginStart="110dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="124dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1" />
@@ -75,7 +75,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="296dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="122dp"
                     android:ems="10"
                     android:fontFamily="@font/montserrat" />
 
@@ -86,9 +86,9 @@
                     android:layout_alignBottom="@+id/edititem_price"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="false"
-                    android:layout_marginStart="108dp"
+                    android:layout_marginStart="110dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="-58dp"
+                    android:layout_marginBottom="-59dp"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1" />
 
@@ -130,9 +130,9 @@
                     android:layout_alignBottom="@+id/editunit_spinner"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="false"
-                    android:layout_marginStart="71dp"
+                    android:layout_marginStart="70dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="-111dp"
+                    android:layout_marginBottom="-114dp"
                     android:fontFamily="@font/montserrat"
                     android:maxLines="1" />
 
@@ -209,31 +209,31 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="19dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="77dp"
+                    android:layout_marginStart="85dp"
                     android:layout_marginTop="187dp"
                     app:srcCompat="@drawable/rupee" />
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="19dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginTop="130dp"
+                    android:layout_marginStart="85dp"
+                    android:layout_marginTop="132dp"
                     app:srcCompat="@drawable/rupee" />
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="19dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="28dp"
                     android:layout_marginTop="401dp"
                     app:srcCompat="@drawable/rupee" />
 
@@ -249,7 +249,7 @@
                     android:textColor="@android:color/white"
                     android:fontFamily="@font/montserrat"
                     android:text="Update Order"
-                    android:background="@android:color/black"/>
+                    android:background="#0A3A86"/>
 
             </RelativeLayout>
         </LinearLayout>
@@ -281,7 +281,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:text="Home" />
 
         <View
@@ -296,7 +296,7 @@
             android:text="Add Customer"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
 
         <View
@@ -310,7 +310,7 @@
             android:text="Settings"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
     </LinearLayout>
 

@@ -250,6 +250,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                                                             Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
                                                             editorder.putExtra("order_object", orders);
                                                             editorder.putExtra("order_id", order_id);
+                                                            editorder.putExtra("customer_name",customer_name);
                                                             startActivity(editorder);
                                                             finish();
                                                             view.setOnClickListener(null);
@@ -307,6 +308,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                                                             Intent editorder = new Intent(getBaseContext(), ViewOrderInfoActivity.class);
                                                             editorder.putExtra("order_object", orders);
                                                             editorder.putExtra("order_id", order_id);
+                                                            editorder.putExtra("customer_name",customer_name);
                                                             startActivity(editorder);
                                                             finish();
                                                             view.setOnClickListener(null);
@@ -373,6 +375,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    searchtext.getText().clear();
                     Toast.makeText(ViewOrdersActivity.this, "Nothing to clear here", Toast.LENGTH_SHORT).show();
                 }
 

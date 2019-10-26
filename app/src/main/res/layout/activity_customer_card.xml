@@ -45,7 +45,7 @@
             android:layout_width="75dp"
             android:layout_height="50dp"
             android:text="Edit"
-            android:background="@android:color/black"
+            android:background="#0A3A86"
             android:textColor="@android:color/white"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"

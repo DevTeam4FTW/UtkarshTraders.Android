@@ -38,7 +38,7 @@
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="65dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="-49dp"
+                android:layout_marginBottom="-61dp"
                 android:backgroundTintMode="src_in"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1" />
@@ -65,7 +65,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
                 android:fontFamily="@font/montserrat"
@@ -105,7 +105,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="87dp"
-                android:layout_marginTop="112dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
                 android:fontFamily="@font/montserrat"
@@ -132,7 +132,7 @@
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="87dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="-51dp"
+                android:layout_marginBottom="-55dp"
                 android:editable="false"
                 android:fontFamily="@font/montserrat"
                 android:maxLines="1" />
@@ -159,10 +159,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="65dp"
-                android:layout_marginTop="212dp"
+                android:layout_marginTop="219dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTintMode="src_in"
-                />
+                android:backgroundTintMode="src_in" />
 
             <Spinner
                 android:id="@+id/area_spinner2"
@@ -184,7 +183,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="65dp"
-                android:layout_marginTop="313dp"
+                android:layout_marginTop="321dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTintMode="src_in" />
 
@@ -207,7 +206,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="65dp"
-                android:layout_marginTop="262dp"
+                android:layout_marginTop="269dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTintMode="src_in" />
 
@@ -301,7 +300,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="62dp"
-                android:layout_marginTop="183dp"
+                android:layout_marginTop="174dp"
                 app:srcCompat="@drawable/rupee" />
 
             <ImageView
@@ -333,7 +332,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="465dp"
                 android:layout_marginRight="10dp"
-                android:background="@android:color/black"
+                android:background="#0A3A86"
                 android:fontFamily="@font/montserrat"
                 android:text="Add"
                 android:textColor="@android:color/background_light" />
@@ -366,7 +365,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:text="Home" />
 
         <View
@@ -381,7 +380,7 @@
             android:text="Add Customer"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
 
         <View
@@ -395,7 +394,7 @@
             android:text="Settings"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@android:color/white"
-            android:background="@android:color/black"
+            android:background="#222222"
             android:layout_weight="1"/>
     </LinearLayout>
 
