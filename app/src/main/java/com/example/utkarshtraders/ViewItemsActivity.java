@@ -224,8 +224,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                         String value = searchtext.getText().toString();
 
-                        itemsRef
-                                .whereEqualTo("itemName", value)
+                        itemsRef.orderBy("itemName").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override

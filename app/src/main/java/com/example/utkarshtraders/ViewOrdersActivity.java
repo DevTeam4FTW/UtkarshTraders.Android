@@ -214,8 +214,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
 
                     if (Character.isDigit(value.charAt(0))) {
                         count= true;
-                        ordersRef
-                                .whereEqualTo("date", value)
+                        ordersRef.orderBy("date").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
@@ -272,8 +271,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                                 });
                     } else if (Character.isLetter(value.charAt(0))) {
                         count= true;
-                        ordersRef
-                                .whereEqualTo("itemName", value)
+                        ordersRef.orderBy("itemName").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override

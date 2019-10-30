@@ -225,8 +225,7 @@ public class CustomersActivity extends AppCompatActivity {
 
                     if (Character.isDigit(value.charAt(0))) {
                         count= true;
-                        customerRef
-                                .whereEqualTo("clientPhoneNo", value)
+                        customerRef.orderBy("clientPhoneNo").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
@@ -297,8 +296,8 @@ public class CustomersActivity extends AppCompatActivity {
                                 });
                     } else if(Character.isLetter(value.charAt(0))) {
                         count= true;
-                        customerRef
-                                .whereEqualTo("clientName", value)
+
+                        customerRef.orderBy("clientName").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
