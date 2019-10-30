@@ -85,12 +85,12 @@ public class Edit_CustomerActivity extends AppCompatActivity {
 
 
         final List<String> areas = new ArrayList<>();
-        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areas);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         final String area = customers.getClientArea();
         c_area.setAdapter(areaAdapter);
-        areasRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        areasRef.orderBy("areaName").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

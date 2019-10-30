@@ -6,6 +6,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,6 +61,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
     String default_bill;
     String default_unit;
     String default_area;
+    Float c_total;
     boolean val;
 
     private Button add_customer,home,settings;
@@ -109,7 +113,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
         default_area = orders.getCustomerArea();
 
         final List<String> areas = new ArrayList<>();
-        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areas);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         editarea_spinner.setAdapter(areaAdapter);
@@ -155,13 +159,13 @@ public class Edit_OrderActivity extends AppCompatActivity {
             default: default_unit = "Per/Piece";
         }
 
-        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, R.layout.spinner_item);
         billadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editbill_spinner.setAdapter(billadapter);
 
         editbill_spinner.setSelection(billadapter.getPosition(default_bill));
 
-        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, R.layout.spinner_item);
         unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editunit_spinner.setAdapter(unitadapter);
 
@@ -183,15 +187,25 @@ public class Edit_OrderActivity extends AppCompatActivity {
         }, 0, 500);
 
 
+
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
                 if(!TextUtils.isEmpty(edititem_qty.getText().toString()) && !TextUtils.isEmpty(edititem_price.getText().toString()) && edititem_qty.getText().toString().matches("^[0-9]*$") && edititem_price.getText().toString().matches("^[0-9]*$") )
                 {
-                    final Float c_total = (Float .parseFloat(edititem_qty.getText().toString()) * Float .parseFloat(edititem_price.getText().toString()));
+                    c_total = (Float .parseFloat(edititem_qty.getText().toString()) * Float .parseFloat(edititem_price.getText().toString()));
                     editcustomer_total.setText(c_total.toString());
 
                 }
+
+                    }
+                });
 
             }
         }, 0, 1000);

@@ -163,18 +163,7 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTintMode="src_in" />
 
-            <Spinner
-                android:id="@+id/area_spinner2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="251dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/spinnerborder"
-                android:backgroundTintMode="src_in"
-                tools:ignore="DuplicateIds" />
+
 
             <Spinner
                 android:id="@+id/bill_spinner"
@@ -206,7 +195,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="65dp"
-                android:layout_marginTop="269dp"
+                android:layout_marginTop="276dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTintMode="src_in" />
 
@@ -217,7 +206,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="65dp"
-                android:layout_marginTop="262dp"
+                android:layout_marginTop="264dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/spinnerborder"
                 android:backgroundTintMode="src_in" />

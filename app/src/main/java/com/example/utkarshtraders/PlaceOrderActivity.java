@@ -34,8 +34,11 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +47,7 @@ import java.util.TimerTask;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
-    private TextView date,item_name,taxrate,customer_total;
+    private TextView item_name,taxrate,customer_total;
     private EditText item_qty, item_price;
     private Spinner area_spinner;
     private Button placeorder;
@@ -59,6 +62,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String bill_generator;
     private String unit_type;
 
+    private String date_string;
     private String cust_id;
     boolean val;
     private String default_area,customer_name;
@@ -74,8 +78,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
         add_customer = findViewById(R.id.add_customer);
         home = findViewById(R.id.home);
         settings = findViewById(R.id.settings);
-
-        date = findViewById(R.id.date);
         item_name = findViewById(R.id.item_name);
         taxrate = findViewById(R.id.taxrate);
         customer_total = findViewById(R.id.customer_total);
@@ -107,21 +109,20 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         });
 
-        long datemnow = System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-        String dateString = sdf.format(datemnow);
-        date.setText(dateString);
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date todayDate = new Date();
+        date_string = currentDate.format(todayDate);
 
         item_name.setText(items.getItemName());
         item_price.setText(items.getItemPrice());
         taxrate.setText(items.getTaxRate());
 
-        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, R.layout.spinner_item);
         billadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bill_spinner.setAdapter(billadapter);
 
-        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, R.layout.spinner_item);
         unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         unit_spinner.setAdapter(unitadapter);
 
@@ -136,19 +137,23 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     if (document.exists()) {
                         default_area = document.getString("clientArea");
                     } else {
-                        Toast.makeText(PlaceOrderActivity.this, "foo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PlaceOrderActivity.this, "Area doesnt exist", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(PlaceOrderActivity.this, "foo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlaceOrderActivity.this, "Area doesnt exist", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         final List<String> areas = new ArrayList<>();
-        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, areas);
+        final ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, areas);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         area_spinner.setAdapter(areaAdapter);
@@ -221,11 +226,11 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
                     String customerArea = area_spinner.getSelectedItem().toString();
                     String customerId = cust_id;
-                    String datefield = date.getText().toString();
+                    String datefield = date_string;
                     String itemName = item_name.getText().toString();
                     String itemPrice = item_price.getText().toString();
                     String itemQuantity = item_qty.getText().toString();
-                    String orderId = cust_id + date.getText().toString();
+                    String orderId = cust_id + date_string;
                     String orderStatus = "true";
                     String salesmanId = mCurrentUser.getUid();
                     Float taxTotalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
