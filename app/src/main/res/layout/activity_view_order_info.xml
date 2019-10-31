@@ -1,302 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:background="#ececec"
-    tools:context=".ViewOrderInfoActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_weight="1"
+android:background="#808080"
+tools:context=".ViewOrderInfoActivity">
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="334dp"
-        android:layout_height="570dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:background="@color/cardview_light_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354">
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:id="@+id/linear"
+    android:orientation="vertical"
+    android:background="@color/cardview_light_background"
+    app:layout_constraintBottom_toTopOf="@+id/nav_view"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.45">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/order_dateheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Date:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginTop="25dp"
-            android:ems="10"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/item_nameheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Item Name:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="489dp"
-            android:ems="10"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <TextView
-            android:id="@+id/bill"
-            android:layout_width="wrap_content"
+            android:id="@+id/item_priceheading"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="279dp"
-            android:ems="10"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
-
-        <TextView
-            android:id="@+id/unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="319dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
-
-        <TextView
-            android:id="@+id/area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="365dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
-
-        <TextView
-            android:id="@+id/item_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="408dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:text="Item Price:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="111dp"
-            android:layout_marginBottom="446dp"
-            android:ems="10"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/item_qtyheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Item Qty:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/area_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Area:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/unit_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Unit:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/bill_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Bill:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/totalheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="Total:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/order_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="110dp"
-            android:layout_marginBottom="235dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat"
-            android:maxLines="1" />
-
-        <Button
-            android:id="@+id/edit_order"
-            android:layout_width="157dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="386dp"
-            android:background="#0A3A86"
-            android:fontFamily="@font/montserrat"
-            android:text="Edit"
-            android:textColor="@android:color/background_light" />
-
-        <TextView
-            android:id="@+id/heading1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="526dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Date:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="489dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Item Name:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="446dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Item Price:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="407dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Item Qty:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="365dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Area:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="320dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Unit:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="278dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Bill:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/heading8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="235dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Total:"
-            android:textColor="#000"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="25dp"
-            android:layout_height="23dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="314dp"
-            app:srcCompat="@drawable/rupee" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/nav_view"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" >
-
-
-        <Button
-            android:id="@+id/home"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
-            android:background="#222222"
-            android:text="Home" />
+            android:fontFamily="@font/montserrat"
+            android:textSize="14sp" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent" />
-
-
-        <Button
-            android:id="@+id/add_customer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Add Customer"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="@android:color/white"
-            android:background="#222222"
-            android:layout_weight="1"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/settings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Settings"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="@android:color/white"
-            android:background="#222222"
-            android:layout_weight="1"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/delete_order"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:layout_weight="1"
+            android:background="#0A3A86"
+            android:text="Delete"
+            android:textColor="#fff" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/edit_order"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_weight="1"
+        android:background="#0A3A86"
+        android:text="Edit"
+        android:textColor="#fff" />
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+<LinearLayout
+    android:id="@+id/nav_view"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" >
+
+
+    <Button
+        android:id="@+id/home"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textColor="@android:color/white"
+        android:background="#222222"
+        android:text="Home" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent" />
+
+
+    <Button
+        android:id="@+id/add_customer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Add Customer"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@android:color/white"
+        android:background="#222222"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Settings"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@android:color/white"
+        android:background="#222222"
+        android:layout_weight="1"/>
+</LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+

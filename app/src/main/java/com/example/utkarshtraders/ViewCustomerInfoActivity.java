@@ -72,7 +72,7 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         c_type.setText(customers.getCustType());
         c_fssai.setText(customers.getFssaino());
         c_gstin.setText(customers.getGstno());
-        remainingBal.setText("Rs "+customers.getRemainingBal());
+        remainingBal.setText("Rs: "+customers.getRemainingBal());
 
         edit_customer.setOnClickListener(new View.OnClickListener() {
             @Override

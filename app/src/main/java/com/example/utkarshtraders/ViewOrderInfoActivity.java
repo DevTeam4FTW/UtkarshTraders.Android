@@ -1,8 +1,11 @@
 package com.example.utkarshtraders;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -12,8 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firestore.v1beta1.StructuredQuery;
 
 public class ViewOrderInfoActivity extends AppCompatActivity {
@@ -28,7 +37,10 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView order_total;
     Button edit_order;
     public String c_id;
-    private Button add_customer,home,settings;
+    private Button add_customer,home,settings,delete_order;
+
+    private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
+    private CollectionReference ordersRef=mFireStore.collection("orders");
 
     private String customer_name;
 
@@ -50,6 +62,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         bill = findViewById(R.id.bill);
         order_total = findViewById(R.id.order_total);
         edit_order = findViewById(R.id.edit_order);
+        delete_order = findViewById(R.id.delete_order);
 
         Intent intent = getIntent();
         final Orders orders = intent.getParcelableExtra("order_object");
@@ -59,7 +72,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
 
         date.setText(orders.getDate());
         item_name.setText(orders.getItemName());
-        item_price.setText(orders.getItemPrice());
+        item_price.setText("Rs: "+orders.getItemPrice());
         item_quantity.setText(orders.getItemQuantity());
         area.setText(orders.getCustomerArea());
         unit.setText(orders.getUnit());
@@ -71,7 +84,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         {
             bill.setText("Shanti");
         }
-        order_total.setText(orders.getTotal());
+        order_total.setText("Rs: "+orders.getTotal());
 
 
         c_id = orders.getCustomerId();
@@ -124,6 +137,62 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+
+        delete_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrderInfoActivity.this);
+                builder.setMessage("Deleting order");
+                builder.setTitle("Delete");
+
+                builder.setMessage("Are you sure you want to delete this order?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        ordersRef.document(order_id).delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(ViewOrderInfoActivity.this, "Order deleted successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ViewOrderInfoActivity.this, "Error deleting document", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                        Intent startIntent = new Intent(ViewOrderInfoActivity.this,ViewOrdersActivity.class);
+                        startIntent.putExtra("customer_id",c_id);
+                        startIntent.putExtra("customer_name",customer_name);
+                        startActivity(startIntent);
+                        finish();
+                        view.setOnClickListener(null);
+                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                        Toast.makeText(ViewOrderInfoActivity.this, "You have successfully logged out",
+                                Toast.LENGTH_LONG).show();
+
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+            }
+        });
+
+
     }
 
     @Override
