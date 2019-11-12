@@ -23,11 +23,8 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
     TextView c_ph;
     TextView c_address;
     TextView c_area;
-    TextView c_city;
-    TextView c_pin;
     TextView c_state;
     TextView c_type;
-    TextView c_fssai;
     TextView c_gstin;
     TextView remainingBal;
     Button edit_customer;
@@ -48,11 +45,8 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         c_ph = findViewById(R.id.customer_ph);
         c_address = findViewById(R.id.customer_address);
         c_area = findViewById(R.id.customer_area);
-        c_city = findViewById(R.id.customer_city);
-        c_pin = findViewById(R.id.customer_pin);
         c_state = findViewById(R.id.customer_state);
         c_type = findViewById(R.id.customer_type);
-        c_fssai = findViewById(R.id.customer_fssai);
         c_gstin = findViewById(R.id.customer_gstin);
         remainingBal = findViewById(R.id.remainingBal);
         edit_customer = findViewById(R.id.edit_customer);
@@ -66,11 +60,8 @@ public class ViewCustomerInfoActivity extends AppCompatActivity {
         c_ph.setText(customers.getClientPhoneNo());
         c_address.setText(customers.getClientAddress());
         c_area.setText(customers.getClientArea());
-        c_city.setText(customers.getCity());
-        c_pin.setText(customers.getPincode());
         c_state.setText(customers.getState());
         c_type.setText(customers.getCustType());
-        c_fssai.setText(customers.getFssaino());
         c_gstin.setText(customers.getGstno());
         remainingBal.setText("Rs: "+customers.getRemainingBal());
 

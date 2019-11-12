@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +37,7 @@ import java.util.TimerTask;
 public class AddCustomerActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-    private EditText c_name, c_phno, c_address, c_city, c_pin, c_state, c_type, c_fssai, c_gst;
+    private EditText c_name, c_phno, c_address, c_type, c_gst;
     private Button addcust;
     private CollectionReference customerRef = mFirestore.collection("customer");
     private CollectionReference areasRef = mFirestore.collection("areas");
@@ -58,11 +59,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         c_phno = findViewById(R.id.cphno);
         c_address = findViewById(R.id.caddress);
         c_area = findViewById(R.id.carea);
-        c_city = findViewById(R.id.ccity);
-        c_pin = findViewById(R.id.cpin);
-        c_state = findViewById(R.id.cstate);
         c_type = findViewById(R.id.ctype);
-        c_fssai = findViewById(R.id.cfssai);
         c_gst = findViewById(R.id.cgst);
 
         addcust = findViewById(R.id.addcustbtn);
@@ -114,36 +111,27 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String cphno = c_phno.getText().toString();
                 String caddress = c_address.getText().toString();
                 String carea = c_area.getSelectedItem().toString();
-                String ccity = c_city.getText().toString();
-                String cpin = c_pin.getText().toString();
-                String cstate = c_state.getText().toString();
                 String ctype = c_type.getText().toString();
-                String cfssai = c_fssai.getText().toString();
                 String cgst = c_gst.getText().toString();
 
 
                 if (!TextUtils.isEmpty(cname) &&
                         !TextUtils.isEmpty(cphno) &&
-                        !TextUtils.isEmpty(caddress) &&
-                        !TextUtils.isEmpty(ccity) &&
-                        !TextUtils.isEmpty(cpin) &&
-                        !TextUtils.isEmpty(cstate) &&
-                        !TextUtils.isEmpty(ctype) &&
-                        !TextUtils.isEmpty(cfssai) &&
-                        !TextUtils.isEmpty(cgst)&& val) {
+                        !TextUtils.isEmpty(caddress)&&
+                        !TextUtils.isEmpty(ctype)&& val) {
                     Map<String, String> userMap = new HashMap<>();
 
-                    userMap.put("city", ccity);
+                    userMap.put("city", "");
                     userMap.put("clientAddress", caddress);
                     userMap.put("clientArea", carea);
                     userMap.put("clientName", cname);
                     userMap.put("clientPhoneNo", cphno);
                     userMap.put("custType", ctype);
-                    userMap.put("fssaino", cfssai);
+                    userMap.put("fssaino", "");
                     userMap.put("gstno", cgst);
                     userMap.put("remainingBal", "0");
-                    userMap.put("pincode", cpin);
-                    userMap.put("state", cstate);
+                    userMap.put("pincode", "");
+                    userMap.put("state", "Goa");
 
 
                     customerRef.add(userMap);
@@ -215,9 +203,6 @@ public class AddCustomerActivity extends AppCompatActivity {
         Boolean val = true;
         String cname = c_name.getText().toString();
         String cphno = c_phno.getText().toString();
-        String ccity = c_city.getText().toString();
-        String cpin = c_pin.getText().toString();
-        String cstate = c_state.getText().toString();
         String ctype = c_type.getText().toString();
 
         if(!cname.isEmpty())
@@ -236,32 +221,6 @@ public class AddCustomerActivity extends AppCompatActivity {
                 val = false;
             }
         }
-
-        if(!ccity.isEmpty())
-        {
-            if(!ccity.matches("[a-zA-Z ]+"))
-            {
-                c_city.setError("Enter characters only");
-                val = false;
-            }
-        }
-
-        if(!cpin.isEmpty())
-        {
-            if(!cpin.matches("\\A[0-9]{6}\\z"))
-            {
-                c_pin.setError("Enter 6 digit number starting with 4");
-                val = false;
-            }
-        }
-        if(!cstate.isEmpty())
-        {
-            if(!cstate.matches("[a-zA-Z ]+"))
-            {
-                c_state.setError("Enter characters only");
-                val = false;
-            }
-        }
         if(!ctype.isEmpty())
         {
             if(!ctype.matches("[a-zA-Z ]+"))
@@ -270,10 +229,6 @@ public class AddCustomerActivity extends AppCompatActivity {
                 val = false;
             }
         }
-
-
-
-
 
 
         return val;

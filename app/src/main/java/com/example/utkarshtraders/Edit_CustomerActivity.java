@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,11 +40,8 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     EditText c_phno;
     EditText c_address;
     Spinner c_area;
-    EditText c_city;
-    EditText c_pin;
-    EditText c_state;
+    TextView c_state;
     EditText c_type;
-    EditText c_fssai;
     EditText c_gstin;
     EditText c_bal;
     Button saveCust;
@@ -66,11 +64,8 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         c_phno = findViewById(R.id.cphno);
         c_address = findViewById(R.id.caddress);
         c_area = findViewById(R.id.carea);
-        c_city = findViewById(R.id.ccity);
-        c_pin = findViewById(R.id.cpin);
         c_state = findViewById(R.id.cstate);
         c_type = findViewById(R.id.ctype);
-        c_fssai = findViewById(R.id.cfssai);
         c_gstin = findViewById(R.id.cgst);
         c_bal = findViewById(R.id.c_bal);
         saveCust = findViewById(R.id.savecustbtn);
@@ -104,15 +99,8 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-        c_city.setText(customers.getCity());
-        c_pin.setText(customers.getPincode());
         c_state.setText(customers.getState());
         c_type.setText(customers.getCustType());
-        c_fssai.setText(customers.getFssaino());
         c_gstin.setText(customers.getGstno());
         c_bal.setText(customers.getRemainingBal());
 
@@ -137,32 +125,24 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(c_city.getText().toString()) &&
+                if (
                         !TextUtils.isEmpty(c_address.getText().toString())&&
                         !TextUtils.isEmpty(c_name.getText().toString()) &&
                         !TextUtils.isEmpty(c_phno.getText().toString()) &&
-                        !TextUtils.isEmpty(c_type.getText().toString()) &&
-                        !TextUtils.isEmpty(c_fssai.getText().toString()) &&
-                        !TextUtils.isEmpty(c_gstin.getText().toString()) &&
-                        !TextUtils.isEmpty(c_bal.getText().toString())&&
-                        !TextUtils.isEmpty(c_pin.getText().toString())&&
-                        !TextUtils.isEmpty(c_state.getText().toString())&&
-                                                                            val) {
+                        !TextUtils.isEmpty(c_type.getText().toString())&&
+                        !TextUtils.isEmpty(c_bal.getText().toString())&& val) {
 
 
                     customerRef.document(c_id)
                             .update(
-                                    "city", c_city.getText().toString(),
                                     "clientAddress", c_address.getText().toString(),
                                     "clientArea", c_area.getSelectedItem().toString(),
                                     "clientName", c_name.getText().toString(),
                                     "clientPhoneNo", c_phno.getText().toString(),
                                     "custType", c_type.getText().toString(),
-                                    "fssaino", c_fssai.getText().toString(),
                                     "gstno", c_gstin.getText().toString(),
                                     "remainingBal", c_bal.getText().toString(),
-                                    "pincode", c_pin.getText().toString(),
-                                    "state", c_state.getText().toString()
+                                    "state", "Goa"
                             );
 
                     Toast.makeText(Edit_CustomerActivity.this, "The Customer has been updated",
@@ -249,9 +229,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         Boolean val = true;
         String cname = c_name.getText().toString();
         String cphno = c_phno.getText().toString();
-        String ccity = c_city.getText().toString();
-        String cpin = c_pin.getText().toString();
-        String cstate = c_state.getText().toString();
         String ctype = c_type.getText().toString();
         String bal   =c_bal.getText().toString();
 
@@ -268,32 +245,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             if(!cphno.matches("\\A[0-9]{10}\\z"))
             {
                 c_phno.setError("Enter 10 digit number");
-                val = false;
-            }
-        }
-
-        if(!ccity.isEmpty())
-        {
-            if(!ccity.matches("[a-zA-Z ]+"))
-            {
-                c_city.setError("Enter characters only");
-                val = false;
-            }
-        }
-
-        if(!cpin.isEmpty())
-        {
-            if(!cpin.matches("\\A[0-9]{6}\\z"))
-            {
-                c_pin.setError("Enter 6 digit number ");
-                val = false;
-            }
-        }
-        if(!cstate.isEmpty())
-        {
-            if(!cstate.matches("[a-zA-Z ]+"))
-            {
-                c_state.setError("Enter characters only");
                 val = false;
             }
         }
