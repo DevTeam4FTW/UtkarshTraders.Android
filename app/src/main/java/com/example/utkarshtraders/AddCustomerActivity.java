@@ -37,10 +37,12 @@ import java.util.TimerTask;
 public class AddCustomerActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-    private EditText c_name, c_phno, c_address, c_type, c_gst;
+    private EditText c_name, c_phno, c_address, c_gst;
+    private Spinner c_type;
     private Button addcust;
     private CollectionReference customerRef = mFirestore.collection("customer");
     private CollectionReference areasRef = mFirestore.collection("areas");
+    private CollectionReference customerTypeRef = mFirestore.collection("cT");
     private Spinner c_area;
     boolean val;
 
@@ -84,6 +86,24 @@ public class AddCustomerActivity extends AppCompatActivity {
         });
 
 
+        final List<String> customertypes = new ArrayList<>();
+        final ArrayAdapter<String> ctypeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, customertypes);
+        ctypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        c_type.setAdapter(ctypeAdapter);
+        customerTypeRef.orderBy("ct").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String ctype = document.getString("ct");
+                        customertypes.add(ctype);
+                    }
+                    ctypeAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -111,14 +131,13 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String cphno = c_phno.getText().toString();
                 String caddress = c_address.getText().toString();
                 String carea = c_area.getSelectedItem().toString();
-                String ctype = c_type.getText().toString();
+                String custtype = c_type.getSelectedItem().toString();
                 String cgst = c_gst.getText().toString();
 
 
                 if (!TextUtils.isEmpty(cname) &&
                         !TextUtils.isEmpty(cphno) &&
-                        !TextUtils.isEmpty(caddress)&&
-                        !TextUtils.isEmpty(ctype)&& val) {
+                        !TextUtils.isEmpty(caddress)&& val) {
                     Map<String, String> userMap = new HashMap<>();
 
                     userMap.put("city", "");
@@ -126,7 +145,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     userMap.put("clientArea", carea);
                     userMap.put("clientName", cname);
                     userMap.put("clientPhoneNo", cphno);
-                    userMap.put("custType", ctype);
+                    userMap.put("custType", custtype);
                     userMap.put("fssaino", "");
                     userMap.put("gstno", cgst);
                     userMap.put("remainingBal", "0");
@@ -203,7 +222,6 @@ public class AddCustomerActivity extends AppCompatActivity {
         Boolean val = true;
         String cname = c_name.getText().toString();
         String cphno = c_phno.getText().toString();
-        String ctype = c_type.getText().toString();
 
         if(!cname.isEmpty())
         {
@@ -218,14 +236,6 @@ public class AddCustomerActivity extends AppCompatActivity {
             if(!cphno.matches("\\A[0-9]{10}\\z"))
             {
                 c_phno.setError("Enter 10 digit number");
-                val = false;
-            }
-        }
-        if(!ctype.isEmpty())
-        {
-            if(!ctype.matches("[a-zA-Z ]+"))
-            {
-                c_type.setError("Enter characters only");
                 val = false;
             }
         }

@@ -10,16 +10,50 @@
     android:background="#DCDCDC"
     tools:context=".CustomersActivity">
 
-
     <LinearLayout
-        android:id="@+id/searchtab"
+        android:id="@+id/filtertab"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollbaba"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/searchtab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="85dp"
+            android:layout_height="40dp"
+            android:text="Select Area: "/>
+
+        <Spinner
+            android:id="@+id/filterarea"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/filterbtn"
+            android:textColor="@android:color/white"
+            android:background="#0A3A86"
+            android:text="Filter"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/searchtab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollcustomers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filtertab"
         app:layout_constraintVertical_bias="0.45"
         android:orientation="horizontal">
 

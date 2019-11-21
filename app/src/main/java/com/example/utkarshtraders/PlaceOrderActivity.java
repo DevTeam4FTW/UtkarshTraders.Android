@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +48,7 @@ import java.util.TimerTask;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
-    private TextView item_name,taxrate,customer_total;
+    private TextView item_name,taxrate,customer_total,date;
     private EditText item_qty, item_price;
     private Spinner area_spinner;
     private Button placeorder;
@@ -56,7 +57,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private CollectionReference customerRef=mFireStore.collection("customer");
     private CollectionReference ordersRef=mFireStore.collection("orders");
     private CollectionReference areasRef=mFireStore.collection("areas");
-    private Spinner bill_spinner,unit_spinner;
+    private Spinner bill_spinner,unit_spinner,special;
     private FirebaseUser mCurrentUser;
 
     private String bill_generator;
@@ -68,12 +69,15 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String default_area,customer_name;
     private Button add_customer,home,settings;
 
+    private LinearLayout special_layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
         setup();
+
 
         add_customer = findViewById(R.id.add_customer);
         home = findViewById(R.id.home);
@@ -88,6 +92,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         togglespecial = findViewById(R.id.togglespecial);
         bill_spinner = findViewById(R.id.bill_spinner);
         unit_spinner = findViewById(R.id.unit_spinner);
+        special = findViewById(R.id.special_spinner);
+        date = findViewById(R.id.date);
+
+        special_layout = findViewById(R.id.special_layout);
 
         Intent intent = getIntent();
         final Items items = intent.getParcelableExtra("item_object");
@@ -95,14 +103,17 @@ public class PlaceOrderActivity extends AppCompatActivity {
         customer_name = intent.getStringExtra("customer_name");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         item_price.setEnabled(false);
+        special_layout.setVisibility(View.GONE);
 
         togglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     item_price.setEnabled(true);
+                    special_layout.setVisibility(View.VISIBLE);
                 } else {
-                    item_price.setText(items.getItemPrice());
+                    item_price.setText(items.getPrice());
                     item_price.setEnabled(false);
+                    special_layout.setVisibility(View.GONE);
 
                 }
             }
@@ -114,8 +125,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         Date todayDate = new Date();
         date_string = currentDate.format(todayDate);
 
-        item_name.setText(items.getItemName());
-        item_price.setText(items.getItemPrice());
+        date.setText(date_string);
+
+        item_name.setText(items.getName());
+        item_price.setText(items.getPrice());
         taxrate.setText(items.getTaxRate());
 
         ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, R.layout.spinner_item);

@@ -18,11 +18,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,10 +54,14 @@ public class ViewItemsActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference itemsRef=mFireStore.collection("items");
+    private CollectionReference packageRef=mFireStore.collection("cS");
+    private CollectionReference companyRef=mFireStore.collection("cN");
 
     private ImageView searchbtn;
     private ImageView clearsearch;
     private EditText searchtext;
+
+    private String filtercat,filtercomp,filterpackage;
 
     boolean hasbeen = false;
     private LinearLayout i_list;
@@ -62,6 +71,12 @@ public class ViewItemsActivity extends AppCompatActivity {
     private Button add_customer,home,settings;
     private ProgressDialog mProgressDialog;
     private ProgressDialog searchDialog;
+
+    private Spinner filterCategory;
+    private Spinner filterCompany;
+    private Spinner filterPackaging;
+
+    private Button filterItem;
 
     private boolean count;
     @Override
@@ -74,6 +89,10 @@ public class ViewItemsActivity extends AppCompatActivity {
         clearsearch = findViewById(R.id.clearsearch);
         searchtext = findViewById(R.id.searchtext);
 
+        filterCategory = findViewById(R.id.filterCategory);
+        filterCompany = findViewById(R.id.filterCompany);
+        filterPackaging = findViewById(R.id.filterPackaging);
+        filterItem = findViewById(R.id.filteritembtn);
 
         add_customer = findViewById(R.id.add_customer);
         home = findViewById(R.id.home);
@@ -90,62 +109,141 @@ public class ViewItemsActivity extends AppCompatActivity {
         customer_id = intent.getStringExtra("customer_id");
         customer_name = intent.getStringExtra("customer_name");
 
-
-        mProgressDialog.setTitle("Loading Items");
-        mProgressDialog.setMessage("Please wait while we load the Items we have");
-        mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.show();
-
-            itemsRef.orderBy("itemName").
-                    get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        final TextView loadMsg = new TextView(this);
+        loadMsg.setText("Choose values from the dropdowns and press 'Filter' to load Items.");
+        i_list.addView(loadMsg);
 
 
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-
-
-                        final Items items = documentSnapshot.toObject(Items.class);
-
-                        String item_name = items.getItemName();
-                        String default_price = "Rs: " + items.getItemPrice();
-
-                        final View Card = inflater.inflate(R.layout.activity_item_card, null);
-
-                        final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
-
-                        final TextView i_name = Card.findViewById(R.id.item_name);
-                        final TextView i_price = Card.findViewById(R.id.item_price);
-                        final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
-
-                        i_name.setText(item_name);
-                        i_price.setText(default_price);
-
-                        i_list.addView(Card);
-
-                        additemtoorder.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
-                                additemtoorder.putExtra("item_object", items);
-                                additemtoorder.putExtra("customer_id", customer_id);
-                                additemtoorder.putExtra("customer_name",customer_name);
-                                startActivity(additemtoorder);
-                                finish();
-                                view.setOnClickListener(null);
-                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                            }
-                        });
+        final List<String> categories = new ArrayList<>();
+        final ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, categories);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterCategory.setAdapter(categoryAdapter);
+        itemsRef.orderBy("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String category = document.getString("category");
+                        categories.add(category);
                     }
+                    categoryAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
-                    mProgressDialog.dismiss();
+        final List<String> companies = new ArrayList<>();
+        final ArrayAdapter<String> companiesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, companies);
+        companiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterCompany.setAdapter(companiesAdapter);
+        companyRef.orderBy("cn").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String company_name = document.getString("cn");
+                        companies.add(company_name);
+                    }
+                    companiesAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        final List<String> packaging = new ArrayList<>();
+        final ArrayAdapter<String> packagingAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, packaging);
+        packagingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterPackaging.setAdapter(packagingAdapter);
+        packageRef.orderBy("cS").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String package_name = document.getString("cS");
+                        packaging.add(package_name);
+                    }
+                    packagingAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+
+        filterItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                i_list.removeAllViews();
+
+                searchDialog.setTitle("Loading Customers");
+                searchDialog.setMessage("Please wait while we load the Customers");
+                searchDialog.setCanceledOnTouchOutside(false);
+                searchDialog.show();
+
+                if(!TextUtils.isEmpty(filterCategory.getSelectedItem().toString()) && !TextUtils.isEmpty(filterCompany.getSelectedItem().toString()) && !TextUtils.isEmpty(filterPackaging.getSelectedItem().toString())) {
+
+
+                    filtercat = filterCategory.getSelectedItem().toString();
+                    filtercomp = filterCompany.getSelectedItem().toString();
+                    filterpackage = filterPackaging.getSelectedItem().toString();
+
+
+                    itemsRef.whereEqualTo("category",filtercat).whereEqualTo("cname",filtercomp).whereEqualTo("ics",filterpackage).
+                            get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+
+                                final Items items = documentSnapshot.toObject(Items.class);
+
+                                String item_name = items.getName();
+                                String default_price = "Rs: " + items.getPrice();
+
+                                final View Card = inflater.inflate(R.layout.activity_item_card, null);
+
+                                final RelativeLayout viewitems = Card.findViewById(R.id.viewitems);
+
+                                final TextView i_name = Card.findViewById(R.id.item_name);
+                                final TextView i_price = Card.findViewById(R.id.item_price);
+                                final ImageView additemtoorder = Card.findViewById(R.id.additemtoorder);
+
+                                i_name.setText(item_name);
+                                i_price.setText(default_price);
+
+
+                                i_list.addView(Card);
+
+                                additemtoorder.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
+                                        additemtoorder.putExtra("item_object", items);
+                                        additemtoorder.putExtra("customer_id", customer_id);
+                                        additemtoorder.putExtra("customer_name",customer_name);
+                                        startActivity(additemtoorder);
+                                        finish();
+                                        view.setOnClickListener(null);
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                                    }
+                                });
+                            }
+
+                            searchDialog.dismiss();
+
+                        }
+                    });
 
 
 
 
                 }
-            });
+            }
+        });
+
+
+
+
 
         add_customer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,8 +332,8 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                                                 final Items items = document.toObject(Items.class);
 
-                                                String item_name = items.getItemName();
-                                                String default_price = "Rs: " + items.getItemPrice();
+                                                String item_name = items.getName();
+                                                String default_price = "Rs: " + items.getPrice();
 
                                                 final View Card = inflater.inflate(R.layout.activity_item_card, null);
 

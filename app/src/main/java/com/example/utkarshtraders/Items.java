@@ -2,32 +2,47 @@ package com.example.utkarshtraders;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.ArrayMap;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Items implements  Parcelable {
 
-    private String ItemCategory;
+    private String category;
+    private ArrayList<HashMap<String,String>> catgprice;
+    private String cname;
     private String hsnNo;
-    private String itemName;
-    private String itemPrice;
+    private String ics;
+    private String name;
+    private String price;
     private String taxRate;
 
     public Items() {
 
     }
 
-    public Items(String itemcategory, String hsnno, String itemname, String itemprice, String taxrate) {
-        ItemCategory = itemcategory;
-        hsnNo = hsnno;
-        itemName = itemname;
-        itemPrice = itemprice;
-        taxRate = taxrate;
+    public Items(String Category, ArrayList<HashMap<String,String>>  Catgprice, String Cname, String HsnNo, String Ics,String Name,String Price,String TaxRate) {
+        category = Category;
+        catgprice = Catgprice;
+        cname = Cname;
+        hsnNo = HsnNo;
+        ics = Ics;
+        name = Name;
+        name = Name;
+        price = Price;
+        taxRate = TaxRate;
     }
 
     protected Items(Parcel in) {
-        ItemCategory = in.readString();
+        category = in.readString();
+        catgprice = (ArrayList<HashMap<String,String>>) in.readValue(Array.class.getClassLoader());
+        cname = in.readString();
         hsnNo = in.readString();
-        itemName = in.readString();
-        itemPrice = in.readString();
+        ics = in.readString();
+        name = in.readString();
+        price = in.readString();
         taxRate = in.readString();
     }
 
@@ -43,12 +58,29 @@ public class Items implements  Parcelable {
         }
     };
 
-    public String getItemCategory() {
-        return ItemCategory;
+
+    public String getCategory() {
+        return category;
     }
 
-    public void setItemCategory(String itemCategory) {
-        ItemCategory = itemCategory;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public ArrayList<HashMap<String,String>> getCatgprice() {
+        return catgprice;
+    }
+
+    public void setCatgprice(ArrayList<HashMap<String,String>> catgprice) {
+        this.catgprice = catgprice;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public String getHsnNo() {
@@ -59,20 +91,28 @@ public class Items implements  Parcelable {
         this.hsnNo = hsnNo;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getIcs() {
+        return ics;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setIcs(String ics) {
+        this.ics = ics;
     }
 
-    public String getItemPrice() {
-        return itemPrice;
+    public String getName() {
+        return name;
     }
 
-    public void setItemPrice(String itemPrice) {
-        this.itemPrice = itemPrice;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getTaxRate() {
@@ -90,10 +130,13 @@ public class Items implements  Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(ItemCategory);
+        parcel.writeString(category);
+        parcel.writeValue(catgprice);
+        parcel.writeString(cname);
         parcel.writeString(hsnNo);
-        parcel.writeString(itemName);
-        parcel.writeString(itemPrice);
+        parcel.writeString(ics);
+        parcel.writeString(name);
+        parcel.writeString(price);
         parcel.writeString(taxRate);
     }
 }

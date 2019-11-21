@@ -315,7 +315,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Name:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -326,7 +325,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -347,7 +345,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Phone No:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -358,7 +355,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -380,7 +376,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Address:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -391,7 +386,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -412,7 +406,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Area:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -423,7 +416,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -453,7 +445,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="State:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -464,7 +455,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -485,7 +475,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Type:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -496,7 +485,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -519,7 +507,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Gstin No:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -530,7 +517,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -551,7 +537,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:text="Remaining Balance:"
                 android:textAlignment="center"
                 android:textSize="15sp"
@@ -562,7 +547,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
 
         </LinearLayout>

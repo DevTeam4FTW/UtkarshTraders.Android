@@ -41,7 +41,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     EditText c_address;
     Spinner c_area;
     TextView c_state;
-    EditText c_type;
+    Spinner c_type;
     EditText c_gstin;
     EditText c_bal;
     Button saveCust;
@@ -49,6 +49,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     private Button add_customer,home,settings;
 
     private CollectionReference areasRef = mFirestore.collection("areas");
+    private CollectionReference customerTypeRef = mFirestore.collection("cT");
     private CollectionReference customerRef = mFirestore.collection("customer");
 
     @Override
@@ -99,8 +100,27 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             }
         });
 
+        final List<String> customertypes = new ArrayList<>();
+        final ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, customertypes);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        final String type = customers.getCustType();
+        c_type.setAdapter(typeAdapter);
+        customerTypeRef.orderBy("ct").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String ctype = document.getString("ct");
+                        customertypes.add(ctype);
+                    }
+                    typeAdapter.notifyDataSetChanged();
+                    c_type.setSelection(typeAdapter.getPosition(type));
+                }
+            }
+        });
+
         c_state.setText(customers.getState());
-        c_type.setText(customers.getCustType());
         c_gstin.setText(customers.getGstno());
         c_bal.setText(customers.getRemainingBal());
 
@@ -128,8 +148,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
                 if (
                         !TextUtils.isEmpty(c_address.getText().toString())&&
                         !TextUtils.isEmpty(c_name.getText().toString()) &&
-                        !TextUtils.isEmpty(c_phno.getText().toString()) &&
-                        !TextUtils.isEmpty(c_type.getText().toString())&&
+                        !TextUtils.isEmpty(c_phno.getText().toString())&&
                         !TextUtils.isEmpty(c_bal.getText().toString())&& val) {
 
 
@@ -139,7 +158,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
                                     "clientArea", c_area.getSelectedItem().toString(),
                                     "clientName", c_name.getText().toString(),
                                     "clientPhoneNo", c_phno.getText().toString(),
-                                    "custType", c_type.getText().toString(),
+                                    "custType", c_type.getSelectedItem().toString(),
                                     "gstno", c_gstin.getText().toString(),
                                     "remainingBal", c_bal.getText().toString(),
                                     "state", "Goa"
@@ -229,7 +248,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         Boolean val = true;
         String cname = c_name.getText().toString();
         String cphno = c_phno.getText().toString();
-        String ctype = c_type.getText().toString();
         String bal   =c_bal.getText().toString();
 
         if(!cname.isEmpty())
@@ -245,14 +263,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
             if(!cphno.matches("\\A[0-9]{10}\\z"))
             {
                 c_phno.setError("Enter 10 digit number");
-                val = false;
-            }
-        }
-        if(!ctype.isEmpty())
-        {
-            if(!ctype.matches("[a-zA-Z ]+"))
-            {
-                c_type.setError("Enter characters only");
                 val = false;
             }
         }

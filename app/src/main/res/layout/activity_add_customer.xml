@@ -55,7 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
                     android:hint="Enter Name"
                     android:maxLines="1"
                     android:textSize="18sp" />
@@ -89,7 +88,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
                     android:hint="Enter Phone No."
                     android:maxLines="1"
                     android:textSize="18sp" />
@@ -123,7 +121,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
                     android:hint="Enter Address"
                     android:maxLines="1"
                     android:textSize="18sp" />
@@ -191,7 +188,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
                     android:hint="Goa"
                     android:gravity="center"
                     android:textSize="18sp" />
@@ -219,15 +215,12 @@
                     android:layout_marginTop="14dp"
                     app:srcCompat="@drawable/typeicon" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/ctype"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
-                    android:hint="Enter Type"
-                    android:maxLines="1"
-                    android:textSize="18sp" />
+                    android:textColor="@android:color/black" />
 
             </LinearLayout>
 
@@ -259,7 +252,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/montserrat"
                     android:hint="Enter Gstin No."
                     android:maxLines="1"
                     android:textSize="18sp" />

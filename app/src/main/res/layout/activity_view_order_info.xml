@@ -33,7 +33,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Date:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -44,7 +43,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -65,7 +63,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Item Name:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -76,7 +73,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -98,7 +94,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Item Price:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -109,7 +104,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -130,7 +124,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Item Qty:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -141,7 +134,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -162,7 +154,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Area:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -173,7 +164,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -194,7 +184,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Unit:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -205,7 +194,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -226,7 +214,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Bill:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -237,7 +224,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -258,7 +244,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:text="Total:"
             android:textAlignment="center"
             android:textSize="15sp"
@@ -269,7 +254,6 @@ tools:context=".ViewOrderInfoActivity">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat"
             android:textSize="14sp" />
 
     </LinearLayout>
