@@ -69,6 +69,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private String default_area,customer_name;
     private Button add_customer,home,settings;
 
+    private String[] specialtypes,specialprices;
+    private HashMap<String,String> specials;
+
     private LinearLayout special_layout;
 
 
@@ -94,6 +97,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
         unit_spinner = findViewById(R.id.unit_spinner);
         special = findViewById(R.id.special_spinner);
         date = findViewById(R.id.date);
+        specials = new HashMap<String, String>();
+
+
 
         special_layout = findViewById(R.id.special_layout);
 
@@ -105,11 +111,36 @@ public class PlaceOrderActivity extends AppCompatActivity {
         item_price.setEnabled(false);
         special_layout.setVisibility(View.GONE);
 
+        specialtypes = new String[items.getCatgprice().size()];
+        specialprices = new String[items.getCatgprice().size()];
+
         togglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     item_price.setEnabled(true);
                     special_layout.setVisibility(View.VISIBLE);
+                    String defaultprice = special.getSelectedItem().toString();
+                    String pricetoshow = specials.get(defaultprice);
+
+                    item_price.setText(pricetoshow);
+
+
+                    special.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                            String defaultpr = special.getSelectedItem().toString();
+                            String pricetoshowalso = specials.get(defaultpr);
+
+                            item_price.setText(pricetoshowalso);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parentView) {
+                            // your code here
+                        }
+
+                    });
+
                 } else {
                     item_price.setText(items.getPrice());
                     item_price.setEnabled(false);
@@ -119,6 +150,20 @@ public class PlaceOrderActivity extends AppCompatActivity {
             }
 
         });
+
+        for (int i=0;i<items.getCatgprice().size();i++)
+        {
+            HashMap<String, String> hashmap= items.getCatgprice().get(i);
+            String types= hashmap.get("ct");
+            String prices= hashmap.get("price");
+            specialtypes[i] = types+"(Rs:"+prices+")";
+            specials.put(types,prices);
+        }
+
+
+        ArrayAdapter<CharSequence> specialAdapter = new ArrayAdapter<CharSequence>(this,R.layout.spinner_item,specialtypes);
+        specialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        special.setAdapter(specialAdapter);
 
 
         SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -138,6 +183,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, R.layout.spinner_item);
         unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         unit_spinner.setAdapter(unitadapter);
+
+
+
 
 
 
