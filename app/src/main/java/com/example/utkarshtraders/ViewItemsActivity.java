@@ -56,6 +56,7 @@ public class ViewItemsActivity extends AppCompatActivity {
     private CollectionReference itemsRef=mFireStore.collection("items");
     private CollectionReference packageRef=mFireStore.collection("cS");
     private CollectionReference companyRef=mFireStore.collection("cN");
+    private CollectionReference categoriesRef = mFireStore.collection("categories");
 
     private ImageView searchbtn;
     private ImageView clearsearch;
@@ -75,6 +76,8 @@ public class ViewItemsActivity extends AppCompatActivity {
     private Spinner filterCategory;
     private Spinner filterCompany;
     private Spinner filterPackaging;
+
+    private String item_id;
 
     private Button filterItem;
 
@@ -110,7 +113,7 @@ public class ViewItemsActivity extends AppCompatActivity {
         customer_name = intent.getStringExtra("customer_name");
 
         final TextView loadMsg = new TextView(this);
-        loadMsg.setText("Choose values from the dropdowns and press 'Filter' to load Items.");
+        loadMsg.setText("Choose values from the dropdowns and press 'Filter' to load Items. Alternatively, type the item name to search");
         i_list.addView(loadMsg);
 
 
@@ -118,12 +121,12 @@ public class ViewItemsActivity extends AppCompatActivity {
         final ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, categories);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterCategory.setAdapter(categoryAdapter);
-        itemsRef.orderBy("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        categoriesRef.orderBy("categoryName").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String category = document.getString("category");
+                        String category = document.getString("categoryName");
                         categories.add(category);
                     }
                     categoryAdapter.notifyDataSetChanged();
@@ -173,8 +176,8 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                 i_list.removeAllViews();
 
-                searchDialog.setTitle("Loading Customers");
-                searchDialog.setMessage("Please wait while we load the Customers");
+                searchDialog.setTitle("Loading Items");
+                searchDialog.setMessage("Please wait while we load the Items");
                 searchDialog.setCanceledOnTouchOutside(false);
                 searchDialog.show();
 
@@ -193,7 +196,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-
+                                item_id = documentSnapshot.getId();
                                 final Items items = documentSnapshot.toObject(Items.class);
 
                                 String item_name = items.getName();
@@ -218,6 +221,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                     public void onClick(View view) {
                                         Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
                                         additemtoorder.putExtra("item_object", items);
+                                        additemtoorder.putExtra("item_id",item_id);
                                         additemtoorder.putExtra("customer_id", customer_id);
                                         additemtoorder.putExtra("customer_name",customer_name);
                                         startActivity(additemtoorder);
@@ -309,8 +313,8 @@ public class ViewItemsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    searchDialog.setTitle("Loading Customers");
-                    searchDialog.setMessage("Please wait while we load the Customers");
+                    searchDialog.setTitle("Loading Items");
+                    searchDialog.setMessage("Please wait while we load the Items");
                     searchDialog.setCanceledOnTouchOutside(false);
                     searchDialog.show();
 
@@ -330,6 +334,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                                item_id = document.getId();
                                                 final Items items = document.toObject(Items.class);
 
                                                 String item_name = items.getName();
@@ -353,6 +358,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                                     public void onClick(View view) {
                                                         Intent additemtoorder = new Intent(getBaseContext(), PlaceOrderActivity.class);
                                                         additemtoorder.putExtra("item_object", items);
+                                                        additemtoorder.putExtra("item_name",item_id);
                                                         additemtoorder.putExtra("customer_id", customer_id);
                                                         additemtoorder.putExtra("customer_name",customer_name);
                                                         startActivity(additemtoorder);
@@ -388,8 +394,8 @@ public class ViewItemsActivity extends AppCompatActivity {
                     if(!count)
                     {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ViewItemsActivity.this);
-                        builder.setTitle("Customers");
-                        builder.setMessage("Cannot find customer. Must be exact match");
+                        builder.setTitle("Items");
+                        builder.setMessage("Cannot find Item. Data must begin with search parameter entered.");
                         builder.setNeutralButton("Ok",
                                 new DialogInterface.OnClickListener() {
                                     @Override

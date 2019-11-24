@@ -174,7 +174,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
                     }
                 }
                 mProgressDialog.dismiss();
-                if(!count)
+                if(count == null || !count)
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrdersActivity.this);
                     builder.setTitle("Orders");
@@ -200,8 +200,8 @@ public class ViewOrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                searchDialog.setTitle("Loading Customers");
-                searchDialog.setMessage("Please wait while we load the Customers");
+                searchDialog.setTitle("Loading Orders");
+                searchDialog.setMessage("Please wait while we load the Orders for this Customer");
                 searchDialog.setCanceledOnTouchOutside(false);
                 searchDialog.show();
 
@@ -340,8 +340,8 @@ public class ViewOrdersActivity extends AppCompatActivity {
                 if(!count)
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ViewOrdersActivity.this);
-                    builder.setTitle("Customers");
-                    builder.setMessage("Cannot find customer. Must be exact match");
+                    builder.setTitle("Orders");
+                    builder.setMessage("Cannot find Order. Data must begin with search parameter entered.");
                     builder.setNeutralButton("Ok",
                             new DialogInterface.OnClickListener() {
                                 @Override

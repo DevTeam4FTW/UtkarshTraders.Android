@@ -9,11 +9,14 @@ public class Orders implements  Parcelable {
     private String customerArea;
     private String customerId;
     private String date;
+    private String hsnNo;
+    private String itemId;
     private String itemName;
     private String itemPrice;
     private String itemQuantity;
     private String orderId;
     private String orderStatus;
+    private String priceType;
     private String salesmanId;
     private String taxTotal;
     private String taxableRate;
@@ -26,16 +29,19 @@ public class Orders implements  Parcelable {
 
     }
 
-    public Orders(String billgenerator, String customerarea, String customerid, String datevar, String itemname,String itemprice,String itemquantity,String orderid,String orderstatus,String salesmanid,String taxtotal,String taxablerate,String taxratevar,String totalvar,String unitvar) {
+    public Orders(String billgenerator, String customerarea, String customerid, String datevar,String hsnno, String itemid, String itemname,String itemprice,String itemquantity,String orderid,String orderstatus,String pricetype, String salesmanid,String taxtotal,String taxablerate,String taxratevar,String totalvar,String unitvar) {
         billGenerator = billgenerator;
         customerArea = customerarea;
         customerId = customerid;
         date = datevar;
+        hsnNo = hsnno;
+        itemId = itemid;
         itemName = itemname;
         itemPrice = itemprice;
         itemQuantity = itemquantity;
         orderId = orderid;
         orderStatus = orderstatus;
+        priceType = pricetype;
         salesmanId = salesmanid;
         taxTotal = taxtotal;
         taxableRate = taxablerate;
@@ -49,11 +55,14 @@ public class Orders implements  Parcelable {
         customerArea = in.readString();
         customerId = in.readString();
         date = in.readString();
+        hsnNo = in.readString();
+        itemId = in.readString();
         itemName = in.readString();
         itemPrice = in.readString();
         itemQuantity = in.readString();
         orderId = in.readString();
         orderStatus = in.readString();
+        priceType = in.readString();
         salesmanId = in.readString();
         taxTotal = in.readString();
         taxableRate = in.readString();
@@ -107,6 +116,23 @@ public class Orders implements  Parcelable {
         this.date = date;
     }
 
+    public String getHsnNo() {
+        return hsnNo;
+    }
+
+    public void setHsnNo(String hsnNo) {
+        this.hsnNo = hsnNo;
+    }
+
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -145,6 +171,14 @@ public class Orders implements  Parcelable {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getPriceType() {
+        return priceType;
+    }
+
+    public void setPriceType(String priceType) {
+        this.priceType = priceType;
     }
 
     public String getSalesmanId() {
@@ -195,6 +229,8 @@ public class Orders implements  Parcelable {
         this.unit = unit;
     }
 
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -206,11 +242,14 @@ public class Orders implements  Parcelable {
         parcel.writeString(customerArea);
         parcel.writeString(customerId);
         parcel.writeString(date);
+        parcel.writeString(hsnNo);
+        parcel.writeString(itemId);
         parcel.writeString(itemName);
         parcel.writeString(itemPrice);
         parcel.writeString(itemQuantity);
         parcel.writeString(orderId);
         parcel.writeString(orderStatus);
+        parcel.writeString(priceType);
         parcel.writeString(salesmanId);
         parcel.writeString(taxTotal);
         parcel.writeString(taxableRate);

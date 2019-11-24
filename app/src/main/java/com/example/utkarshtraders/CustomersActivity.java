@@ -67,7 +67,6 @@ public class CustomersActivity extends AppCompatActivity {
     String filtervalue;
     private ProgressDialog mProgressDialog;
     private ProgressDialog searchDialog;
-    private Boolean count;
     private Spinner filterarea;
     private Button filterbtn;
 
@@ -75,6 +74,8 @@ public class CustomersActivity extends AppCompatActivity {
     private CollectionReference salesmanRef=mFireStore.collection("salesman");
     private CollectionReference customerRef=mFireStore.collection("customer");
     private CollectionReference areasRef=mFireStore.collection("areas");
+
+    Boolean filtercount = false;
 
 
     private Button add_customer,settings;
@@ -156,7 +157,7 @@ public class CustomersActivity extends AppCompatActivity {
         });
 
         final TextView loadMsg = new TextView(this);
-        loadMsg.setText("Choose area from the dropdown and press 'Filter' to load customers.");
+        loadMsg.setText("Choose area from the dropdown and press 'Filter' to load customers. Alternatively, type the name or phone number to search for required customer");
         c_list.addView(loadMsg);
 
 
@@ -182,6 +183,7 @@ public class CustomersActivity extends AppCompatActivity {
 
 
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                filtercount = true;
 
 
                                 final Customers customers = documentSnapshot.toObject(Customers.class);
@@ -203,8 +205,6 @@ public class CustomersActivity extends AppCompatActivity {
                                 c_phno.setText(phoneno);
 
                                 c_list.addView(Card);
-                                count= true;
-
                                 edit_customer.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -238,10 +238,29 @@ public class CustomersActivity extends AppCompatActivity {
                             }
 
                             searchDialog.dismiss();
+
+                            if(!filtercount)
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CustomersActivity.this);
+                                builder.setTitle("Customers");
+                                builder.setMessage("No customer are registered with the Area");
+                                builder.setNeutralButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+
                         }
 
                     });
                 }
+
+                filtercount = false;
 
                 }
         });
@@ -268,7 +287,6 @@ public class CustomersActivity extends AppCompatActivity {
                     value = searchtext.getText().toString();
 
                     if (Character.isDigit(value.charAt(0))) {
-                        count= true;
                         customerRef.orderBy("clientPhoneNo").startAt(value).endAt(value + "\uf8ff")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -278,6 +296,8 @@ public class CustomersActivity extends AppCompatActivity {
 
                                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+
+
                                                 if(document.exists()) {
 
                                                     final Customers customers = document.toObject(Customers.class);
@@ -330,16 +350,13 @@ public class CustomersActivity extends AppCompatActivity {
                                                         }
                                                     });
                                                 }
-                                                else
-                                                {
-                                                    count = false;
-                                                }
                                             }
                                         }
                                     }
+
+
                                 });
                     } else if(Character.isLetter(value.charAt(0))) {
-                        count= true;
 
                         customerRef.orderBy("clientName").startAt(value).endAt(value + "\uf8ff")
                                 .get()
@@ -348,8 +365,9 @@ public class CustomersActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                                         if (task.isSuccessful()) {
-                                            count = true;
                                             for (QueryDocumentSnapshot document : task.getResult()) {
+
+
 
                                                 if(document.exists()) {
 
@@ -402,10 +420,6 @@ public class CustomersActivity extends AppCompatActivity {
 
                                                         }
                                                     });
-                                                }
-                                                else
-                                                {
-                                                    count = false;
                                                 }
                                             }
 
@@ -423,23 +437,6 @@ public class CustomersActivity extends AppCompatActivity {
                         t.cancel();
                     }
                 }, 1000);
-
-                if(!count)
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CustomersActivity.this);
-                    builder.setTitle("Customers");
-                    builder.setMessage("Cannot find customer. Must be exact match");
-                    builder.setNeutralButton("Ok",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
             }
 
 

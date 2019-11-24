@@ -48,8 +48,8 @@ import java.util.TimerTask;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
-    private TextView item_name,taxrate,customer_total,date;
-    private EditText item_qty, item_price;
+    private TextView item_name,taxrate,customer_total,date,item_price,hsnno;
+    private EditText item_qty;
     private Spinner area_spinner;
     private Button placeorder;
     private ToggleButton togglespecial;
@@ -68,6 +68,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
     boolean val;
     private String default_area,customer_name;
     private Button add_customer,home,settings;
+
+    private String item_id;
+    private String price_typedb;
 
     private String[] specialtypes,specialprices;
     private HashMap<String,String> specials;
@@ -98,6 +101,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
         special = findViewById(R.id.special_spinner);
         date = findViewById(R.id.date);
         specials = new HashMap<String, String>();
+        price_typedb = "default";
+        hsnno = findViewById(R.id.hsnno);
 
 
 
@@ -105,6 +110,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Items items = intent.getParcelableExtra("item_object");
+        item_id = intent.getStringExtra("item_id");
         cust_id = intent.getStringExtra("customer_id");
         customer_name = intent.getStringExtra("customer_name");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -121,8 +127,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     special_layout.setVisibility(View.VISIBLE);
                     String defaultprice = special.getSelectedItem().toString();
                     String pricetoshow = specials.get(defaultprice);
-
                     item_price.setText(pricetoshow);
+                    price_typedb = defaultprice;
 
 
                     special.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -130,8 +136,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                             String defaultpr = special.getSelectedItem().toString();
                             String pricetoshowalso = specials.get(defaultpr);
-
                             item_price.setText(pricetoshowalso);
+                            price_typedb = defaultpr;
                         }
 
                         @Override
@@ -145,6 +151,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     item_price.setText(items.getPrice());
                     item_price.setEnabled(false);
                     special_layout.setVisibility(View.GONE);
+                    price_typedb = "default";
 
                 }
             }
@@ -157,7 +164,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
             String types= hashmap.get("ct");
             String prices= hashmap.get("price");
             specialtypes[i] = types+"(Rs:"+prices+")";
-            specials.put(types,prices);
+            specials.put(types+"(Rs:"+prices+")",prices);
         }
 
 
@@ -175,6 +182,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         item_name.setText(items.getName());
         item_price.setText(items.getPrice());
         taxrate.setText(items.getTaxRate());
+        hsnno.setText(items.getHsnNo());
 
         ArrayAdapter<CharSequence> billadapter = ArrayAdapter.createFromResource(this, R.array.seller_prompts, R.layout.spinner_item);
         billadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -183,11 +191,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> unitadapter = ArrayAdapter.createFromResource(this, R.array.unit_prompts, R.layout.spinner_item);
         unitadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         unit_spinner.setAdapter(unitadapter);
-
-
-
-
-
 
 
         customerRef.document(cust_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -231,7 +234,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -286,20 +288,24 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     }
 
                     String customerArea = area_spinner.getSelectedItem().toString();
-                    String customerId = cust_id;
                     String datefield = date_string;
+                    String hsnNo = hsnno.getText().toString();
                     String itemName = item_name.getText().toString();
                     String itemPrice = item_price.getText().toString();
                     String itemQuantity = item_qty.getText().toString();
                     String orderId = cust_id + date_string;
                     String orderStatus = "true";
                     String salesmanId = mCurrentUser.getUid();
-                    Float taxTotalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
-                    String taxTotal = taxTotalFloat.toString();
-                    Float taxableRateFloat = Float.parseFloat(item_price.getText().toString()) - (Float.parseFloat(item_price.getText().toString()) * (Float.parseFloat(taxrate.getText().toString())/100));
-                    String taxableRate = taxableRateFloat.toString();
                     String tax_rate = taxrate.getText().toString();
-                    String total = taxTotal;
+
+                    Float totalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
+                    String total = totalFloat.toString();
+
+                    Float taxTotalFloat = totalFloat - (( totalFloat * Float.parseFloat(taxrate.getText().toString())) / (100 + Float.parseFloat(taxrate.getText().toString())));
+                    String taxTotal = taxTotalFloat.toString();
+
+                    Float taxableRateFloat = (totalFloat / Float.parseFloat(item_qty.getText().toString())) - ((totalFloat / Float.parseFloat(item_qty.getText().toString())) * Float.parseFloat(taxrate.getText().toString()) / (100 + Float.parseFloat(taxrate.getText().toString())));
+                    String taxableRate = String.valueOf(taxableRateFloat);
 
 
                     if (unit_spinner.getSelectedItem().toString().equals("Per/Kg")) {
@@ -316,11 +322,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     orderMap.put("customerArea", customerArea);
                     orderMap.put("customerId", cust_id);
                     orderMap.put("date", datefield);
+                    orderMap.put("hsnNo",hsnNo);
+                    orderMap.put("itemId",item_id);
                     orderMap.put("itemName",itemName);
                     orderMap.put("itemPrice", itemPrice);
                     orderMap.put("itemQuantity",itemQuantity);
                     orderMap.put("orderId",orderId);
                     orderMap.put("orderStatus",orderStatus);
+                    orderMap.put("priceType",price_typedb);
                     orderMap.put("salesmanId",salesmanId);
                     orderMap.put("taxTotal", taxTotal);
                     orderMap.put("taxableRate", taxableRate);

@@ -34,6 +34,8 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView area;
     TextView unit;
     TextView bill;
+    TextView pricetype;
+    TextView hsnno;
     TextView order_total;
     Button edit_order;
     public String c_id;
@@ -63,6 +65,8 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         order_total = findViewById(R.id.order_total);
         edit_order = findViewById(R.id.edit_order);
         delete_order = findViewById(R.id.delete_order);
+        pricetype = findViewById(R.id.item_pricetype);
+        hsnno = findViewById(R.id.hsnno);
 
         Intent intent = getIntent();
         final Orders orders = intent.getParcelableExtra("order_object");
@@ -76,6 +80,11 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         item_quantity.setText(orders.getItemQuantity());
         area.setText(orders.getCustomerArea());
         unit.setText(orders.getUnit());
+        hsnno.setText(orders.getHsnNo());
+
+        String itempricetype = orders.getPriceType().equals("default") ? "Default" : orders.getPriceType();
+        pricetype.setText(itempricetype);
+
 
         if(orders.getBillGenerator().equals("1")) {
             bill.setText("Utkarsh");
