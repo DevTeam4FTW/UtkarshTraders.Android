@@ -114,7 +114,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         cust_id = intent.getStringExtra("customer_id");
         customer_name = intent.getStringExtra("customer_name");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        item_price.setEnabled(false);
+
         special_layout.setVisibility(View.GONE);
 
         specialtypes = new String[items.getCatgprice().size()];
@@ -123,7 +123,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
         togglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    item_price.setEnabled(true);
                     special_layout.setVisibility(View.VISIBLE);
                     String defaultprice = special.getSelectedItem().toString();
                     String pricetoshow = specials.get(defaultprice);

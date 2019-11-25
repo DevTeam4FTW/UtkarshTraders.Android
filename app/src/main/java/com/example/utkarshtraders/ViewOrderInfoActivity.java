@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +18,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firestore.v1beta1.StructuredQuery;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ViewOrderInfoActivity extends AppCompatActivity {
 
@@ -39,10 +46,13 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView order_total;
     Button edit_order;
     public String c_id;
+    String item_id,dbsetprice;
+    private ArrayList<HashMap<String,String>> item_price_types;
     private Button add_customer,home,settings,delete_order;
 
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference ordersRef=mFireStore.collection("orders");
+    private CollectionReference itemsRef = mFireStore.collection("items");
 
     private String customer_name;
 
@@ -72,6 +82,30 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         final Orders orders = intent.getParcelableExtra("order_object");
         final String order_id = intent.getStringExtra("order_id");
         customer_name = intent.getStringExtra("customer_name");
+
+
+        item_id = orders.getItemId();
+        itemsRef.document(item_id).
+                get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        Items edit_item = document.toObject(Items.class);
+                        dbsetprice = edit_item.getPrice();
+                        item_price_types = edit_item.getCatgprice();
+
+                    } else {
+                        Log.d("tag1","no item found with id"+item_id);
+                    }
+                } else {
+                    Log.d("tag2","no item found with id"+item_id);
+                }
+            }
+        });
+
 
 
         date.setText(orders.getDate());
@@ -106,6 +140,8 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
                 edit.putExtra("order_object",orders);
                 edit.putExtra("order_id",order_id);
                 edit.putExtra("customer_name",customer_name);
+                edit.putExtra("dbsetprice",dbsetprice);
+                edit.putExtra("itempricetypes",item_price_types);
                 startActivity(edit);
                 finish();
                 view.setOnClickListener(null);

@@ -4,20 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,14 +49,17 @@ import java.util.TimerTask;
 
 public class Edit_OrderActivity extends AppCompatActivity {
 
-    private TextView editdate,edititem_name,edittaxrate,editcustomer_total;
-    private EditText edititem_qty, edititem_price;
+    private TextView editdate,edititem_name,edittaxrate,editcustomer_total,edititem_price;
+    private EditText edititem_qty;
     private Button editplaceorder;
     private ToggleButton edittogglespecial;
     private FirebaseFirestore mFireStore=FirebaseFirestore.getInstance();
     private CollectionReference ordersRef=mFireStore.collection("orders");
     private CollectionReference areasRef=mFireStore.collection("areas");
-    private Spinner editbill_spinner,editunit_spinner,editarea_spinner;
+    private CollectionReference itemRef = mFireStore.collection("items");
+    private Spinner editbill_spinner,editunit_spinner,editarea_spinner,editspecial_spinner;
+
+    private LinearLayout special_layout;
 
     private String editbill_generator;
     private String editunit_type,customer_name;
@@ -63,8 +70,17 @@ public class Edit_OrderActivity extends AppCompatActivity {
     String default_area;
     Float c_total;
     boolean val;
+    String item_id;
+    String price_typedb;
+
+    String dbsetprice;
 
     private Button add_customer,home,settings;
+
+    private String[] specialtypes,specialprices;
+    private HashMap<String,String> specials;
+
+    private ArrayList<HashMap<String,String>> item_price_types;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,25 +103,99 @@ public class Edit_OrderActivity extends AppCompatActivity {
         edittogglespecial = findViewById(R.id.edittogglespecial);
         editbill_spinner = findViewById(R.id.editbill_spinner);
         editunit_spinner = findViewById(R.id.editunit_spinner);
+        editspecial_spinner = findViewById(R.id.editspecial_spinner);
+        special_layout = findViewById(R.id.special_layout);
+        specials = new HashMap<String, String>();
 
         Intent intent = getIntent();
         final Orders orders = intent.getParcelableExtra("order_object");
         final String order_id = intent.getStringExtra("order_id");
         customer_name = intent.getStringExtra("customer_name");
+        dbsetprice = intent.getStringExtra("dbsetprice");
+
+        item_price_types = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("itempricetypes");
+
+
         cust_id = orders.getCustomerId();
-        edititem_price.setEnabled(false);
+
+
+
+        specialtypes = new String[item_price_types.size()];
+        specialprices = new String[item_price_types.size()];
+
 
         edittogglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    edititem_price.setEnabled(true);
+                    special_layout.setVisibility(View.VISIBLE);
+                    String defaultprice = editspecial_spinner.getSelectedItem().toString();
+                    String pricetoshow = specials.get(defaultprice);
+                    edititem_price.setText(pricetoshow);
+                    price_typedb = defaultprice;
+
+                    editspecial_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                            String defaultpr = editspecial_spinner.getSelectedItem().toString();
+                            String pricetoshowalso = specials.get(defaultpr);
+                            edititem_price.setText(pricetoshowalso);
+                            price_typedb = defaultpr;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parentView) {
+                            // your code here
+                        }
+
+                    });
                 } else {
-                    edititem_price.setEnabled(false);
-                    edititem_price.setText(orders.getItemPrice());
+
+                    edititem_price.setText(dbsetprice);
+                    special_layout.setVisibility(View.GONE);
+                    price_typedb = "default";
                 }
             }
 
         });
+
+        for (int i=0;i<item_price_types.size();i++)
+        {
+            HashMap<String, String> hashmap= item_price_types.get(i);
+            String types= hashmap.get("ct");
+            String prices= hashmap.get("price");
+            specialtypes[i] = types+"(Rs:"+prices+")";
+            specials.put(types+"(Rs:"+prices+")",prices);
+        }
+
+
+        ArrayAdapter<CharSequence> specialAdapter = new ArrayAdapter<CharSequence>(this,R.layout.spinner_item,specialtypes);
+        specialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editspecial_spinner.setAdapter(specialAdapter);
+
+
+        //defaults
+        if(!orders.getPriceType().equals("default"))
+        {
+            edittogglespecial.setChecked(true);
+            special_layout.setVisibility(View.VISIBLE);
+            editspecial_spinner.setSelection(specialAdapter.getPosition(orders.getPriceType()));
+
+            String defaultprice = editspecial_spinner.getSelectedItem().toString();
+            String price2show = specials.get(defaultprice);
+            edititem_price.setText(price2show);
+            price_typedb = defaultprice;
+
+
+        }
+        else
+        {
+            edititem_price.setText(dbsetprice);
+            special_layout.setVisibility(View.GONE);
+            price_typedb = "default";
+
+        }
+
+
         editdate.setText(orders.getDate());
         edititem_name.setText(orders.getItemName());
         edittaxrate.setText(orders.getTaxrate());
@@ -227,11 +317,16 @@ public class Edit_OrderActivity extends AppCompatActivity {
                     String editcustomerArea = editarea_spinner.getSelectedItem().toString();
                     String edititemPrice = edititem_price.getText().toString();
                     String edititemQuantity = edititem_qty.getText().toString();
-                    Float taxTotalFloat = Float.parseFloat(edititem_qty.getText().toString()) * Float.parseFloat(edititem_price.getText().toString());
-                    String edittaxTotal = taxTotalFloat.toString();
-                    Float taxableRateFloat = Float.parseFloat(edititem_price.getText().toString()) - (Float.parseFloat(edititem_price.getText().toString()) * (Float.parseFloat(edittaxrate.getText().toString())/100));
-                    String edittaxableRate = taxableRateFloat.toString();
-                    String edittotal = edittaxTotal;
+
+
+                    Float edittotalFloat = Float.parseFloat(edititem_qty.getText().toString()) * Float.parseFloat(edititem_price.getText().toString());
+                    String edittotal = edittotalFloat.toString();
+
+                    Float edittaxTotalFloat = edittotalFloat - (( edittotalFloat * Float.parseFloat(edittaxrate.getText().toString())) / (100 + Float.parseFloat(edittaxrate.getText().toString())));
+                    String edittaxTotal = edittaxTotalFloat.toString();
+
+                    Float edittaxableRateFloat = (edittotalFloat / Float.parseFloat(edititem_qty.getText().toString())) - ((edittotalFloat / Float.parseFloat(edititem_qty.getText().toString())) * Float.parseFloat(edittaxrate.getText().toString()) / (100 + Float.parseFloat(edittaxrate.getText().toString())));
+                    String edittaxableRate = String.valueOf(edittaxableRateFloat);
 
 
                     if (editunit_spinner.getSelectedItem().toString().equals("Per/Kg")) {
@@ -248,6 +343,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
                                     "customerArea",editcustomerArea ,
                                     "itemPrice",edititemPrice ,
                                     "itemQuantity",edititemQuantity,
+                                    "priceType",price_typedb,
                                     "taxTotal",edittaxTotal ,
                                     "taxableRate",edittaxableRate ,
                                     "total",edittotal,

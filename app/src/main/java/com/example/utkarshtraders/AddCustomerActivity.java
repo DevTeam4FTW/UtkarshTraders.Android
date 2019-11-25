@@ -233,9 +233,9 @@ public class AddCustomerActivity extends AppCompatActivity {
         }
         if(!cphno.isEmpty())
         {
-            if(!cphno.matches("\\A[0-9]{10}\\z"))
+            if(!cphno.matches("[0-9]+"))
             {
-                c_phno.setError("Enter 10 digit number");
+                c_phno.setError("Enter valid phone number only");
                 val = false;
             }
         }
