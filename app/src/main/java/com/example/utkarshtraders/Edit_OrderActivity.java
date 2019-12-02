@@ -126,32 +126,43 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
         edittogglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    special_layout.setVisibility(View.VISIBLE);
-                    String defaultprice = editspecial_spinner.getSelectedItem().toString();
-                    String pricetoshow = specials.get(defaultprice);
-                    edititem_price.setText(pricetoshow);
-                    price_typedb = defaultprice;
 
-                    editspecial_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                            String defaultpr = editspecial_spinner.getSelectedItem().toString();
-                            String pricetoshowalso = specials.get(defaultpr);
-                            edititem_price.setText(pricetoshowalso);
-                            price_typedb = defaultpr;
-                        }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parentView) {
-                            // your code here
-                        }
+                if(item_price_types.isEmpty())
+                {
+                    Toast.makeText(Edit_OrderActivity.this, "No special price is defined for this item.", Toast.LENGTH_SHORT).show();
+                    edittogglespecial.setChecked(false);
+                }
 
-                    });
-                } else {
-                    edititem_price.setText(dbsetprice);
-                    special_layout.setVisibility(View.GONE);
-                    price_typedb = "default";
+                else {
+
+                    if (isChecked) {
+                        special_layout.setVisibility(View.VISIBLE);
+                        String defaultprice = editspecial_spinner.getSelectedItem().toString();
+                        String pricetoshow = specials.get(defaultprice);
+                        edititem_price.setText(pricetoshow);
+                        price_typedb = defaultprice;
+
+                        editspecial_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                String defaultpr = editspecial_spinner.getSelectedItem().toString();
+                                String pricetoshowalso = specials.get(defaultpr);
+                                edititem_price.setText(pricetoshowalso);
+                                price_typedb = defaultpr;
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parentView) {
+                                // your code here
+                            }
+
+                        });
+                    } else {
+                        edititem_price.setText(dbsetprice);
+                        special_layout.setVisibility(View.GONE);
+                        price_typedb = "default";
+                    }
                 }
             }
 
