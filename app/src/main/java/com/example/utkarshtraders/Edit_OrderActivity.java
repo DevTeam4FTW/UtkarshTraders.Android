@@ -149,7 +149,6 @@ public class Edit_OrderActivity extends AppCompatActivity {
 
                     });
                 } else {
-
                     edititem_price.setText(dbsetprice);
                     special_layout.setVisibility(View.GONE);
                     price_typedb = "default";

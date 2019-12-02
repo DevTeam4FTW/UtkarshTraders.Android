@@ -122,36 +122,45 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         togglespecial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    special_layout.setVisibility(View.VISIBLE);
-                    String defaultprice = special.getSelectedItem().toString();
-                    String pricetoshow = specials.get(defaultprice);
-                    item_price.setText(pricetoshow);
-                    price_typedb = defaultprice;
+
+                if(items.getCatgprice().isEmpty())
+                {
+                    Toast.makeText(PlaceOrderActivity.this, "No special price is defined for this item.", Toast.LENGTH_SHORT).show();
+                    togglespecial.setChecked(false);
+                }
+
+                else {
+
+                    if (isChecked) {
+                        special_layout.setVisibility(View.VISIBLE);
+                        String defaultprice = special.getSelectedItem().toString();
+                        String pricetoshow = specials.get(defaultprice);
+                        item_price.setText(pricetoshow);
+                        price_typedb = defaultprice;
 
 
-                    special.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                            String defaultpr = special.getSelectedItem().toString();
-                            String pricetoshowalso = specials.get(defaultpr);
-                            item_price.setText(pricetoshowalso);
-                            price_typedb = defaultpr;
-                        }
+                        special.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                String defaultpr = special.getSelectedItem().toString();
+                                String pricetoshowalso = specials.get(defaultpr);
+                                item_price.setText(pricetoshowalso);
+                                price_typedb = defaultpr;
+                            }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parentView) {
-                            // your code here
-                        }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parentView) {
+                                // your code here
+                            }
 
-                    });
+                        });
 
-                } else {
-                    item_price.setText(items.getPrice());
-                    item_price.setEnabled(false);
-                    special_layout.setVisibility(View.GONE);
-                    price_typedb = "default";
+                    } else {
+                        item_price.setText(items.getPrice());
+                        special_layout.setVisibility(View.GONE);
+                        price_typedb = "default";
 
+                    }
                 }
             }
 
