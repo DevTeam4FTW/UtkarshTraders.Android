@@ -77,8 +77,6 @@ public class ViewItemsActivity extends AppCompatActivity {
     private Spinner filterCompany;
     private Spinner filterPackaging;
 
-    private String item_id;
-
     private Button filterItem;
 
     private boolean count;
@@ -196,7 +194,7 @@ public class ViewItemsActivity extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
 
-                                item_id = documentSnapshot.getId();
+                                final String item_id = documentSnapshot.getId();
                                 final Items items = documentSnapshot.toObject(Items.class);
 
                                 String item_name = items.getName();
@@ -334,7 +332,7 @@ public class ViewItemsActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                                item_id = document.getId();
+                                                final String item_id = document.getId();
                                                 final Items items = document.toObject(Items.class);
 
                                                 String item_name = items.getName();

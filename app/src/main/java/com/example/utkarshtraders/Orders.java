@@ -14,6 +14,7 @@ public class Orders implements  Parcelable {
     private String itemName;
     private String itemPrice;
     private String itemQuantity;
+    private String mrpPrice;
     private String orderId;
     private String orderStatus;
     private String priceType;
@@ -29,7 +30,7 @@ public class Orders implements  Parcelable {
 
     }
 
-    public Orders(String billgenerator, String customerarea, String customerid, String datevar,String hsnno, String itemid, String itemname,String itemprice,String itemquantity,String orderid,String orderstatus,String pricetype, String salesmanid,String taxtotal,String taxablerate,String taxratevar,String totalvar,String unitvar) {
+    public Orders(String billgenerator, String customerarea, String customerid, String datevar,String hsnno, String itemid, String itemname,String itemprice,String itemquantity,String mrpprice,String orderid,String orderstatus,String pricetype, String salesmanid,String taxtotal,String taxablerate,String taxratevar,String totalvar,String unitvar) {
         billGenerator = billgenerator;
         customerArea = customerarea;
         customerId = customerid;
@@ -39,6 +40,7 @@ public class Orders implements  Parcelable {
         itemName = itemname;
         itemPrice = itemprice;
         itemQuantity = itemquantity;
+        mrpPrice = mrpprice;
         orderId = orderid;
         orderStatus = orderstatus;
         priceType = pricetype;
@@ -60,6 +62,7 @@ public class Orders implements  Parcelable {
         itemName = in.readString();
         itemPrice = in.readString();
         itemQuantity = in.readString();
+        mrpPrice = in.readString();
         orderId = in.readString();
         orderStatus = in.readString();
         priceType = in.readString();
@@ -157,6 +160,14 @@ public class Orders implements  Parcelable {
         this.itemQuantity = itemQuantity;
     }
 
+    public String getMrpPrice() {
+        return mrpPrice;
+    }
+
+    public void setMrpPrice(String mrpPrice) {
+        this.mrpPrice = mrpPrice;
+    }
+
     public String getOrderId() {
         return orderId;
     }
@@ -247,6 +258,7 @@ public class Orders implements  Parcelable {
         parcel.writeString(itemName);
         parcel.writeString(itemPrice);
         parcel.writeString(itemQuantity);
+        parcel.writeString(mrpPrice);
         parcel.writeString(orderId);
         parcel.writeString(orderStatus);
         parcel.writeString(priceType);
