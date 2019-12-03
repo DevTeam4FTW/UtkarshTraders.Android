@@ -335,6 +335,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     orderMap.put("itemName",itemName);
                     orderMap.put("itemPrice", itemPrice);
                     orderMap.put("itemQuantity",itemQuantity);
+                    orderMap.put("mrpPrice",items.getPrice());
                     orderMap.put("orderId",orderId);
                     orderMap.put("orderStatus",orderStatus);
                     orderMap.put("priceType",price_typedb);
