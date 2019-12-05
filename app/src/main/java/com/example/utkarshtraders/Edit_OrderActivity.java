@@ -316,7 +316,7 @@ public class Edit_OrderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())&& !TextUtils.isEmpty(edititem_price.getText().toString()) && val) {
+                if (!TextUtils.isEmpty(editcustomer_total.getText().toString()) && !TextUtils.isEmpty(edititem_qty.getText().toString())) {
 
                     if (editbill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
                         editbill_generator = "1";
@@ -455,18 +455,6 @@ public class Edit_OrderActivity extends AppCompatActivity {
                 val = false;
             }
         }
-
-        if(!price.isEmpty())
-        {
-            if(!price.matches("^[0-9]*$"))
-            {
-                edititem_price.setError("Enter numbers only");
-                val = false;
-            }
-        }
-
-
-
 
         return val;
     }

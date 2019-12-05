@@ -45,7 +45,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
     EditText c_gstin;
     EditText c_bal;
     Button saveCust;
-    boolean val;
     private Button add_customer,home,settings;
 
     private CollectionReference areasRef = mFirestore.collection("areas");
@@ -124,32 +123,16 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         c_gstin.setText(customers.getGstno());
         c_bal.setText(customers.getRemainingBal());
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        val = validations();
-                    }
-                });
-
-
-            }
-        }, 0, 1000);
 
         saveCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (
-                        !TextUtils.isEmpty(c_address.getText().toString())&&
-                        !TextUtils.isEmpty(c_name.getText().toString()) &&
-                        !TextUtils.isEmpty(c_phno.getText().toString())&&
-                        !TextUtils.isEmpty(c_bal.getText().toString())&& val) {
+                if (!TextUtils.isEmpty(c_name.getText().toString())) {
+
+
+                    String remainingbal = c_bal.getText().toString().isEmpty() ? "0" : c_bal.getText().toString();
 
 
                     customerRef.document(c_id)
@@ -160,7 +143,7 @@ public class Edit_CustomerActivity extends AppCompatActivity {
                                     "clientPhoneNo", c_phno.getText().toString(),
                                     "custType", c_type.getSelectedItem().toString(),
                                     "gstno", c_gstin.getText().toString(),
-                                    "remainingBal", c_bal.getText().toString(),
+                                    "remainingBal", remainingbal,
                                     "state", "Goa"
                             );
 
@@ -239,49 +222,6 @@ public class Edit_CustomerActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
         setTitle("Edit Customer");
         return true;
-    }
-
-
-
-    boolean validations()
-    {
-        Boolean val = true;
-        String cname = c_name.getText().toString();
-        String cphno = c_phno.getText().toString();
-        String bal   =c_bal.getText().toString();
-
-        if(!cname.isEmpty())
-        {
-            if(!cname.matches("[a-zA-Z ]+"))
-            {
-                c_name.setError("Enter characters only");
-                val = false;
-            }
-        }
-        if(!cphno.isEmpty())
-        {
-            if(!cphno.matches("\\A[0-9]{10}\\z"))
-            {
-                c_phno.setError("Enter 10 digit number");
-                val = false;
-            }
-        }
-
-        if(!bal.isEmpty())
-        {
-            if(!bal.matches("^[0-9]*$"))
-            {
-                c_bal.setError("Enter numbers only");
-                val = false;
-            }
-        }
-
-
-
-
-
-
-        return val;
     }
 
 

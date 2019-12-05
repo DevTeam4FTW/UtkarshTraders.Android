@@ -44,7 +44,6 @@ public class AddCustomerActivity extends AppCompatActivity {
     private CollectionReference areasRef = mFirestore.collection("areas");
     private CollectionReference customerTypeRef = mFirestore.collection("cT");
     private Spinner c_area;
-    boolean val;
 
     private Button home,settings;
 
@@ -104,24 +103,6 @@ public class AddCustomerActivity extends AppCompatActivity {
         });
 
 
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        val = validations();
-                    }
-                });
-
-
-            }
-        }, 0, 1000);
-
-
         addcust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,9 +116,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                 String cgst = c_gst.getText().toString();
 
 
-                if (!TextUtils.isEmpty(cname) &&
-                        !TextUtils.isEmpty(cphno) &&
-                        !TextUtils.isEmpty(caddress)&& val) {
+                if (!TextUtils.isEmpty(cname)) {
                     Map<String, String> userMap = new HashMap<>();
 
                     userMap.put("city", "");
@@ -163,7 +142,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
-                    Toast.makeText(AddCustomerActivity.this, "Please dont leave any fields Empty or enter right values", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddCustomerActivity.this, "Name field is required.", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -215,33 +194,6 @@ public class AddCustomerActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_activity_bar_empty, menu);
         setTitle("Add Customer");
         return true;
-    }
-
-    boolean validations()
-    {
-        Boolean val = true;
-        String cname = c_name.getText().toString();
-        String cphno = c_phno.getText().toString();
-
-        if(!cname.isEmpty())
-        {
-            if(!cname.matches("^[A-Z][a-zA-Z ]+"))
-            {
-                c_name.setError("Enter characters only(start with capital letter)");
-                val = false;
-            }
-        }
-        if(!cphno.isEmpty())
-        {
-            if(!cphno.matches("[0-9]+"))
-            {
-                c_phno.setError("Enter valid phone number only");
-                val = false;
-            }
-        }
-
-
-        return val;
     }
 }
 

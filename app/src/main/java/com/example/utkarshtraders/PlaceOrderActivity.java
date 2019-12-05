@@ -287,7 +287,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!TextUtils.isEmpty(customer_total.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString()) && val) {
+                if (!TextUtils.isEmpty(customer_total.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString())) {
 
                     if (bill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
                         bill_generator = "1";
@@ -449,18 +449,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
                 val = false;
             }
         }
-
-        if(!price.isEmpty())
-        {
-            if(!price.matches("^[0-9]*$"))
-            {
-                item_price.setError("Enter numbers only");
-                val = false;
-            }
-        }
-
-
-
 
         return val;
     }
