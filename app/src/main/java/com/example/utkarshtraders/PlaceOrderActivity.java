@@ -1,9 +1,11 @@
 package com.example.utkarshtraders;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -291,86 +295,112 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
+                builder.setMessage("Placing order");
+                builder.setTitle("Place Order");
+
+                builder.setMessage("Are you sure about the order? If any issues later, delete order and place it again.");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
 
-                if (!TextUtils.isEmpty(customer_total.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString())) {
 
-                    if (bill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
-                        bill_generator = "1";
-                    } else {
-                        bill_generator = "2";
+                        if (!TextUtils.isEmpty(customer_total.getText().toString()) && !TextUtils.isEmpty(item_qty.getText().toString())) {
+
+                            if (bill_spinner.getSelectedItem().toString().equals("Utkarsh")) {
+                                bill_generator = "1";
+                            } else {
+                                bill_generator = "2";
+                            }
+
+                            String customerArea = area_spinner.getSelectedItem().toString();
+                            String datefield = date_string;
+                            String hsnNo = hsnno.getText().toString();
+                            String itemName = item_name.getText().toString();
+                            String itemPrice = item_price.getText().toString();
+                            String itemQuantity = item_qty.getText().toString();
+                            String orderId = cust_id + date_string;
+                            String orderStatus = "true";
+                            String salesmanId = mCurrentUser.getUid();
+                            String tax_rate = taxrate.getText().toString();
+
+                            Float totalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
+                            String total = totalFloat.toString();
+
+                            Float taxTotalFloat = totalFloat - (( totalFloat * Float.parseFloat(taxrate.getText().toString())) / (100 + Float.parseFloat(taxrate.getText().toString())));
+                            String taxTotal = taxTotalFloat.toString();
+
+                            Float taxableRateFloat = (totalFloat / Float.parseFloat(item_qty.getText().toString())) - ((totalFloat / Float.parseFloat(item_qty.getText().toString())) * Float.parseFloat(taxrate.getText().toString()) / (100 + Float.parseFloat(taxrate.getText().toString())));
+                            String taxableRate = String.valueOf(taxableRateFloat);
+
+
+                            if (unit_spinner.getSelectedItem().toString().equals("Per/Kg")) {
+                                unit_type = "per/kg";
+                            } else if (unit_spinner.getSelectedItem().toString().equals("Per/Piece")) {
+                                unit_type = "per/pc";
+                            } else {
+                                unit_type = "per/dozen";
+                            }
+
+                            Map<String, String> orderMap = new HashMap<>();
+
+                            orderMap.put("billGenerator", bill_generator);
+                            orderMap.put("customerArea", customerArea);
+                            orderMap.put("customerId", cust_id);
+                            orderMap.put("date", datefield);
+                            orderMap.put("hsnNo",hsnNo);
+                            orderMap.put("itemId",item_id);
+                            orderMap.put("itemName",itemName);
+                            orderMap.put("itemPrice", itemPrice);
+                            orderMap.put("itemQuantity",itemQuantity);
+                            orderMap.put("mrpPrice",items.getPrice());
+                            orderMap.put("orderId",orderId);
+                            orderMap.put("orderStatus",orderStatus);
+                            orderMap.put("priceType",price_typedb);
+                            orderMap.put("salesmanId",salesmanId);
+                            orderMap.put("taxTotal", taxTotal);
+                            orderMap.put("taxableRate", taxableRate);
+                            orderMap.put("taxrate", tax_rate);
+                            orderMap.put("total", total);
+                            orderMap.put("unit", unit_type);
+
+                            ordersRef.add(orderMap);
+                            Toast.makeText(PlaceOrderActivity.this, "Order added successfully",
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(PlaceOrderActivity.this, ViewOrdersActivity.class);
+                            intent.putExtra("customer_id",cust_id);
+                            intent.putExtra("customer_name",customer_name);
+                            startActivity(intent);
+                            finish();
+                            view.setOnClickListener(null);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                        }
+
+                        else
+                        {
+                            Toast.makeText(PlaceOrderActivity.this,"Enter all fields before placing order ",Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
-                    String customerArea = area_spinner.getSelectedItem().toString();
-                    String datefield = date_string;
-                    String hsnNo = hsnno.getText().toString();
-                    String itemName = item_name.getText().toString();
-                    String itemPrice = item_price.getText().toString();
-                    String itemQuantity = item_qty.getText().toString();
-                    String orderId = cust_id + date_string;
-                    String orderStatus = "true";
-                    String salesmanId = mCurrentUser.getUid();
-                    String tax_rate = taxrate.getText().toString();
-
-                    Float totalFloat = Float.parseFloat(item_qty.getText().toString()) * Float.parseFloat(item_price.getText().toString());
-                    String total = totalFloat.toString();
-
-                    Float taxTotalFloat = totalFloat - (( totalFloat * Float.parseFloat(taxrate.getText().toString())) / (100 + Float.parseFloat(taxrate.getText().toString())));
-                    String taxTotal = taxTotalFloat.toString();
-
-                    Float taxableRateFloat = (totalFloat / Float.parseFloat(item_qty.getText().toString())) - ((totalFloat / Float.parseFloat(item_qty.getText().toString())) * Float.parseFloat(taxrate.getText().toString()) / (100 + Float.parseFloat(taxrate.getText().toString())));
-                    String taxableRate = String.valueOf(taxableRateFloat);
-
-
-                    if (unit_spinner.getSelectedItem().toString().equals("Per/Kg")) {
-                         unit_type = "per/kg";
-                    } else if (unit_spinner.getSelectedItem().toString().equals("Per/Piece")) {
-                         unit_type = "per/pc";
-                    } else {
-                         unit_type = "per/dozen";
+                        dialog.cancel();
                     }
+                });
 
-                    Map<String, String> orderMap = new HashMap<>();
+                AlertDialog alert = builder.create();
+                alert.show();
 
-                    orderMap.put("billGenerator", bill_generator);
-                    orderMap.put("customerArea", customerArea);
-                    orderMap.put("customerId", cust_id);
-                    orderMap.put("date", datefield);
-                    orderMap.put("hsnNo",hsnNo);
-                    orderMap.put("itemId",item_id);
-                    orderMap.put("itemName",itemName);
-                    orderMap.put("itemPrice", itemPrice);
-                    orderMap.put("itemQuantity",itemQuantity);
-                    orderMap.put("mrpPrice",items.getPrice());
-                    orderMap.put("orderId",orderId);
-                    orderMap.put("orderStatus",orderStatus);
-                    orderMap.put("priceType",price_typedb);
-                    orderMap.put("salesmanId",salesmanId);
-                    orderMap.put("taxTotal", taxTotal);
-                    orderMap.put("taxableRate", taxableRate);
-                    orderMap.put("taxrate", tax_rate);
-                    orderMap.put("total", total);
-                    orderMap.put("unit", unit_type);
 
-                    ordersRef.add(orderMap);
-                    Toast.makeText(PlaceOrderActivity.this, "Order added successfully",
-                            Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(PlaceOrderActivity.this, ViewOrdersActivity.class);
-                    intent.putExtra("customer_id",cust_id);
-                    intent.putExtra("customer_name",customer_name);
-                    startActivity(intent);
-                    finish();
-                    view.setOnClickListener(null);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                }
-
-                else
-                {
-                    Toast.makeText(PlaceOrderActivity.this,"Enter all fields before placing order ",Toast.LENGTH_SHORT).show();
-                }
 
 
 
