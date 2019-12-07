@@ -333,10 +333,6 @@ tools:context=".ViewOrderInfoActivity">
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
 
 
     <LinearLayout
@@ -355,19 +351,19 @@ tools:context=".ViewOrderInfoActivity">
             android:text="Delete"
             android:textColor="#fff" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+<!--        <View-->
+<!--            android:layout_width="1dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="@android:color/darker_gray"/>-->
 
-    <Button
-        android:id="@+id/edit_order"
-        android:layout_width="match_parent"
-        android:layout_height="100px"
-        android:layout_weight="1"
-        android:background="#0A3A86"
-        android:text="Edit"
-        android:textColor="#fff" />
+<!--    <Button-->
+<!--        android:id="@+id/edit_order"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100px"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="#0A3A86"-->
+<!--        android:text="Edit"-->
+<!--        android:textColor="#fff" />-->
 
 
 

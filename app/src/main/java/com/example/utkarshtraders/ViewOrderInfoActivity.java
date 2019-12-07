@@ -44,7 +44,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
     TextView pricetype;
     TextView hsnno;
     TextView order_total;
-    Button edit_order;
+    //Button edit_order;
     public String c_id;
     String item_id,dbsetprice;
     private ArrayList<HashMap<String,String>> item_price_types;
@@ -73,7 +73,7 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
         unit = findViewById(R.id.unit);
         bill = findViewById(R.id.bill);
         order_total = findViewById(R.id.order_total);
-        edit_order = findViewById(R.id.edit_order);
+        //edit_order = findViewById(R.id.edit_order);
         delete_order = findViewById(R.id.delete_order);
         pricetype = findViewById(R.id.item_pricetype);
         hsnno = findViewById(R.id.hsnno);
@@ -132,22 +132,22 @@ public class ViewOrderInfoActivity extends AppCompatActivity {
 
         c_id = orders.getCustomerId();
 
-        edit_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent edit = new Intent(getBaseContext(), Edit_OrderActivity.class);
-                edit.putExtra("order_object",orders);
-                edit.putExtra("order_id",order_id);
-                edit.putExtra("customer_name",customer_name);
-                edit.putExtra("dbsetprice",dbsetprice);
-                edit.putExtra("itempricetypes",item_price_types);
-                startActivity(edit);
-                finish();
-                view.setOnClickListener(null);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
-        });
+//        edit_order.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent edit = new Intent(getBaseContext(), Edit_OrderActivity.class);
+//                edit.putExtra("order_object",orders);
+//                edit.putExtra("order_id",order_id);
+//                edit.putExtra("customer_name",customer_name);
+//                edit.putExtra("dbsetprice",dbsetprice);
+//                edit.putExtra("itempricetypes",item_price_types);
+//                startActivity(edit);
+//                finish();
+//                view.setOnClickListener(null);
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            }
+//        });
 
 
         add_customer.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -137,6 +138,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                         String pricetoshow = specials.get(defaultprice);
                         item_price.setText(pricetoshow);
                         price_typedb = defaultprice;
+                        item_price.setEnabled(true);
+                        item_price.setTextColor(Color.BLACK);
 
 
                         special.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -146,6 +149,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                                 String pricetoshowalso = specials.get(defaultpr);
                                 item_price.setText(pricetoshowalso);
                                 price_typedb = defaultpr;
+                                item_price.setEnabled(true);
+                                item_price.setTextColor(Color.BLACK);
                             }
 
                             @Override
@@ -159,6 +164,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                         item_price.setText(items.getPrice());
                         special_layout.setVisibility(View.GONE);
                         price_typedb = "default";
+                        item_price.setEnabled(false);
+                        item_price.setTextColor(Color.BLACK);
 
                     }
                 }
